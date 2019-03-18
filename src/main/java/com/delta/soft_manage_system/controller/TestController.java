@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class TestController {
 
+
     @GetMapping("test")
     @ResponseBody
     public String test(){
-        return "hello weilizong";
+        return "get connection failed";
     }
 }
