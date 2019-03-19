@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.delta.soft_manage_system.dao.UserMapper">
+
+    <select id="getUserCount" resultType="integer">
+        select count(*) from twei_user
+    </select>
+
+    <select id="listCount" resultType="integer">
+        select count(*) from twei_user
+    </select>
+
+</mapper>

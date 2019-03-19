@@ -10,10 +10,12 @@
  */
 package com.delta.soft_manage_system.dto;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -25,7 +27,11 @@ import lombok.ToString;
  */
 
 @Data
-public class User {
+@TableName("twei_user")
+public class User implements Serializable {
+    @TableId(type = IdType.AUTO)
     private String userid;
-    private String user_name;
+
+    private String userName;
+    private String password;
 }
