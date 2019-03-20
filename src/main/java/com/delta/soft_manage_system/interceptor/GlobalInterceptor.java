@@ -3,6 +3,8 @@ package com.delta.soft_manage_system.interceptor;
 import com.delta.soft_manage_system.common.ApplicationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,8 +31,9 @@ public class GlobalInterceptor implements HandlerInterceptor {
         if (sc.getAttribute("appname") != null) {
             return true;
         }
-        sc.setAttribute("appname",applicationInfo.getName());
-        sc.setAttribute("version",applicationInfo.getVersion());
+        sc.setAttribute("appname", applicationInfo.getName());
+        sc.setAttribute("version", applicationInfo.getVersion());
+        sc.setAttribute("company", applicationInfo.getCompany());
         return true;
     }
 

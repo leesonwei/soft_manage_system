@@ -13,18 +13,13 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class ApplicationInfo {
-
     @Value("${spring.application.name}")
     private String name;
 
     private String version;
 
-    @Override
-    public String toString(){
-        return String.format("-------------應用名稱:%s," +
-                        "應用版本:%s-------------",
-                this.name,
-                this.version);
-    }
+    @Value("${spring.application.company}")
+    private String company;
+
 }
 
