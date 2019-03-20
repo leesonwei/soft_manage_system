@@ -28,12 +28,11 @@ public class GlobalInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws Exception {
         ServletContext sc = httpServletRequest.getServletContext();
-        if (sc.getAttribute("appname") != null) {
-            return true;
+        if (sc.getAttribute("appname") == null) {
+            sc.setAttribute("appname", applicationInfo.getName());
+            sc.setAttribute("version", applicationInfo.getVersion());
+            sc.setAttribute("company", applicationInfo.getCompany());
         }
-        sc.setAttribute("appname", applicationInfo.getName());
-        sc.setAttribute("version", applicationInfo.getVersion());
-        sc.setAttribute("company", applicationInfo.getCompany());
         return true;
     }
 
