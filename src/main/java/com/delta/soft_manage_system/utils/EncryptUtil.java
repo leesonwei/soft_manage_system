@@ -62,7 +62,7 @@ public class EncryptUtil {
     }
 
     public static void main(String[] args) {
-        String en = EncryptUtil.getInstance().Base64Encode("123456 春天");
+        String en = EncryptUtil.getInstance().MD5("123456");
         System.out.println(en);
     }
 

@@ -10,6 +10,8 @@
  */
 package com.delta.soft_manage_system.utils;
 
+import com.delta.soft_manage_system.common.StringPool;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,16 +26,17 @@ import java.util.Date;
  * @since 1.0.0
  */
 public class DateUtil {
-        
+
     public static String DATE_FORMAT = "yyyy-MM-dd";
-    
+
     public static String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    
+
     public static String DATE_TIME_FORMAT_IOS = "yyyy/MM/dd HH:mm:ss";
-    
+
     public static String DATE_FORMAT_CHINESE = "yyyy年M月d日";
 
     public static String DATE_VERSION = "yyMMddHHmm";
+
     
     public static String getCurrentTime(String format) {
         String datestr = null;
@@ -43,7 +46,7 @@ public class DateUtil {
     }
 
     public static String getDateVersion() {
-        return getCurrentTime(DATE_VERSION);
+        return getCurrentTime(StringPool.DATE_VERSION);
     }
     
     /**
@@ -70,7 +73,7 @@ public class DateUtil {
      */
     public static String getCurrentDate() {
         String datestr = null;
-        SimpleDateFormat df = new SimpleDateFormat(DateUtil.DATE_FORMAT);
+        SimpleDateFormat df = new SimpleDateFormat(StringPool.DATE_FORMAT);
         datestr = df.format(new Date());
         return datestr;
     }
@@ -84,7 +87,7 @@ public class DateUtil {
      */
     public static String getCurrentDateTime() {
         String datestr = null;
-        SimpleDateFormat df = new SimpleDateFormat(DateUtil.DATE_TIME_FORMAT);
+        SimpleDateFormat df = new SimpleDateFormat(StringPool.DATE_TIME_FORMAT);
         datestr = df.format(new Date());
         return datestr;
     }
@@ -105,7 +108,7 @@ public class DateUtil {
     
     public static String dateToDateTime(Date date) {
         String datestr = null;
-        SimpleDateFormat df = new SimpleDateFormat(DateUtil.DATE_TIME_FORMAT);
+        SimpleDateFormat df = new SimpleDateFormat(StringPool.DATE_TIME_FORMAT);
         datestr = df.format(date);
         return datestr;
     }
@@ -123,7 +126,7 @@ public class DateUtil {
             return null;
         }
         Date date = new Date();
-        SimpleDateFormat df = new SimpleDateFormat(DateUtil.DATE_FORMAT);
+        SimpleDateFormat df = new SimpleDateFormat(StringPool.DATE_FORMAT);
         try {
             date = df.parse(datestr);
         } catch (ParseException e) {
@@ -164,7 +167,7 @@ public class DateUtil {
      */
     public static String dateToString(Date date) {
         String datestr = null;
-        SimpleDateFormat df = new SimpleDateFormat(DateUtil.DATE_FORMAT);
+        SimpleDateFormat df = new SimpleDateFormat(StringPool.DATE_FORMAT);
         datestr = df.format(date);
         return datestr;
     }

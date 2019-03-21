@@ -13,7 +13,9 @@ package com.delta.soft_manage_system.dto;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
 
@@ -33,5 +35,8 @@ public class User implements Serializable {
     private String userid;
 
     private String userName;
+
+    @Transient
+    @JsonIgnore
     private String password;
 }
