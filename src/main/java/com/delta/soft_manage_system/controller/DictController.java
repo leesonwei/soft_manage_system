@@ -9,5 +9,6 @@ import org.springframework.stereotype.Controller;
  * @Author LIZONG.WEI
  */
 @Controller
-public class DictTypeController {
+public class DictController {
+
 }

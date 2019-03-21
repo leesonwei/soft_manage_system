@@ -41,4 +41,11 @@ public class UserController {
         // TODO: 2019/3/21 簽發jwt 
         return serverResponse;
     }
+
+    @PostMapping("/logout")
+    public String logout(HttpSession httpSession){
+        httpSession.setMaxInactiveInterval(-1);
+        // TODO: 2019/3/21 作廢jwt
+        return "backend/login";
+    }
 }
