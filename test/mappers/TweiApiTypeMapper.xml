@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.TweiApiTypeDao">
+	<!-- TweiApiType的resultMap,column是给数据库列起的别名,它对应property类的属性 -->
+	<resultMap id="result_TweiApiType_Map" type="com.dto.TweiApiType">
+		
+		<result column="api_type_id" property="apiTypeId" />
+		<result column="api_type_name" property="apiTypeName" />
+		<result column="api_type_memo" property="apiTypeMemo" />
+		<result column="create_by" property="createBy" />
+		<result column="create_at" property="createAt" />
+		<result column="update_by" property="updateBy" />
+		<result column="update_at" property="updateAt" />
+		<result column="data_version" property="dataVersion" />
+	</resultMap>
+
+	<!-- assist是查询辅助工具类, ${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+	<sql id="assist">
+		<where>
+			<foreach collection="require" item="req" separator=" ">
+				${req.require}
+				<if test="req.value != null">
+					#{req.value}
+				</if>
+				<if test="req.values != null">
+					<foreach collection="req.values" item="value" separator=",">
+						#{value}
+					</foreach>
+				</if>
+				<if test="req.customRequire !=null">
+					<foreach collection="req.customRequire" item="cr" separator=" ">
+						${cr.require}
+						<if test="cr.value != null">
+							#{cr.value}
+						</if>
+						<if test="cr.values != null">
+							<foreach collection="cr.values" item="value"
+								separator=",">
+								#{value}
+							</foreach>
+						</if>
+						<if test="cr.suffix != null"> ${cr.suffix}</if>
+					</foreach>
+				</if>
+				<if test="req.suffix != null"> ${req.suffix}</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<!-- updateAssist用于更新数据查询辅助工具类,作用assist与一致 -->
+	<sql id="updateAssist">
+		<where>
+			<foreach collection="assist.require" item="req" separator=" ">
+				${req.require}
+				<if test="req.value != null">
+					#{req.value}
+				</if>
+				<if test="req.values != null">
+					<foreach collection="req.values" item="value" separator=",">
+						#{value}
+					</foreach>
+				</if>
+				<if test="req.customRequire !=null">
+					<foreach collection="req.customRequire" item="cr" separator=" ">
+						${cr.require}
+						<if test="cr.value != null">
+							#{cr.value}
+						</if>
+						<if test="cr.values != null">
+							<foreach collection="cr.values" item="value"
+								separator=",">
+								#{value}
+							</foreach>
+						</if>
+						<if test="cr.suffix != null"> ${cr.suffix}</if>
+					</foreach>
+				</if>
+				<if test="req.suffix != null"> ${req.suffix}</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<!-- 数据库中表名为:twei_api_type的列名 -->
+	<sql id="twei_api_type_Column">
+		api_type_id,api_type_name,api_type_memo,create_by,create_at,update_by,update_at,data_version
+	</sql>
+
+	<!--获得类名为:TweiApiType对应的数据库表的数据总行数 -->
+	<select id="getTweiApiTypeRowCount" parameterType="com.common.Assist" resultType="java.lang.Long">
+		select count(*) from twei_api_type
+		<if test="require!=null">
+			<include refid="assist" />
+		</if>
+	</select>
+	
+	<!-- 获得类名为:TweiApiType对应数据库中表的数据集合 -->
+	<select id="selectTweiApiType" parameterType="com.common.Assist" resultMap="result_TweiApiType_Map">
+		select
+		<if test="distinct !=null">${distinct}</if>
+		<choose>
+			<when test="resultColumn!=null">${resultColumn}</when>
+			<otherwise>
+				<include refid="twei_api_type_Column" />
+			</otherwise>
+		</choose>
+		from twei_api_type
+		<if test="require!=null">
+			<include refid="assist" />
+		</if>
+		<if test="order !=null">${order}</if>
+		<choose>
+			<when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+			<when test="rowSize !=null">LIMIT #{rowSize}</when>
+		</choose>
+	</select>
+	
+	<!-- 获得一个TweiApiType对象,以参数TweiApiType对象中不为空的属性作为条件进行查询 -->
+	<select id="selectTweiApiTypeObjSingle" parameterType="com.dto.TweiApiType" resultMap="result_TweiApiType_Map">
+		select
+		<include refid="twei_api_type_Column" />
+		from twei_api_type
+		<where>
+		<if test="apiTypeMemo != null"> and api_type_memo = #{apiTypeMemo}</if>
+		<if test="createBy != null"> and create_by = #{createBy}</if>
+		<if test="createAt != null"> and create_at = #{createAt}</if>
+		<if test="updateBy != null"> and update_by = #{updateBy}</if>
+		<if test="updateAt != null"> and update_at = #{updateAt}</if>
+		<if test="dataVersion != null"> and data_version = #{dataVersion}</if>
+		<if test="apiTypeId != null"> and api_type_id = #{apiTypeId}</if>
+		<if test="apiTypeName != null"> and api_type_name = #{apiTypeName}</if>
+		
+		</where>
+		LIMIT 1
+	</select>
+	
+	<!-- 获得TweiApiType对象,以参数TweiApiType对象中不为空的属性作为条件进行查询 -->
+	<select id="selectTweiApiTypeByObj" parameterType="com.dto.TweiApiType" resultMap="result_TweiApiType_Map">
+		select
+		<include refid="twei_api_type_Column" />
+		from twei_api_type
+		<where>
+		<if test="apiTypeMemo != null"> and api_type_memo = #{apiTypeMemo}</if>
+		<if test="createBy != null"> and create_by = #{createBy}</if>
+		<if test="createAt != null"> and create_at = #{createAt}</if>
+		<if test="updateBy != null"> and update_by = #{updateBy}</if>
+		<if test="updateAt != null"> and update_at = #{updateAt}</if>
+		<if test="dataVersion != null"> and data_version = #{dataVersion}</if>
+		<if test="apiTypeId != null"> and api_type_id = #{apiTypeId}</if>
+		<if test="apiTypeName != null"> and api_type_name = #{apiTypeName}</if>
+		
+		</where>
+	</select>
+
+	<!-- 将TweiApiType插入到对应数据库的表中,包括属性值为null的数据 -->
+	<insert id="insertTweiApiType" parameterType="com.dto.TweiApiType">
+		insert into 
+		twei_api_type (api_type_id,api_type_name,api_type_memo,create_by,create_at,update_by,update_at,data_version) 
+		values(#{apiTypeId},#{apiTypeName},#{apiTypeMemo},#{createBy},#{createAt},#{updateBy},#{updateAt},#{dataVersion})
+	</insert>
+
+	<!-- 将TweiApiType中属性值不为null的数据,插入到对应数据库的表中 -->
+	<insert id="insertNotNullTweiApiType" parameterType="com.dto.TweiApiType">
+		insert into twei_api_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="apiTypeId != null">api_type_id,</if>
+			<if test="apiTypeName != null">api_type_name,</if>
+			<if test="apiTypeMemo != null">api_type_memo,</if>
+			<if test="createBy != null">create_by,</if>
+			<if test="createAt != null">create_at,</if>
+			<if test="updateBy != null">update_by,</if>
+			<if test="updateAt != null">update_at,</if>
+			<if test="dataVersion != null">data_version,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="apiTypeId != null">#{apiTypeId},</if>
+			<if test="apiTypeName != null">#{apiTypeName},</if>
+			<if test="apiTypeMemo != null">#{apiTypeMemo},</if>
+			<if test="createBy != null">#{createBy},</if>
+			<if test="createAt != null">#{createAt},</if>
+			<if test="updateBy != null">#{updateBy},</if>
+			<if test="updateAt != null">#{updateAt},</if>
+			<if test="dataVersion != null">#{dataVersion},</if>
+		</trim>
+	</insert>
+
+	<!-- 将TweiApiType批量插入到对应数据库的表中 -->
+	<insert id="insertTweiApiTypeByBatch" parameterType="ArrayList">
+		insert into twei_api_type(api_type_id,api_type_name,api_type_memo,create_by,create_at,update_by,update_at,data_version) values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.apiTypeId},#{item.apiTypeName},#{item.apiTypeMemo},#{item.createBy},#{item.createAt},#{item.updateBy},#{item.updateAt},#{item.dataVersion})
+		</foreach>
+	</insert>
+	
+
+	<!-- 通过辅助工具Assist中的条件将TweiApiType对应的数据库表的数据删除 -->
+	<delete id="deleteTweiApiTypeByAssist" parameterType="com.common.Assist">
+		delete from twei_api_type
+		<if test="require!=null">
+			<include refid="assist" />
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 通过辅助工具Assist中的条件将TweiApiType中的数据更新到数据库对应的表中,包括值为null的数据 -->
+	<update id="updateTweiApiType" parameterType="map">
+		update twei_api_type
+		<set>
+			api_type_id = #{enti.apiTypeId},
+			api_type_name = #{enti.apiTypeName},
+			api_type_memo = #{enti.apiTypeMemo},
+			create_by = #{enti.createBy},
+			create_at = #{enti.createAt},
+			update_by = #{enti.updateBy},
+			update_at = #{enti.updateAt},
+			data_version = #{enti.dataVersion},
+		</set>
+		<if test="assist.require!=null">
+			<include refid="updateAssist" />
+		</if>
+	</update>
+
+	<!-- 通过辅助工具Assist中的条件将TweiApiType中属性值不为null的数据更新到数据库对应的表中 -->
+	<update id="updateNotNullTweiApiType" parameterType="map">
+		update twei_api_type
+		<set>
+			<if test="enti.apiTypeId != null">api_type_id = #{enti.apiTypeId},</if>
+			<if test="enti.apiTypeName != null">api_type_name = #{enti.apiTypeName},</if>
+			<if test="enti.apiTypeMemo != null">api_type_memo = #{enti.apiTypeMemo},</if>
+			<if test="enti.createBy != null">create_by = #{enti.createBy},</if>
+			<if test="enti.createAt != null">create_at = #{enti.createAt},</if>
+			<if test="enti.updateBy != null">update_by = #{enti.updateBy},</if>
+			<if test="enti.updateAt != null">update_at = #{enti.updateAt},</if>
+			<if test="enti.dataVersion != null">data_version = #{enti.dataVersion},</if>
+		</set>
+		<if test="assist.require!=null">
+			<include refid="updateAssist" />
+		</if>
+	</update>
+</mapper>

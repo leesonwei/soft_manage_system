@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.TweiDictDao">
+	<!-- TweiDict的resultMap,column是给数据库列起的别名,它对应property类的属性 -->
+	<resultMap id="result_TweiDict_Map" type="com.dto.TweiDict">
+		
+		<result column="type_id" property="typeId" />
+		<result column="dict_id" property="dictId" />
+		<result column="dict_name" property="dictName" />
+		<result column="dict_short_name" property="dictShortName" />
+		<result column="dict_full_name" property="dictFullName" />
+		<result column="create_by" property="createBy" />
+		<result column="create_at" property="createAt" />
+		<result column="update_by" property="updateBy" />
+		<result column="update_at" property="updateAt" />
+		<result column="flag" property="flag" />
+		<result column="check_by" property="checkBy" />
+		<result column="check_at" property="checkAt" />
+		<result column="is_used" property="isUsed" />
+		<result column="memo" property="memo" />
+		<result column="pycode" property="pycode" />
+		<result column="data_version" property="dataVersion" />
+	</resultMap>
+
+	<!-- assist是查询辅助工具类, ${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+	<sql id="assist">
+		<where>
+			<foreach collection="require" item="req" separator=" ">
+				${req.require}
+				<if test="req.value != null">
+					#{req.value}
+				</if>
+				<if test="req.values != null">
+					<foreach collection="req.values" item="value" separator=",">
+						#{value}
+					</foreach>
+				</if>
+				<if test="req.customRequire !=null">
+					<foreach collection="req.customRequire" item="cr" separator=" ">
+						${cr.require}
+						<if test="cr.value != null">
+							#{cr.value}
+						</if>
+						<if test="cr.values != null">
+							<foreach collection="cr.values" item="value"
+								separator=",">
+								#{value}
+							</foreach>
+						</if>
+						<if test="cr.suffix != null"> ${cr.suffix}</if>
+					</foreach>
+				</if>
+				<if test="req.suffix != null"> ${req.suffix}</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<!-- updateAssist用于更新数据查询辅助工具类,作用assist与一致 -->
+	<sql id="updateAssist">
+		<where>
+			<foreach collection="assist.require" item="req" separator=" ">
+				${req.require}
+				<if test="req.value != null">
+					#{req.value}
+				</if>
+				<if test="req.values != null">
+					<foreach collection="req.values" item="value" separator=",">
+						#{value}
+					</foreach>
+				</if>
+				<if test="req.customRequire !=null">
+					<foreach collection="req.customRequire" item="cr" separator=" ">
+						${cr.require}
+						<if test="cr.value != null">
+							#{cr.value}
+						</if>
+						<if test="cr.values != null">
+							<foreach collection="cr.values" item="value"
+								separator=",">
+								#{value}
+							</foreach>
+						</if>
+						<if test="cr.suffix != null"> ${cr.suffix}</if>
+					</foreach>
+				</if>
+				<if test="req.suffix != null"> ${req.suffix}</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<!-- 数据库中表名为:twei_dict的列名 -->
+	<sql id="twei_dict_Column">
+		type_id,dict_id,dict_name,dict_short_name,dict_full_name,create_by,create_at,update_by,update_at,flag,check_by,check_at,is_used,memo,pycode,data_version
+	</sql>
+
+	<!--获得类名为:TweiDict对应的数据库表的数据总行数 -->
+	<select id="getTweiDictRowCount" parameterType="com.common.Assist" resultType="java.lang.Long">
+		select count(*) from twei_dict
+		<if test="require!=null">
+			<include refid="assist" />
+		</if>
+	</select>
+	
+	<!-- 获得类名为:TweiDict对应数据库中表的数据集合 -->
+	<select id="selectTweiDict" parameterType="com.common.Assist" resultMap="result_TweiDict_Map">
+		select
+		<if test="distinct !=null">${distinct}</if>
+		<choose>
+			<when test="resultColumn!=null">${resultColumn}</when>
+			<otherwise>
+				<include refid="twei_dict_Column" />
+			</otherwise>
+		</choose>
+		from twei_dict
+		<if test="require!=null">
+			<include refid="assist" />
+		</if>
+		<if test="order !=null">${order}</if>
+		<choose>
+			<when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+			<when test="rowSize !=null">LIMIT #{rowSize}</when>
+		</choose>
+	</select>
+	
+	<!-- 获得一个TweiDict对象,以参数TweiDict对象中不为空的属性作为条件进行查询 -->
+	<select id="selectTweiDictObjSingle" parameterType="com.dto.TweiDict" resultMap="result_TweiDict_Map">
+		select
+		<include refid="twei_dict_Column" />
+		from twei_dict
+		<where>
+		<if test="dictShortName != null"> and dict_short_name = #{dictShortName}</if>
+		<if test="dictFullName != null"> and dict_full_name = #{dictFullName}</if>
+		<if test="createBy != null"> and create_by = #{createBy}</if>
+		<if test="createAt != null"> and create_at = #{createAt}</if>
+		<if test="updateBy != null"> and update_by = #{updateBy}</if>
+		<if test="updateAt != null"> and update_at = #{updateAt}</if>
+		<if test="flag != null"> and flag = #{flag}</if>
+		<if test="checkBy != null"> and check_by = #{checkBy}</if>
+		<if test="checkAt != null"> and check_at = #{checkAt}</if>
+		<if test="isUsed != null"> and is_used = #{isUsed}</if>
+		<if test="memo != null"> and memo = #{memo}</if>
+		<if test="pycode != null"> and pycode = #{pycode}</if>
+		<if test="dataVersion != null"> and data_version = #{dataVersion}</if>
+		<if test="typeId != null"> and type_id = #{typeId}</if>
+		<if test="dictId != null"> and dict_id = #{dictId}</if>
+		<if test="dictName != null"> and dict_name = #{dictName}</if>
+		
+		</where>
+		LIMIT 1
+	</select>
+	
+	<!-- 获得TweiDict对象,以参数TweiDict对象中不为空的属性作为条件进行查询 -->
+	<select id="selectTweiDictByObj" parameterType="com.dto.TweiDict" resultMap="result_TweiDict_Map">
+		select
+		<include refid="twei_dict_Column" />
+		from twei_dict
+		<where>
+		<if test="dictShortName != null"> and dict_short_name = #{dictShortName}</if>
+		<if test="dictFullName != null"> and dict_full_name = #{dictFullName}</if>
+		<if test="createBy != null"> and create_by = #{createBy}</if>
+		<if test="createAt != null"> and create_at = #{createAt}</if>
+		<if test="updateBy != null"> and update_by = #{updateBy}</if>
+		<if test="updateAt != null"> and update_at = #{updateAt}</if>
+		<if test="flag != null"> and flag = #{flag}</if>
+		<if test="checkBy != null"> and check_by = #{checkBy}</if>
+		<if test="checkAt != null"> and check_at = #{checkAt}</if>
+		<if test="isUsed != null"> and is_used = #{isUsed}</if>
+		<if test="memo != null"> and memo = #{memo}</if>
+		<if test="pycode != null"> and pycode = #{pycode}</if>
+		<if test="dataVersion != null"> and data_version = #{dataVersion}</if>
+		<if test="typeId != null"> and type_id = #{typeId}</if>
+		<if test="dictId != null"> and dict_id = #{dictId}</if>
+		<if test="dictName != null"> and dict_name = #{dictName}</if>
+		
+		</where>
+	</select>
+
+	<!-- 将TweiDict插入到对应数据库的表中,包括属性值为null的数据 -->
+	<insert id="insertTweiDict" parameterType="com.dto.TweiDict">
+		insert into 
+		twei_dict (type_id,dict_id,dict_name,dict_short_name,dict_full_name,create_by,create_at,update_by,update_at,flag,check_by,check_at,is_used,memo,pycode,data_version) 
+		values(#{typeId},#{dictId},#{dictName},#{dictShortName},#{dictFullName},#{createBy},#{createAt},#{updateBy},#{updateAt},#{flag},#{checkBy},#{checkAt},#{isUsed},#{memo},#{pycode},#{dataVersion})
+	</insert>
+
+	<!-- 将TweiDict中属性值不为null的数据,插入到对应数据库的表中 -->
+	<insert id="insertNotNullTweiDict" parameterType="com.dto.TweiDict">
+		insert into twei_dict
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="typeId != null">type_id,</if>
+			<if test="dictId != null">dict_id,</if>
+			<if test="dictName != null">dict_name,</if>
+			<if test="dictShortName != null">dict_short_name,</if>
+			<if test="dictFullName != null">dict_full_name,</if>
+			<if test="createBy != null">create_by,</if>
+			<if test="createAt != null">create_at,</if>
+			<if test="updateBy != null">update_by,</if>
+			<if test="updateAt != null">update_at,</if>
+			<if test="flag != null">flag,</if>
+			<if test="checkBy != null">check_by,</if>
+			<if test="checkAt != null">check_at,</if>
+			<if test="isUsed != null">is_used,</if>
+			<if test="memo != null">memo,</if>
+			<if test="pycode != null">pycode,</if>
+			<if test="dataVersion != null">data_version,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="typeId != null">#{typeId},</if>
+			<if test="dictId != null">#{dictId},</if>
+			<if test="dictName != null">#{dictName},</if>
+			<if test="dictShortName != null">#{dictShortName},</if>
+			<if test="dictFullName != null">#{dictFullName},</if>
+			<if test="createBy != null">#{createBy},</if>
+			<if test="createAt != null">#{createAt},</if>
+			<if test="updateBy != null">#{updateBy},</if>
+			<if test="updateAt != null">#{updateAt},</if>
+			<if test="flag != null">#{flag},</if>
+			<if test="checkBy != null">#{checkBy},</if>
+			<if test="checkAt != null">#{checkAt},</if>
+			<if test="isUsed != null">#{isUsed},</if>
+			<if test="memo != null">#{memo},</if>
+			<if test="pycode != null">#{pycode},</if>
+			<if test="dataVersion != null">#{dataVersion},</if>
+		</trim>
+	</insert>
+
+	<!-- 将TweiDict批量插入到对应数据库的表中 -->
+	<insert id="insertTweiDictByBatch" parameterType="ArrayList">
+		insert into twei_dict(type_id,dict_id,dict_name,dict_short_name,dict_full_name,create_by,create_at,update_by,update_at,flag,check_by,check_at,is_used,memo,pycode,data_version) values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.typeId},#{item.dictId},#{item.dictName},#{item.dictShortName},#{item.dictFullName},#{item.createBy},#{item.createAt},#{item.updateBy},#{item.updateAt},#{item.flag},#{item.checkBy},#{item.checkAt},#{item.isUsed},#{item.memo},#{item.pycode},#{item.dataVersion})
+		</foreach>
+	</insert>
+	
+
+	<!-- 通过辅助工具Assist中的条件将TweiDict对应的数据库表的数据删除 -->
+	<delete id="deleteTweiDictByAssist" parameterType="com.common.Assist">
+		delete from twei_dict
+		<if test="require!=null">
+			<include refid="assist" />
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 通过辅助工具Assist中的条件将TweiDict中的数据更新到数据库对应的表中,包括值为null的数据 -->
+	<update id="updateTweiDict" parameterType="map">
+		update twei_dict
+		<set>
+			type_id = #{enti.typeId},
+			dict_id = #{enti.dictId},
+			dict_name = #{enti.dictName},
+			dict_short_name = #{enti.dictShortName},
+			dict_full_name = #{enti.dictFullName},
+			create_by = #{enti.createBy},
+			create_at = #{enti.createAt},
+			update_by = #{enti.updateBy},
+			update_at = #{enti.updateAt},
+			flag = #{enti.flag},
+			check_by = #{enti.checkBy},
+			check_at = #{enti.checkAt},
+			is_used = #{enti.isUsed},
+			memo = #{enti.memo},
+			pycode = #{enti.pycode},
+			data_version = #{enti.dataVersion},
+		</set>
+		<if test="assist.require!=null">
+			<include refid="updateAssist" />
+		</if>
+	</update>
+
+	<!-- 通过辅助工具Assist中的条件将TweiDict中属性值不为null的数据更新到数据库对应的表中 -->
+	<update id="updateNotNullTweiDict" parameterType="map">
+		update twei_dict
+		<set>
+			<if test="enti.typeId != null">type_id = #{enti.typeId},</if>
+			<if test="enti.dictId != null">dict_id = #{enti.dictId},</if>
+			<if test="enti.dictName != null">dict_name = #{enti.dictName},</if>
+			<if test="enti.dictShortName != null">dict_short_name = #{enti.dictShortName},</if>
+			<if test="enti.dictFullName != null">dict_full_name = #{enti.dictFullName},</if>
+			<if test="enti.createBy != null">create_by = #{enti.createBy},</if>
+			<if test="enti.createAt != null">create_at = #{enti.createAt},</if>
+			<if test="enti.updateBy != null">update_by = #{enti.updateBy},</if>
+			<if test="enti.updateAt != null">update_at = #{enti.updateAt},</if>
+			<if test="enti.flag != null">flag = #{enti.flag},</if>
+			<if test="enti.checkBy != null">check_by = #{enti.checkBy},</if>
+			<if test="enti.checkAt != null">check_at = #{enti.checkAt},</if>
+			<if test="enti.isUsed != null">is_used = #{enti.isUsed},</if>
+			<if test="enti.memo != null">memo = #{enti.memo},</if>
+			<if test="enti.pycode != null">pycode = #{enti.pycode},</if>
+			<if test="enti.dataVersion != null">data_version = #{enti.dataVersion},</if>
+		</set>
+		<if test="assist.require!=null">
+			<include refid="updateAssist" />
+		</if>
+	</update>
+</mapper>

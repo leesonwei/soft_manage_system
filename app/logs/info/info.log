@@ -1,0 +1,804 @@
+[DEBUG] 2019-03-21 22:09:38 --> 运行Spring-Generator... --> Main.java:62 
+
+[DEBUG] 2019-03-21 22:09:38 --> 执行创建模板... --> TemplateUtil.java:36 
+
+[DEBUG] 2019-03-21 22:09:38 --> jar --> TemplateUtil.java:42 
+
+[DEBUG] 2019-03-21 22:09:38 --> 初始化首页... --> IndexController.java:305 
+
+[DEBUG] 2019-03-21 22:09:38 --> 初始化首页成功! --> IndexController.java:344 
+
+[DEBUG] 2019-03-21 22:09:38 --> 加载左侧数据库树与事件.... --> IndexController.java:586 
+
+[DEBUG] 2019-03-21 22:09:39 --> 加载所有数据库到左侧树集成功! --> IndexController.java:349 
+
+[DEBUG] 2019-03-21 22:09:39 --> 执行查询默认配置信息并加载到首页... --> IndexController.java:356 
+
+[DEBUG] 2019-03-21 22:09:39 --> 执行加载模板文件夹里面所有模板的名字... --> IndexController.java:759 
+
+[DEBUG] 2019-03-21 22:09:39 --> 执行加载模板文件夹里面所有模板的名字-->成功! --> IndexController.java:766 
+
+[DEBUG] 2019-03-21 22:09:39 --> 加载配置信息到首页成功! --> IndexController.java:360 
+
+[DEBUG] 2019-03-21 22:09:47 --> 初始化数据库连接窗口.... --> ConnectionController.java:86 
+
+[DEBUG] 2019-03-21 22:09:47 --> 初始化数据库连接成功! --> ConnectionController.java:103 
+
+[DEBUG] 2019-03-21 22:10:47 --> 执行测试数据库连接... --> ConnectionController.java:170 
+
+[DEBUG] 2019-03-21 22:10:47 --> 数据库测试连接成功! --> ConnectionController.java:179 
+
+[DEBUG] 2019-03-21 22:10:50 --> 执行保存数据库连接... --> ConnectionController.java:137 
+
+[DEBUG] 2019-03-21 22:10:50 --> 保存数据库连接成功! --> ConnectionController.java:147 
+
+[DEBUG] 2019-03-21 22:10:52 --> 加载所有表.... --> IndexController.java:686 
+
+[DEBUG] 2019-03-21 22:10:52 --> 加载所有表成功! --> IndexController.java:704 
+
+[DEBUG] 2019-03-21 22:11:21 --> 选择文件项目目录:D:\test --> IndexController.java:1310 
+
+[DEBUG] 2019-03-21 22:12:09 --> 初始化SetRouterController... --> SetRouterController.java:133 
+
+[DEBUG] 2019-03-21 22:12:09 --> 初始化SetRouterController->初始化属性... --> SetRouterController.java:134 
+
+[DEBUG] 2019-03-21 22:12:09 --> 初始化SetRouterController->初始化模板文件名选择... --> SetRouterController.java:172 
+
+[DEBUG] 2019-03-21 22:12:09 --> 初始化SetRouterController->初始化配置信息... --> SetRouterController.java:177 
+
+[DEBUG] 2019-03-21 22:12:09 --> 执行从数据库中获取配置文件... --> SetRouterController.java:231 
+
+[DEBUG] 2019-03-21 22:12:09 --> 执行获取配置文件-->成功! --> SetRouterController.java:234 
+
+[DEBUG] 2019-03-21 22:12:09 --> 执行加载配置文件到当前页面... --> SetRouterController.java:264 
+
+[DEBUG] 2019-03-21 22:12:09 --> 执行加载配置文件到当前页面->成功! --> SetRouterController.java:279 
+
+[DEBUG] 2019-03-21 22:12:09 --> 初始化SetRouterController-->成功! --> SetRouterController.java:192 
+
+[DEBUG] 2019-03-21 22:12:34 --> 初始化配置信息窗口.... --> HistoryConfigController.java:47 
+
+[DEBUG] 2019-03-21 22:12:34 --> 初始化配置信息表格... --> HistoryConfigController.java:48 
+
+[DEBUG] 2019-03-21 22:12:34 --> 初始化配置信息完成! --> HistoryConfigController.java:77 
+
+[DEBUG] 2019-03-21 22:12:34 --> 初始化配置信息窗口完成! --> HistoryConfigController.java:78 
+
+[DEBUG] 2019-03-21 22:12:47 --> 初始化SetCustomConterller... --> SetCustomController.java:165 
+
+[DEBUG] 2019-03-21 22:12:47 --> 初始化SetCustomConterller->初始化属性... --> SetCustomController.java:166 
+
+[DEBUG] 2019-03-21 22:12:47 --> 初始化SetCustomConterller->初始化模板文件名选择... --> SetCustomController.java:209 
+
+[DEBUG] 2019-03-21 22:12:47 --> 初始化SetCustomConterller->初始化配置信息... --> SetCustomController.java:210 
+
+[DEBUG] 2019-03-21 22:12:47 --> 执行从数据库中获取配置文件... --> SetCustomController.java:266 
+
+[DEBUG] 2019-03-21 22:12:47 --> 执行获取配置文件-->成功! --> SetCustomController.java:269 
+
+[DEBUG] 2019-03-21 22:12:47 --> 执行加载配置文件到当前页面... --> SetCustomController.java:299 
+
+[DEBUG] 2019-03-21 22:12:47 --> 执行加载配置文件到当前页面->成功! --> SetCustomController.java:314 
+
+[DEBUG] 2019-03-21 22:12:47 --> 初始化SetCustomConterller-->成功! --> SetCustomController.java:225 
+
+[DEBUG] 2019-03-21 22:13:03 --> 执行创建... --> IndexController.java:1044 
+
+[DEBUG] 2019-03-21 22:13:17 --> 执行全库生成... --> IndexController.java:671 
+
+[DEBUG] 2019-03-21 22:13:21 --> Couldn't find template in cache for "Entity.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Entity_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Entity_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Entity.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> Loading template for "Entity.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Entity.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> 执行将twei_api生成实体类-->成功! --> IndexController.java:930 
+
+[DEBUG] 2019-03-21 22:13:21 --> Couldn't find template in cache for "Service.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Service_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Service_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Service.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> Loading template for "Service.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Service.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> 执行将twei_api生成Service-->成功! --> IndexController.java:941 
+
+[DEBUG] 2019-03-21 22:13:21 --> Couldn't find template in cache for "ServiceImpl.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("ServiceImpl_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("ServiceImpl_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("ServiceImpl.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> Loading template for "ServiceImpl.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\ServiceImpl.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> 执行将twei_api生成ServiceImpl-->成功! --> IndexController.java:952 
+
+[DEBUG] 2019-03-21 22:13:21 --> Couldn't find template in cache for "Dao.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Dao_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Dao_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Dao.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> Loading template for "Dao.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Dao.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> 执行将twei_api生成DAO-->成功! --> IndexController.java:963 
+
+[DEBUG] 2019-03-21 22:13:21 --> Couldn't find template in cache for "MySQLMapper.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("MySQLMapper_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("MySQLMapper_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("MySQLMapper.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> Loading template for "MySQLMapper.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\MySQLMapper.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> 执行生成Mapper-->成功! --> IndexController.java:980 
+
+[DEBUG] 2019-03-21 22:13:21 --> Couldn't find template in cache for "Controller.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Controller_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Controller_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("Controller.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> Loading template for "Controller.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Controller.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> 执行将twei_api生成Router-->成功! --> IndexController.java:991 
+
+[DEBUG] 2019-03-21 22:13:21 --> Couldn't find template in cache for "UnitTest.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("UnitTest_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("UnitTest_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("UnitTest.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> Loading template for "UnitTest.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\UnitTest.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> 执行将twei_api生成单元测试-->成功! --> IndexController.java:1002 
+
+[DEBUG] 2019-03-21 22:13:21 --> Couldn't find template in cache for "SqlAssist.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("SqlAssist_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("SqlAssist_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> TemplateLoader.findTemplateSource("SqlAssist.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> Loading template for "SqlAssist.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\SqlAssist.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:21 --> 执行将twei_api生成SqlAssist-->成功! --> IndexController.java:1013 
+
+[DEBUG] 2019-03-21 22:13:25 --> Couldn't find template in cache for "Entity.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Entity_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Entity_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Entity.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> Loading template for "Entity.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Entity.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> 执行将twei_api_code生成实体类-->成功! --> IndexController.java:930 
+
+[DEBUG] 2019-03-21 22:13:25 --> Couldn't find template in cache for "Service.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Service_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Service_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Service.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> Loading template for "Service.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Service.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> 执行将twei_api_code生成Service-->成功! --> IndexController.java:941 
+
+[DEBUG] 2019-03-21 22:13:25 --> Couldn't find template in cache for "ServiceImpl.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("ServiceImpl_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("ServiceImpl_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("ServiceImpl.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> Loading template for "ServiceImpl.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\ServiceImpl.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> 执行将twei_api_code生成ServiceImpl-->成功! --> IndexController.java:952 
+
+[DEBUG] 2019-03-21 22:13:25 --> Couldn't find template in cache for "Dao.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Dao_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Dao_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Dao.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> Loading template for "Dao.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Dao.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> 执行将twei_api_code生成DAO-->成功! --> IndexController.java:963 
+
+[DEBUG] 2019-03-21 22:13:25 --> Couldn't find template in cache for "MySQLMapper.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("MySQLMapper_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("MySQLMapper_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("MySQLMapper.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> Loading template for "MySQLMapper.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\MySQLMapper.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> 执行生成Mapper-->成功! --> IndexController.java:980 
+
+[DEBUG] 2019-03-21 22:13:25 --> Couldn't find template in cache for "Controller.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Controller_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Controller_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("Controller.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> Loading template for "Controller.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Controller.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> 执行将twei_api_code生成Router-->成功! --> IndexController.java:991 
+
+[DEBUG] 2019-03-21 22:13:25 --> Couldn't find template in cache for "UnitTest.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("UnitTest_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("UnitTest_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> TemplateLoader.findTemplateSource("UnitTest.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> Loading template for "UnitTest.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\UnitTest.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:25 --> 执行将twei_api_code生成单元测试-->成功! --> IndexController.java:1002 
+
+[DEBUG] 2019-03-21 22:13:25 --> 设置了文件存在不覆盖,文件已经存在,忽略本文件的创建 --> CreateFileUtil.java:49 
+
+[DEBUG] 2019-03-21 22:13:25 --> 执行将twei_api_code生成SqlAssist-->成功! --> IndexController.java:1013 
+
+[DEBUG] 2019-03-21 22:13:28 --> Couldn't find template in cache for "Entity.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Entity_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Entity_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Entity.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> Loading template for "Entity.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Entity.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> 执行将twei_api_para生成实体类-->成功! --> IndexController.java:930 
+
+[DEBUG] 2019-03-21 22:13:28 --> Couldn't find template in cache for "Service.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Service_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Service_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Service.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> Loading template for "Service.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Service.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> 执行将twei_api_para生成Service-->成功! --> IndexController.java:941 
+
+[DEBUG] 2019-03-21 22:13:28 --> Couldn't find template in cache for "ServiceImpl.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("ServiceImpl_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("ServiceImpl_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("ServiceImpl.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> Loading template for "ServiceImpl.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\ServiceImpl.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> 执行将twei_api_para生成ServiceImpl-->成功! --> IndexController.java:952 
+
+[DEBUG] 2019-03-21 22:13:28 --> Couldn't find template in cache for "Dao.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Dao_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Dao_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Dao.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> Loading template for "Dao.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Dao.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> 执行将twei_api_para生成DAO-->成功! --> IndexController.java:963 
+
+[DEBUG] 2019-03-21 22:13:28 --> Couldn't find template in cache for "MySQLMapper.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("MySQLMapper_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("MySQLMapper_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("MySQLMapper.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> Loading template for "MySQLMapper.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\MySQLMapper.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> 执行生成Mapper-->成功! --> IndexController.java:980 
+
+[DEBUG] 2019-03-21 22:13:28 --> Couldn't find template in cache for "Controller.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Controller_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Controller_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("Controller.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> Loading template for "Controller.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Controller.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> 执行将twei_api_para生成Router-->成功! --> IndexController.java:991 
+
+[DEBUG] 2019-03-21 22:13:28 --> Couldn't find template in cache for "UnitTest.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("UnitTest_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("UnitTest_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> TemplateLoader.findTemplateSource("UnitTest.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> Loading template for "UnitTest.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\UnitTest.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:28 --> 执行将twei_api_para生成单元测试-->成功! --> IndexController.java:1002 
+
+[DEBUG] 2019-03-21 22:13:28 --> 设置了文件存在不覆盖,文件已经存在,忽略本文件的创建 --> CreateFileUtil.java:49 
+
+[DEBUG] 2019-03-21 22:13:28 --> 执行将twei_api_para生成SqlAssist-->成功! --> IndexController.java:1013 
+
+[DEBUG] 2019-03-21 22:13:31 --> Couldn't find template in cache for "Entity.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Entity_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Entity_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Entity.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> Loading template for "Entity.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Entity.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> 执行将twei_api_type生成实体类-->成功! --> IndexController.java:930 
+
+[DEBUG] 2019-03-21 22:13:31 --> Couldn't find template in cache for "Service.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Service_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Service_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Service.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> Loading template for "Service.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Service.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> 执行将twei_api_type生成Service-->成功! --> IndexController.java:941 
+
+[DEBUG] 2019-03-21 22:13:31 --> Couldn't find template in cache for "ServiceImpl.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("ServiceImpl_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("ServiceImpl_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("ServiceImpl.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> Loading template for "ServiceImpl.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\ServiceImpl.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> 执行将twei_api_type生成ServiceImpl-->成功! --> IndexController.java:952 
+
+[DEBUG] 2019-03-21 22:13:31 --> Couldn't find template in cache for "Dao.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Dao_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Dao_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Dao.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> Loading template for "Dao.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Dao.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> 执行将twei_api_type生成DAO-->成功! --> IndexController.java:963 
+
+[DEBUG] 2019-03-21 22:13:31 --> Couldn't find template in cache for "MySQLMapper.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("MySQLMapper_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("MySQLMapper_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("MySQLMapper.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> Loading template for "MySQLMapper.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\MySQLMapper.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> 执行生成Mapper-->成功! --> IndexController.java:980 
+
+[DEBUG] 2019-03-21 22:13:31 --> Couldn't find template in cache for "Controller.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Controller_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Controller_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("Controller.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> Loading template for "Controller.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Controller.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> 执行将twei_api_type生成Router-->成功! --> IndexController.java:991 
+
+[DEBUG] 2019-03-21 22:13:31 --> Couldn't find template in cache for "UnitTest.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("UnitTest_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("UnitTest_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> TemplateLoader.findTemplateSource("UnitTest.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> Loading template for "UnitTest.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\UnitTest.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:31 --> 执行将twei_api_type生成单元测试-->成功! --> IndexController.java:1002 
+
+[DEBUG] 2019-03-21 22:13:31 --> 设置了文件存在不覆盖,文件已经存在,忽略本文件的创建 --> CreateFileUtil.java:49 
+
+[DEBUG] 2019-03-21 22:13:31 --> 执行将twei_api_type生成SqlAssist-->成功! --> IndexController.java:1013 
+
+[DEBUG] 2019-03-21 22:13:35 --> Couldn't find template in cache for "Entity.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Entity_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Entity_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Entity.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> Loading template for "Entity.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Entity.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> 执行将twei_dict生成实体类-->成功! --> IndexController.java:930 
+
+[DEBUG] 2019-03-21 22:13:35 --> Couldn't find template in cache for "Service.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Service_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Service_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Service.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> Loading template for "Service.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Service.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> 执行将twei_dict生成Service-->成功! --> IndexController.java:941 
+
+[DEBUG] 2019-03-21 22:13:35 --> Couldn't find template in cache for "ServiceImpl.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("ServiceImpl_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("ServiceImpl_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("ServiceImpl.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> Loading template for "ServiceImpl.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\ServiceImpl.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> 执行将twei_dict生成ServiceImpl-->成功! --> IndexController.java:952 
+
+[DEBUG] 2019-03-21 22:13:35 --> Couldn't find template in cache for "Dao.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Dao_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Dao_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Dao.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> Loading template for "Dao.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Dao.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> 执行将twei_dict生成DAO-->成功! --> IndexController.java:963 
+
+[DEBUG] 2019-03-21 22:13:35 --> Couldn't find template in cache for "MySQLMapper.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("MySQLMapper_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("MySQLMapper_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("MySQLMapper.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> Loading template for "MySQLMapper.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\MySQLMapper.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> 执行生成Mapper-->成功! --> IndexController.java:980 
+
+[DEBUG] 2019-03-21 22:13:35 --> Couldn't find template in cache for "Controller.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Controller_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Controller_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("Controller.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> Loading template for "Controller.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Controller.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> 执行将twei_dict生成Router-->成功! --> IndexController.java:991 
+
+[DEBUG] 2019-03-21 22:13:35 --> Couldn't find template in cache for "UnitTest.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("UnitTest_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("UnitTest_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> TemplateLoader.findTemplateSource("UnitTest.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> Loading template for "UnitTest.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\UnitTest.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:35 --> 执行将twei_dict生成单元测试-->成功! --> IndexController.java:1002 
+
+[DEBUG] 2019-03-21 22:13:35 --> 设置了文件存在不覆盖,文件已经存在,忽略本文件的创建 --> CreateFileUtil.java:49 
+
+[DEBUG] 2019-03-21 22:13:35 --> 执行将twei_dict生成SqlAssist-->成功! --> IndexController.java:1013 
+
+[DEBUG] 2019-03-21 22:13:38 --> Couldn't find template in cache for "Entity.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Entity_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Entity_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Entity.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> Loading template for "Entity.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Entity.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> 执行将twei_dict_type生成实体类-->成功! --> IndexController.java:930 
+
+[DEBUG] 2019-03-21 22:13:38 --> Couldn't find template in cache for "Service.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Service_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Service_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Service.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> Loading template for "Service.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Service.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> 执行将twei_dict_type生成Service-->成功! --> IndexController.java:941 
+
+[DEBUG] 2019-03-21 22:13:38 --> Couldn't find template in cache for "ServiceImpl.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("ServiceImpl_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("ServiceImpl_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("ServiceImpl.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> Loading template for "ServiceImpl.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\ServiceImpl.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> 执行将twei_dict_type生成ServiceImpl-->成功! --> IndexController.java:952 
+
+[DEBUG] 2019-03-21 22:13:38 --> Couldn't find template in cache for "Dao.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Dao_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Dao_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Dao.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> Loading template for "Dao.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Dao.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> 执行将twei_dict_type生成DAO-->成功! --> IndexController.java:963 
+
+[DEBUG] 2019-03-21 22:13:38 --> Couldn't find template in cache for "MySQLMapper.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("MySQLMapper_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("MySQLMapper_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("MySQLMapper.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> Loading template for "MySQLMapper.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\MySQLMapper.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> 执行生成Mapper-->成功! --> IndexController.java:980 
+
+[DEBUG] 2019-03-21 22:13:38 --> Couldn't find template in cache for "Controller.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Controller_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Controller_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("Controller.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> Loading template for "Controller.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Controller.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> 执行将twei_dict_type生成Router-->成功! --> IndexController.java:991 
+
+[DEBUG] 2019-03-21 22:13:38 --> Couldn't find template in cache for "UnitTest.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("UnitTest_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("UnitTest_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> TemplateLoader.findTemplateSource("UnitTest.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> Loading template for "UnitTest.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\UnitTest.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:38 --> 执行将twei_dict_type生成单元测试-->成功! --> IndexController.java:1002 
+
+[DEBUG] 2019-03-21 22:13:38 --> 设置了文件存在不覆盖,文件已经存在,忽略本文件的创建 --> CreateFileUtil.java:49 
+
+[DEBUG] 2019-03-21 22:13:38 --> 执行将twei_dict_type生成SqlAssist-->成功! --> IndexController.java:1013 
+
+[DEBUG] 2019-03-21 22:13:41 --> Couldn't find template in cache for "Entity.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Entity_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Entity_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Entity.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> Loading template for "Entity.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Entity.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> 执行将twei_knowledge生成实体类-->成功! --> IndexController.java:930 
+
+[DEBUG] 2019-03-21 22:13:41 --> Couldn't find template in cache for "Service.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Service_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Service_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Service.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> Loading template for "Service.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Service.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> 执行将twei_knowledge生成Service-->成功! --> IndexController.java:941 
+
+[DEBUG] 2019-03-21 22:13:41 --> Couldn't find template in cache for "ServiceImpl.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("ServiceImpl_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("ServiceImpl_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("ServiceImpl.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> Loading template for "ServiceImpl.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\ServiceImpl.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> 执行将twei_knowledge生成ServiceImpl-->成功! --> IndexController.java:952 
+
+[DEBUG] 2019-03-21 22:13:41 --> Couldn't find template in cache for "Dao.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Dao_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Dao_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Dao.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> Loading template for "Dao.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Dao.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> 执行将twei_knowledge生成DAO-->成功! --> IndexController.java:963 
+
+[DEBUG] 2019-03-21 22:13:41 --> Couldn't find template in cache for "MySQLMapper.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("MySQLMapper_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("MySQLMapper_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("MySQLMapper.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> Loading template for "MySQLMapper.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\MySQLMapper.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> 执行生成Mapper-->成功! --> IndexController.java:980 
+
+[DEBUG] 2019-03-21 22:13:41 --> Couldn't find template in cache for "Controller.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Controller_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Controller_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("Controller.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> Loading template for "Controller.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Controller.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> 执行将twei_knowledge生成Router-->成功! --> IndexController.java:991 
+
+[DEBUG] 2019-03-21 22:13:41 --> Couldn't find template in cache for "UnitTest.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("UnitTest_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("UnitTest_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> TemplateLoader.findTemplateSource("UnitTest.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> Loading template for "UnitTest.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\UnitTest.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:41 --> 执行将twei_knowledge生成单元测试-->成功! --> IndexController.java:1002 
+
+[DEBUG] 2019-03-21 22:13:41 --> 设置了文件存在不覆盖,文件已经存在,忽略本文件的创建 --> CreateFileUtil.java:49 
+
+[DEBUG] 2019-03-21 22:13:41 --> 执行将twei_knowledge生成SqlAssist-->成功! --> IndexController.java:1013 
+
+[DEBUG] 2019-03-21 22:13:45 --> Couldn't find template in cache for "Entity.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Entity_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Entity_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Entity.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> Loading template for "Entity.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Entity.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> 执行将twei_user生成实体类-->成功! --> IndexController.java:930 
+
+[DEBUG] 2019-03-21 22:13:45 --> Couldn't find template in cache for "Service.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Service_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Service_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Service.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> Loading template for "Service.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Service.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> 执行将twei_user生成Service-->成功! --> IndexController.java:941 
+
+[DEBUG] 2019-03-21 22:13:45 --> Couldn't find template in cache for "ServiceImpl.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("ServiceImpl_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("ServiceImpl_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("ServiceImpl.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> Loading template for "ServiceImpl.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\ServiceImpl.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> 执行将twei_user生成ServiceImpl-->成功! --> IndexController.java:952 
+
+[DEBUG] 2019-03-21 22:13:45 --> Couldn't find template in cache for "Dao.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Dao_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Dao_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Dao.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> Loading template for "Dao.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Dao.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> 执行将twei_user生成DAO-->成功! --> IndexController.java:963 
+
+[DEBUG] 2019-03-21 22:13:45 --> Couldn't find template in cache for "MySQLMapper.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("MySQLMapper_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("MySQLMapper_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("MySQLMapper.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> Loading template for "MySQLMapper.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\MySQLMapper.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> 执行生成Mapper-->成功! --> IndexController.java:980 
+
+[DEBUG] 2019-03-21 22:13:45 --> Couldn't find template in cache for "Controller.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Controller_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Controller_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("Controller.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> Loading template for "Controller.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\Controller.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> 执行将twei_user生成Router-->成功! --> IndexController.java:991 
+
+[DEBUG] 2019-03-21 22:13:45 --> Couldn't find template in cache for "UnitTest.ftl"("zh_CN", utf-8, parsed); will try to load it. --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("UnitTest_zh_CN.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("UnitTest_zh.ftl"): Not found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> TemplateLoader.findTemplateSource("UnitTest.ftl"): Found --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> Loading template for "UnitTest.ftl"("zh_CN", utf-8, parsed) from "D:\\spring-boot\\Spring-generator\\target\\jfx\\app\\template\\UnitTest.ftl" --> _Log4jLoggerFactory.java:45 
+
+[DEBUG] 2019-03-21 22:13:45 --> 执行将twei_user生成单元测试-->成功! --> IndexController.java:1002 
+
+[DEBUG] 2019-03-21 22:13:45 --> 设置了文件存在不覆盖,文件已经存在,忽略本文件的创建 --> CreateFileUtil.java:49 
+
+[DEBUG] 2019-03-21 22:13:45 --> 执行将twei_user生成SqlAssist-->成功! --> IndexController.java:1013 
+
+[DEBUG] 2019-03-21 22:13:45 --> 执行全库生成-->成功 --> IndexController.java:894 
+
+[DEBUG] 2019-03-21 22:14:23 --> 关闭Spring-Generator!!! --> Main.java:64 
+
