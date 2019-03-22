@@ -1,6 +1,7 @@
 package com.delta.soft_manage_system.controller;
 
 import com.delta.soft_manage_system.dto.User;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ public class TestController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @ApiOperation(value="测试获取用户信息",notes = "测试获取用户信息,并打印用户信息")
     @GetMapping("test")
     @ResponseBody
     public String test(){

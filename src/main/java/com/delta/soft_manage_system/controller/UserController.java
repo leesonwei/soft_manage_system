@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.dto.User;
 import com.delta.soft_manage_system.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,11 +30,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @ApiOperation(value="获取登录页面",notes = "获取登录页面")
     @GetMapping("/login")
     public String getLoginFile(){
         return "backend/login";
     }
 
+    @ApiOperation(value="登入",notes = "登入系统")
     @PostMapping("/login")
     @ResponseBody
     public ServerResponse<User> login(User user){
@@ -42,7 +45,8 @@ public class UserController {
         return serverResponse;
     }
 
-    @PostMapping("/logout")
+    @ApiOperation(value="退出",notes = "退出登录")
+    @GetMapping("/logout")
     public String logout(HttpSession httpSession){
         httpSession.setMaxInactiveInterval(-1);
         // TODO: 2019/3/21 作廢jwt

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.TweiUserDao">
+	<!-- TweiUser的resultMap,column是给数据库列起的别名,它对应property类的属性 -->
+	<resultMap id="result_TweiUser_Map" type="com.dto.TweiUser">
+		<id column="userid" property="userid" />
+		<result column="user_name" property="userName" />
+		<result column="password" property="password" />
+	</resultMap>
+
+	<!-- assist是查询辅助工具类, ${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+	<sql id="assist">
+		<where>
+			<foreach collection="require" item="req" separator=" ">
+				${req.require}
+				<if test="req.value != null">
+					#{req.value}
+				</if>
+				<if test="req.values != null">
+					<foreach collection="req.values" item="value" separator=",">
+						#{value}
+					</foreach>
+				</if>
+				<if test="req.customRequire !=null">
+					<foreach collection="req.customRequire" item="cr" separator=" ">
+						${cr.require}
+						<if test="cr.value != null">
+							#{cr.value}
+						</if>
+						<if test="cr.values != null">
+							<foreach collection="cr.values" item="value"
+								separator=",">
+								#{value}
+							</foreach>
+						</if>
+						<if test="cr.suffix != null"> ${cr.suffix}</if>
+					</foreach>
+				</if>
+				<if test="req.suffix != null"> ${req.suffix}</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<!-- updateAssist用于更新数据查询辅助工具类,作用assist与一致 -->
+	<sql id="updateAssist">
+		<where>
+			<foreach collection="assist.require" item="req" separator=" ">
+				${req.require}
+				<if test="req.value != null">
+					#{req.value}
+				</if>
+				<if test="req.values != null">
+					<foreach collection="req.values" item="value" separator=",">
+						#{value}
+					</foreach>
+				</if>
+				<if test="req.customRequire !=null">
+					<foreach collection="req.customRequire" item="cr" separator=" ">
+						${cr.require}
+						<if test="cr.value != null">
+							#{cr.value}
+						</if>
+						<if test="cr.values != null">
+							<foreach collection="cr.values" item="value"
+								separator=",">
+								#{value}
+							</foreach>
+						</if>
+						<if test="cr.suffix != null"> ${cr.suffix}</if>
+					</foreach>
+				</if>
+				<if test="req.suffix != null"> ${req.suffix}</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<!-- 数据库中表名为:twei_user的列名 -->
+	<sql id="twei_user_Column">
+		userid,user_name,password
+	</sql>
+
+	<!--获得类名为:TweiUser对应的数据库表的数据总行数 -->
+	<select id="getTweiUserRowCount" parameterType="com.common.Assist" resultType="java.lang.Long">
+		select count(*) from twei_user
+		<if test="require!=null">
+			<include refid="assist" />
+		</if>
+	</select>
+	
+	<!-- 获得类名为:TweiUser对应数据库中表的数据集合 -->
+	<select id="selectTweiUser" parameterType="com.common.Assist" resultMap="result_TweiUser_Map">
+		select
+		<if test="distinct !=null">${distinct}</if>
+		<choose>
+			<when test="resultColumn!=null">${resultColumn}</when>
+			<otherwise>
+				<include refid="twei_user_Column" />
+			</otherwise>
+		</choose>
+		from twei_user
+		<if test="require!=null">
+			<include refid="assist" />
+		</if>
+		<if test="order !=null">${order}</if>
+		<choose>
+			<when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+			<when test="rowSize !=null">LIMIT #{rowSize}</when>
+		</choose>
+	</select>
+	<!-- 通过TweiUser的id获得对应数据库中表的数据对象 -->
+	<select id="selectTweiUserById" parameterType="String" resultMap="result_TweiUser_Map">
+		select
+		<include refid="twei_user_Column" />
+		from twei_user
+		where userid = #{id}
+	</select>
+	
+	<!-- 获得一个TweiUser对象,以参数TweiUser对象中不为空的属性作为条件进行查询 -->
+	<select id="selectTweiUserObjSingle" parameterType="com.dto.TweiUser" resultMap="result_TweiUser_Map">
+		select
+		<include refid="twei_user_Column" />
+		from twei_user
+		<where>
+		<if test="userName != null"> and user_name = #{userName}</if>
+		<if test="password != null"> and password = #{password}</if>
+		<if test="userid != null"> and userid = #{userid} </if>
+		</where>
+		LIMIT 1
+	</select>
+	
+	<!-- 获得TweiUser对象,以参数TweiUser对象中不为空的属性作为条件进行查询 -->
+	<select id="selectTweiUserByObj" parameterType="com.dto.TweiUser" resultMap="result_TweiUser_Map">
+		select
+		<include refid="twei_user_Column" />
+		from twei_user
+		<where>
+		<if test="userName != null"> and user_name = #{userName}</if>
+		<if test="password != null"> and password = #{password}</if>
+		<if test="userid != null"> and userid = #{userid} </if>
+		</where>
+	</select>
+
+	<!-- 将TweiUser插入到对应数据库的表中,包括属性值为null的数据 -->
+	<insert id="insertTweiUser" parameterType="com.dto.TweiUser">
+		insert into 
+		twei_user (userid,user_name,password) 
+		values(#{userid},#{userName},#{password})
+	</insert>
+
+	<!-- 将TweiUser中属性值不为null的数据,插入到对应数据库的表中 -->
+	<insert id="insertNotNullTweiUser" parameterType="com.dto.TweiUser">
+		insert into twei_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userid != null">userid,</if>
+			<if test="userName != null">user_name,</if>
+			<if test="password != null">password,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userid != null">#{userid},</if>
+			<if test="userName != null">#{userName},</if>
+			<if test="password != null">#{password},</if>
+		</trim>
+	</insert>
+
+	<!-- 将TweiUser批量插入到对应数据库的表中 -->
+	<insert id="insertTweiUserByBatch" parameterType="ArrayList">
+		insert into twei_user(userid,user_name,password) values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.userid},#{item.userName},#{item.password})
+		</foreach>
+	</insert>
+	
+	<!-- 通过TweiUser的id将数据库表中对应的数据删除 -->
+	<delete id="deleteTweiUserById" parameterType="String">
+		delete from twei_user
+		where  userid  =  #{id}
+	</delete>
+
+	<!-- 通过辅助工具Assist中的条件将TweiUser对应的数据库表的数据删除 -->
+	<delete id="deleteTweiUserByAssist" parameterType="com.common.Assist">
+		delete from twei_user
+		<if test="require!=null">
+			<include refid="assist" />
+		</if>
+	</delete>
+	
+	<!-- 通过TweiUser的id将TweiUser的数据更新到数据库中对应的表,包括值null的数据 -->
+	<update id="updateTweiUserById" parameterType="com.dto.TweiUser"> 
+		update twei_user set
+		<set>
+			user_name = #{userName} , 
+			password = #{password} , 
+		</set>
+		where userid = #{userid}
+	</update>
+	
+	<!-- 通过TweiUser的id将TweiUser中属性值不为null的数据更新到数据库对应的表中 -->
+	<update id="updateNotNullTweiUserById" parameterType="com.dto.TweiUser">
+		update twei_user
+		<set>
+					<if test="userName != null">user_name = #{userName},</if>
+					<if test="password != null">password = #{password},</if>
+		</set>
+		where userid = #{userid}
+	</update>
+	
+	<!-- 通过辅助工具Assist中的条件将TweiUser中的数据更新到数据库对应的表中,包括值为null的数据 -->
+	<update id="updateTweiUser" parameterType="map">
+		update twei_user
+		<set>
+			userid = #{enti.userid},
+			user_name = #{enti.userName},
+			password = #{enti.password},
+		</set>
+		<if test="assist.require!=null">
+			<include refid="updateAssist" />
+		</if>
+	</update>
+
+	<!-- 通过辅助工具Assist中的条件将TweiUser中属性值不为null的数据更新到数据库对应的表中 -->
+	<update id="updateNotNullTweiUser" parameterType="map">
+		update twei_user
+		<set>
+			<if test="enti.userid != null">userid = #{enti.userid},</if>
+			<if test="enti.userName != null">user_name = #{enti.userName},</if>
+			<if test="enti.password != null">password = #{enti.password},</if>
+		</set>
+		<if test="assist.require!=null">
+			<include refid="updateAssist" />
+		</if>
+	</update>
+</mapper>
