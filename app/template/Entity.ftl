@@ -3,10 +3,10 @@ package ${content.entity.classPackage};
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * ${content.entity.tableName}实体类
- * 
- * @author 
- *
+ * @Classname ${content.entity.tableName}
+ * @Date 2019.3.22
+ * @author lizong.wei
+ * @Since 1.8
  */
 public class ${content.entity.className} {
 	<#list content.entity.attrs as item> 
@@ -72,7 +72,7 @@ public class ${content.entity.className} {
 		return result;
 	}
 	
-	<#list content.entity.attrs as item> 
+	<#--<#list content.entity.attrs as item>
 	
 	/**
 	 * 获取${item.field}
@@ -91,7 +91,7 @@ public class ${content.entity.className} {
 	public void ${item.fset}(${item.javaType} ${item.field}) {
 		this.${item.field} = ${item.field};
 	}
-	</#list>
+	</#list>-->
 
 	@Override
 	public String toString() {

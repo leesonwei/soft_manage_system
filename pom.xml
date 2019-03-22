@@ -56,11 +56,13 @@
         </dependency>
 
         <!-- database drivers -->
+        <!-- https://mvnrepository.com/artifact/com.hynnet/oracle-driver-ojdbc -->
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>12.2.0.1.0</version>
+            <groupId>com.hynnet</groupId>
+            <artifactId>oracle-driver-ojdbc</artifactId>
+            <version>12.1.0.2</version>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

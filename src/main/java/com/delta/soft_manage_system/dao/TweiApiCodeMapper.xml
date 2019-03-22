@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.TweiApiCodeDao">
+	<!-- TweiApiCode的resultMap,column是给数据库列起的别名,它对应property类的属性 -->
+	<resultMap id="result_TweiApiCode_Map" type="com.delta.soft_manage_system.dto.TweiApiCode">
+		
+		<result column="CODE_ID" property="codeId" />
+		<result column="CODE_NAME" property="codeName" />
+		<result column="DEFINITION" property="dEFINITION" />
+		<result column="API_ID" property="apiId" />
+		<result column="CODE_TYPE" property="codeType" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_AT" property="createAt" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_AT" property="updateAt" />
+		<result column="DATA_VERSION" property="dataVersion" />
+	</resultMap>
+
+</mapper>

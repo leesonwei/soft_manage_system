@@ -22,7 +22,7 @@ public class ApplicationConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         applicationInfo.setVersion(DateUtil.getDateVersion());
-        log.info(String.format("--------------应用名称:%s--------------",applicationInfo.getName()));
-        log.info(String.format("--------------版本号:%s--------------",applicationInfo.getVersion()));
+        log.info(String.format("--------------应用名称:%s--------------", applicationInfo.getName()));
+        log.info(String.format("--------------版本号:%s--------------", applicationInfo.getVersion()));
     }
 }

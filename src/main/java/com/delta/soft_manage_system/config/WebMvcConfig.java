@@ -1,11 +1,8 @@
 package com.delta.soft_manage_system.config;
 
 import com.delta.soft_manage_system.interceptor.GlobalInterceptor;
-
 import com.delta.soft_manage_system.interceptor.JWTInterceptor;
 import com.google.common.base.Predicates;
-import io.netty.util.internal.ResourcesUtil;
-import org.apache.tomcat.util.file.ConfigurationSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +27,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
     private GlobalInterceptor globalInterceptor;
-
+    @Autowired
     private JWTInterceptor jwtInterceptor;
 
 
@@ -45,7 +42,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         //config jwt intercept parttern
         registry.addInterceptor(jwtInterceptor)
-                .addPathPatterns("/**");
+                .addPathPatterns("/admin/**");
     }
 
     /**

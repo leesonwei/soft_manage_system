@@ -1,10 +1,5 @@
 package com.delta.soft_manage_system.interceptor;
 
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.alibaba.fastjson.JSON;
 import com.delta.soft_manage_system.common.JWTConstant;
 import com.delta.soft_manage_system.common.ResponseCode;
@@ -12,14 +7,23 @@ import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.common.TokenMgr;
 import com.delta.soft_manage_system.dto.User;
 import com.delta.soft_manage_system.utils.FastJsonUtil;
+import com.delta.soft_manage_system.utils.StringUtil;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import io.jsonwebtoken.Claims;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 @Slf4j
+@Component
 public class JWTInterceptor implements HandlerInterceptor{
 
 	@Override
@@ -39,14 +43,19 @@ public class JWTInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 			Object handler)  throws Exception{
 		response.setContentType("text/html;charset=UTF-8"); 
-		//请求URL
-		String url =request.getServletPath().toString();
-				
-		//如果是登录则不拦截开始
-		if(url.contains("/login") || url.contains("/index")){
-			return true;
+
+		String tokenStr = request.getHeader("token");
+		if (StringUtil.isBlank(tokenStr)) {
+			tokenStr = request.getParameter("token");
 		}
-		String tokenStr = request.getParameter("token");
+		if (StringUtil.isBlank(tokenStr)) {
+			ArrayList<Cookie> cookies = (ArrayList<Cookie>)Arrays.asList(request.getCookies());
+			for(Cookie cookie:cookies ){
+				if ("token".equals(cookie.getName())) {
+					tokenStr = cookie.getValue();
+				}
+			}
+		}
 		if (tokenStr == null || tokenStr.equals("")) {
 			ServerResponse<String> res = ServerResponse
 					.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode()

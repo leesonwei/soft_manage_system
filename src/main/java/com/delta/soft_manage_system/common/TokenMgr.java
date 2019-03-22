@@ -1,14 +1,12 @@
 package com.delta.soft_manage_system.common;
 
-import java.util.Date;
+import com.alibaba.fastjson.JSON;
+import com.delta.soft_manage_system.dto.User;
+import io.jsonwebtoken.*;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-
-import com.alibaba.fastjson.JSON;
-import com.delta.soft_manage_system.dto.User;
-
-import io.jsonwebtoken.*;
+import java.util.Date;
 
 /**
  * 管理所有的Token
@@ -94,6 +92,22 @@ public class TokenMgr {
 			.setSigningKey(secretKey)
 			.parseClaimsJws(jwt)
 			.getBody();
+	}
+
+	/**
+	 *
+	 * 設置JWT字符串過期
+	 * @param jwt
+	 * @return
+	 * @throws Exception
+	 */
+	public static void expiredJWT(String jwt) {
+		SecretKey secretKey = generalKey();
+		Claims claims = Jwts.parser()
+				.setSigningKey(secretKey)
+				.parseClaimsJws(jwt)
+				.getBody();
+		claims.setExpiration(new Date(System.currentTimeMillis()));
 	}
 	
 	/**

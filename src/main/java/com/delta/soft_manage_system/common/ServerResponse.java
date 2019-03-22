@@ -2,8 +2,6 @@ package com.delta.soft_manage_system.common;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 
@@ -58,14 +56,6 @@ public class ServerResponse<T> implements Serializable {
     public static <T> ServerResponse<T> createBySuccess(){
         return new ServerResponse<T>(ResponseCode.SUCCESS.getCode());
     }
-
-//    public static <T> ServerResponse<T> createBySuccess(int code, String msg){
-//        return new ServerResponse<T>(code, msg);
-//    }
-//
-//    public static <T> ServerResponse<T> createBySuccess(int code, String msg, T data){
-//        return new ServerResponse<T>(code, msg, data);
-//    }
 
     public static <T> ServerResponse<T> createBySuccessMessage(String msg){
         return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(),msg);

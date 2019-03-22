@@ -1,6 +1,5 @@
 package com.delta.soft_manage_system.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.delta.soft_manage_system.common.JWTConstant;
 import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.common.TokenMgr;
@@ -15,12 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
  * @Classname UserController
- * @Description TODO
  * @Date 2019/3/19 14:13
  * @Author LIZONG.WEI
  */
@@ -41,18 +41,25 @@ public class UserController {
     @ApiOperation(value="登入",notes = "登入系统")
     @PostMapping("/login")
     @ResponseBody
-    public ServerResponse<User> login(User user){
+    public ServerResponse<User> login(User user, HttpServletResponse response){
         ServerResponse<User> serverResponse = userService.login(user);
-        User successUser = serverResponse.getData();
-        TokenMgr.createJWT(successUser.getUserid(),JWTConstant.JWT_ISS,TokenMgr.generalSubject(user), JWTConstant.JWT_TTL);
+        if (serverResponse.isSuccess()) {
+            //generat jwt
+            User successUser = serverResponse.getData();
+            String token = TokenMgr.createJWT(successUser.getUserid(),JWTConstant.JWT_ISS,TokenMgr.generalSubject(user), JWTConstant.JWT_TTL);
+            response.addHeader("token", token);
+            Cookie cookie = new Cookie("token", token);
+            response.addCookie(cookie);
+        }
         return serverResponse;
     }
 
     @ApiOperation(value="退出",notes = "退出登录")
     @GetMapping("/logout")
-    public String logout(HttpSession httpSession){
+    public String logout(HttpSession httpSession, HttpServletRequest request){
         httpSession.setMaxInactiveInterval(-1);
-        // TODO: 2019/3/21 作廢jwt
+        String token = request.getParameter("token");
+        TokenMgr.expiredJWT(token);
         return "backend/login";
     }
 }
