@@ -1,7 +1,9 @@
 package com.delta.soft_manage_system.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.delta.soft_manage_system.common.JWTConstant;
 import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.soft_manage_system.common.TokenMgr;
 import com.delta.soft_manage_system.dto.User;
 import com.delta.soft_manage_system.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -41,7 +43,8 @@ public class UserController {
     @ResponseBody
     public ServerResponse<User> login(User user){
         ServerResponse<User> serverResponse = userService.login(user);
-        // TODO: 2019/3/21 簽發jwt 
+        User successUser = serverResponse.getData();
+        TokenMgr.createJWT(successUser.getUserid(),JWTConstant.JWT_ISS,TokenMgr.generalSubject(user), JWTConstant.JWT_TTL);
         return serverResponse;
     }
 

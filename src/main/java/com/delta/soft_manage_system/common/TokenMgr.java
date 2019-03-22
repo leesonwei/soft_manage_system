@@ -5,21 +5,14 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.hthl.jwt.sdk.config.Constant;
-import com.hthl.jwt.sdk.model.CheckResult;
-import com.hthl.jwt.sdk.model.SubjectModel;
-import com.hthl.jwt.sdk.utils.GsonUtil;
+import com.alibaba.fastjson.JSON;
+import com.delta.soft_manage_system.dto.User;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.*;
 
 /**
  * 管理所有的Token
- * @author xuxile
+ * @author lizong.wei
  *
  */
 public class TokenMgr {
@@ -28,7 +21,7 @@ public class TokenMgr {
 		try {
 			//方式一：byte[] encodedKey = Base64.decode(Constant.JWT_SECERT); 引入com.sun.org.apache.xerces.internal.impl.dv.util.Base64
 			//方式二：不管哪种方式最终得到一个byte[]类型的key就行
-			byte[] encodedKey = Constant.JWT_SECERT.getBytes("UTF-8");
+			byte[] encodedKey = JWTConstant.JWT_SECERT.getBytes("UTF-8");
 		    SecretKey key = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
 		    return key;
 		} catch (Exception e) {
@@ -69,24 +62,23 @@ public class TokenMgr {
 	 * @param jwtStr
 	 * @return
 	 */
-	public static CheckResult validateJWT(String jwtStr) {
-		CheckResult checkResult = new CheckResult();
+	public static ServerResponse<Claims> validateJWT(String jwtStr) {
+		ServerResponse<Claims> serverResponse = ServerResponse.createBySuccess();
 		Claims claims = null;
 		try {
 			claims = parseJWT(jwtStr);
-			checkResult.setSuccess(true);
-			checkResult.setClaims(claims);
+			serverResponse = ServerResponse.createBySuccess(claims);
 		} catch (ExpiredJwtException e) {
-			checkResult.setErrCode(Constant.JWT_ERRCODE_EXPIRE);
-			checkResult.setSuccess(false);
+			serverResponse = ServerResponse
+					.createByErrorCodeMessage(JWTConstant.JWT_ERRCODE_EXPIRE,"token expired");
 		} catch (SignatureException e) {
-			checkResult.setErrCode(Constant.JWT_ERRCODE_FAIL);
-			checkResult.setSuccess(false);
+			serverResponse = ServerResponse
+					.createByErrorCodeMessage(JWTConstant.JWT_ERRCODE_FAIL,"token fault");
 		} catch (Exception e) {
-			checkResult.setErrCode(Constant.JWT_ERRCODE_FAIL);
-			checkResult.setSuccess(false);
+			serverResponse = ServerResponse
+					.createByErrorCodeMessage(JWTConstant.JWT_ERRCODE_FAIL,"server fault");
 		}
-		return checkResult;
+		return serverResponse;
 	}
 	
 	/**
@@ -106,10 +98,10 @@ public class TokenMgr {
 	
 	/**
 	 * 生成subject信息
-	 * @param user
+	 * @param sub
 	 * @return
 	 */
-	public static String generalSubject(SubjectModel sub){
-		return GsonUtil.objectToJsonStr(sub);
+	public static String generalSubject(User sub){
+		return JSON.toJSONString(sub);
 	}
 }

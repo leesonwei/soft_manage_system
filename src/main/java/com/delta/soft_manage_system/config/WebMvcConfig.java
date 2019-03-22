@@ -2,6 +2,7 @@ package com.delta.soft_manage_system.config;
 
 import com.delta.soft_manage_system.interceptor.GlobalInterceptor;
 
+import com.delta.soft_manage_system.interceptor.JWTInterceptor;
 import com.google.common.base.Predicates;
 import io.netty.util.internal.ResourcesUtil;
 import org.apache.tomcat.util.file.ConfigurationSource;
@@ -30,6 +31,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private GlobalInterceptor globalInterceptor;
 
+    private JWTInterceptor jwtInterceptor;
+
+
     /**
      * 配置应用信息拦截器
      * @param registry
@@ -37,6 +41,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(globalInterceptor)
+                .addPathPatterns("/**");
+
+        //config jwt intercept parttern
+        registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**");
     }
 
@@ -58,6 +66,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
                 .addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/static/");
+
         //配置swagger路径
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");

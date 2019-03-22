@@ -2,10 +2,10 @@ package com.delta.soft_manage_system.common;
 
 /**
  * 全局配置常量
- * @author xuxile
+ * @author lizong.wei
  *
  */
-public class Constant {
+public class JWTConstant {
 	/**
 	 * 成功
 	 */
@@ -28,7 +28,7 @@ public class Constant {
 	/**
 	 * jwt
 	 */
-	public static final String JWT_ISS = "jwt-demo";	//jwt签发者
+	public static final String JWT_ISS = "jwt-delta";	//jwt签发者
 	public static final String JWT_SECERT = "46cc793c53dc451b8a4fe2cd0bb00847";//密匙
 	public static final long JWT_TTL = 2 *60*60*1000;//token有效时间,单位毫秒
 	
