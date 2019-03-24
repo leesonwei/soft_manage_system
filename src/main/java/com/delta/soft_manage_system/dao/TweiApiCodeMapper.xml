@@ -6,7 +6,7 @@
 		
 		<result column="CODE_ID" property="codeId" />
 		<result column="CODE_NAME" property="codeName" />
-		<result column="DEFINITION" property="dEFINITION" />
+		<result column="DEFINITION" property="definition" />
 		<result column="API_ID" property="apiId" />
 		<result column="CODE_TYPE" property="codeType" />
 		<result column="CREATE_BY" property="createBy" />

@@ -2,6 +2,8 @@ package com.delta.soft_manage_system.dto;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @Classname TWEI_DICT_TYPE
  * @Date 2019.3.22
@@ -15,15 +17,15 @@ public class TweiDictType {
 	/***/
 	private String typeName; 
 	/***/
-	private String mEMO; 
+	private String memo;
 	/***/
 	private String createBy; 
 	/***/
-	private java.time.Instant createAt; 
+	private Date createAt;
 	/***/
 	private String updateBy; 
 	/***/
-	private java.time.Instant updateAt; 
+	private Date updateAt;
 	/***/
 	private Integer dataVersion;
 
@@ -32,7 +34,7 @@ public class TweiDictType {
 		return "TweiDictType{" +
 				"typeId='" + typeId + '\'' +
 				", typeName='" + typeName + '\'' +
-				", mEMO='" + mEMO + '\'' +
+				", mEMO='" + memo + '\'' +
 				", createBy='" + createBy + '\'' +
 				", createAt=" + createAt +
 				", updateBy='" + updateBy + '\'' +

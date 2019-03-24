@@ -17,7 +17,7 @@ public class TweiApiCode {
 	/***/
 	private String codeName; 
 	/***/
-	private String dEFINITION; 
+	private String definition;
 	/***/
 	private Integer apiId; 
 	/***/
@@ -38,7 +38,7 @@ public class TweiApiCode {
 		return "TweiApiCode{" +
 				"codeId='" + codeId + '\'' +
 				", codeName='" + codeName + '\'' +
-				", dEFINITION='" + dEFINITION + '\'' +
+				", dEFINITION='" + definition + '\'' +
 				", apiId=" + apiId +
 				", codeType='" + codeType + '\'' +
 				", createBy='" + createBy + '\'' +

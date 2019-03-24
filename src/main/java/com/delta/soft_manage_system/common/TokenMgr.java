@@ -107,7 +107,7 @@ public class TokenMgr {
 				.setSigningKey(secretKey)
 				.parseClaimsJws(jwt)
 				.getBody();
-		claims.setExpiration(new Date(System.currentTimeMillis()));
+		claims.setExpiration(new Date(System.currentTimeMillis() - 360000));
 	}
 	
 	/**

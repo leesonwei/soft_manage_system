@@ -23,6 +23,27 @@ var LoginV2 = function () {
 		//main function
 		init: function () {
 			handleLoginPageChangeBackground();
+		},
+		login: function () {
+			var formData = $("#login").serializeJSON();
+			$("#submit").text("正在登录...");
+			$("#submit").attr("disabled", "disabled");
+			$.ajax({
+				url:'login',
+				type:'post',
+				data:formData,
+				dataType:'json',
+				success:function(json){
+					if (json.status === 0) {
+						$("#submit").text("登入成功");
+						window.location.href = "/admin/index";
+					} else {
+						swal(json.status+'',json.msg,"error");
+						$("#submit").text("登入系统");
+						$("#submit").removeAttr("disabled");
+					}
+				}
+			});
 		}
 	};
 }();

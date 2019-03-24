@@ -2,6 +2,8 @@ package com.delta.soft_manage_system.dto;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @Classname TWEI_API_TYPE
  * @Date 2019.3.22
@@ -20,11 +22,11 @@ public class TweiApiType {
 	/***/
 	private String createBy; 
 	/***/
-	private java.time.Instant createAt; 
+	private Date createAt;
 	/***/
 	private String updateBy; 
 	/***/
-	private java.time.Instant updateAt; 
+	private Date updateAt;
 	/***/
 	private Integer dataVersion;
 

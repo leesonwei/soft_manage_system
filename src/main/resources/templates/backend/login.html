@@ -68,7 +68,7 @@
 						</label>
 					</div>
 					<div class="login-buttons">
-						<span type="submit" id="submit" class="btn btn-success btn-block btn-lg">登入系統</span>
+						<button id="submit" class="btn btn-success btn-block btn-lg">登入系統</button>
 					</div>
 					<div class="m-t-20" th:if="false">
 						Not a member yet? Click <a href="javascript:;">here</a> to register.
@@ -213,6 +213,7 @@
 		<script src="../static/crossbrowserjs/excanvas.min.js"></script>
 	<![endif]-->
 	<script src="../static/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="../static/plugins/bootstrap-sweetalert/sweetalert.min.js"></script>
 	<script src="../static/plugins/jquery.serializeJSON-master/jquery.serializejson.js"></script>
 	<script src="../static/plugins/js-cookie/js.cookie.js"></script>
 	<script src="../static/js/theme/default.min.js"></script>
@@ -220,7 +221,8 @@
 	<!-- ================== END BASE JS ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="../static/js/demo/login-v2.demo.min.js"></script>
+	<script src="../static/js/demo/login-v2.demo.js"></script>
+	<script src="../static/delta/js/public.js"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 
 	<script>
@@ -229,45 +231,8 @@
 			LoginV2.init();
 		});
 		$("#submit").click(function(){
-			var data = $("#login").serializeJSON();
-			$.ajax({
-				url:'login',
-				type:'post',
-				data:data,
-				dataType:'json',
-				success:function(json){
-					if (json.status === 0) {
-						window.location.href = "/admin/test/user/count?token=" + getCookie('token');
-					} else {
-						alert(json.msg);
-					}
-				}
-			});
+			LoginV2.login();
 		});
-
-
-		function getCookie(cookie_name) {
-			var allcookies = document.cookie;
-			//索引长度，开始索引的位置
-			var cookie_pos = allcookies.indexOf(cookie_name);
-
-			// 如果找到了索引，就代表cookie存在,否则不存在
-			if (cookie_pos != -1) {
-				// 把cookie_pos放在值的开始，只要给值加1即可
-				//计算取cookie值得开始索引，加的1为“=”
-				cookie_pos = cookie_pos + cookie_name.length + 1;
-				//计算取cookie值得结束索引
-				var cookie_end = allcookies.indexOf(";", cookie_pos);
-
-				if (cookie_end == -1) {
-					cookie_end = allcookies.length;
-
-				}
-				//得到想要的cookie的值
-				var value = unescape(allcookies.substring(cookie_pos, cookie_end));
-			}
-			return value;
-		}
 
 	</script>
 </body>

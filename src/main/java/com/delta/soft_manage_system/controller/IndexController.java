@@ -19,4 +19,10 @@ public class IndexController {
     public String index(){
         return "front/index";
     }
+
+    @ApiOperation(value="管理首页",notes = "项目管理首页")
+    @GetMapping("/admin/index")
+    public String adminIndex(){
+        return "backend/index";
+    }
 }

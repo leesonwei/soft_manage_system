@@ -7,9 +7,13 @@ import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.common.TokenMgr;
 import com.delta.soft_manage_system.dto.User;
 import com.delta.soft_manage_system.utils.FastJsonUtil;
+import com.delta.soft_manage_system.utils.RequestUtil;
 import com.delta.soft_manage_system.utils.StringUtil;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,9 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 @Slf4j
@@ -27,35 +33,25 @@ import java.util.Arrays;
 public class JWTInterceptor implements HandlerInterceptor{
 
 	@Override
-	public void afterCompletion(HttpServletRequest arg0,
-			HttpServletResponse arg1, Object arg2, Exception arg3)
+	public void afterCompletion(HttpServletRequest request,
+			HttpServletResponse response, Object object, Exception exception)
 			throws Exception {
 		
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1,
-			Object arg2, ModelAndView arg3) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response,
+			Object object, ModelAndView exception) throws Exception {
 		
 	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 			Object handler)  throws Exception{
-		response.setContentType("text/html;charset=UTF-8"); 
+		response.setContentType("text/html;charset=UTF-8");
 
-		String tokenStr = request.getHeader("token");
-		if (StringUtil.isBlank(tokenStr)) {
-			tokenStr = request.getParameter("token");
-		}
-		if (StringUtil.isBlank(tokenStr)) {
-			ArrayList<Cookie> cookies = (ArrayList<Cookie>)Arrays.asList(request.getCookies());
-			for(Cookie cookie:cookies ){
-				if ("token".equals(cookie.getName())) {
-					tokenStr = cookie.getValue();
-				}
-			}
-		}
+		String tokenStr = RequestUtil.getToken(request);
+
 		if (tokenStr == null || tokenStr.equals("")) {
 			ServerResponse<String> res = ServerResponse
 					.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode()
@@ -74,6 +70,8 @@ public class JWTInterceptor implements HandlerInterceptor{
 			log.info("token校检通过checkResult："+ JSON.toJSONString(checkResult));
 			User user = FastJsonUtil.toBean(claims.getSubject(), User.class);
 			log.info("token校检通过user："+user.toString());
+			Cookie cookie = new Cookie("token", tokenStr);
+			response.addCookie(cookie);
 			return true;
 		} else {
 			ServerResponse<String> res = ServerResponse
@@ -95,8 +93,12 @@ public class JWTInterceptor implements HandlerInterceptor{
 			default:
 				break;
 			}
+			response.setStatus(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED.value());
+			Resource resource =new ClassPathResource("templates/error/403.html");
+			InputStream in = resource.getInputStream();
+			//response.sendRedirect("/error/403");
 			PrintWriter printWriter = response.getWriter();
-			printWriter.print(res);
+			printWriter.print(in);
 			printWriter.flush();
 			printWriter.close();
 			return false;
