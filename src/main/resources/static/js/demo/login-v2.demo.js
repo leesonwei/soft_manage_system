@@ -34,9 +34,11 @@ var LoginV2 = function () {
 				data:formData,
 				dataType:'json',
 				success:function(json){
+					Cookies.set('token', json.data);
 					if (json.status === 0) {
 						$("#submit").text("登入成功");
-						window.location.href = "/admin/index";
+						//window.location.href = "/admin/index";
+						window.location.href = "/admin/index?token=" + Cookies.get('token');
 					} else {
 						swal(json.status+'',json.msg,"error");
 						$("#submit").text("登入系统");

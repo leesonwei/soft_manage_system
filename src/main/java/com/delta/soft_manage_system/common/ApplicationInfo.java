@@ -18,6 +18,9 @@ public class ApplicationInfo {
 
     private String version;
 
+    @Value("${spring.application.debug}")
+    private Boolean debug;
+
     @Value("${spring.application.company}")
     private String company;
 

@@ -6,9 +6,6 @@ import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.common.TokenMgr;
 import com.delta.soft_manage_system.dto.User;
 import com.delta.soft_manage_system.service.UserService;
-import com.delta.soft_manage_system.utils.RequestUtil;
-import com.delta.soft_manage_system.utils.StringUtil;
-import com.sun.deploy.net.HttpResponse;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +19,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @Classname UserController
@@ -40,15 +35,16 @@ public class UserController {
 
     @ApiOperation(value="获取登录页面",notes = "获取登录页面")
     @GetMapping("/login")
-    public String getLoginFile(){
+    public String getLoginFile(HttpServletRequest request){
         return "backend/login";
     }
 
     @ApiOperation(value="登入",notes = "登入系统")
     @PostMapping("/login")
     @ResponseBody
-    public ServerResponse<User> login(User user, HttpSession session, HttpServletResponse response){
+    public ServerResponse<String> login(User user, HttpSession session, HttpServletResponse response){
         ServerResponse<User> serverResponse = userService.login(user);
+        ServerResponse<String> res = null;
         if (serverResponse.isSuccess()) {
             //generat jwt
             User successUser = serverResponse.getData();
@@ -57,19 +53,26 @@ public class UserController {
             response.addHeader("token", token);
             Cookie cookie = new Cookie("token", token);
             response.addCookie(cookie);
+            res = ServerResponse.createBySuccess(token);
         }
-        return serverResponse;
+        return res;
     }
 
     @ApiOperation(value="退出",notes = "退出登录")
     @GetMapping("/logout")
     public String logout(HttpSession httpSession, HttpServletRequest request, HttpServletResponse response){
-        httpSession.setMaxInactiveInterval(-1);
-        String token = RequestUtil.getToken(request);
-        TokenMgr.expiredJWT(token);
-        response.addHeader("token", "");
-        Cookie cookie = new Cookie("token", "");
-        response.addCookie(cookie);
+//        User user = (User)httpSession.getAttribute(GlobalConst.CURRENT_USER);
+//        String token = TokenMgr.createJWT(user.getUserid(),JWTConstant.JWT_ISS,TokenMgr.generalSubject(user), JWTConstant.JWT_EXP);
+//        response.addHeader("token", token);
+//        Cookie cookie = new Cookie("token", token);
+//        response.addCookie(cookie);
+        request.changeSessionId();
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if ("token".equals(cookie.getName())) {
+                cookie.setMaxAge(-1);
+            }
+        }
         return "redirect:login";
     }
 }

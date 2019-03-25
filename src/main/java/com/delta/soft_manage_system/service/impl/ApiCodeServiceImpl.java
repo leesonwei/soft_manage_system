@@ -10,7 +10,10 @@
  */
 package com.delta.soft_manage_system.service.impl;
 
+import com.delta.soft_manage_system.dto.TweiApiCode;
 import com.delta.soft_manage_system.service.ApiCodeService;
+
+import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -22,4 +25,28 @@ import com.delta.soft_manage_system.service.ApiCodeService;
  */
 public class ApiCodeServiceImpl implements ApiCodeService {
 
+    @Override
+    public int insertOne(TweiApiCode apiCode) {
+        return 0;
+    }
+
+    @Override
+    public int deleteOne(TweiApiCode apiCode) {
+        return 0;
+    }
+
+    @Override
+    public int updateOne(TweiApiCode apiCode) {
+        return 0;
+    }
+
+    @Override
+    public TweiApiCode selectOne(TweiApiCode apiCode) {
+        return null;
+    }
+
+    @Override
+    public List<TweiApiCode> selectList(TweiApiCode apiCode) {
+        return null;
+    }
 }

@@ -1,7 +1,7 @@
 --”µ“ş×ÖµäîĞÍ
 drop table twei_dict_type;
 create table twei_dict_type(
-type_id varchar2(5) not null,
+type_id number generated as identity primary key,
 type_name varchar2(50) not null,
 memo varchar2(100),
 create_by varchar2(20),

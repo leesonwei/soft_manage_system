@@ -1,7 +1,10 @@
 package com.delta.soft_manage_system.dto;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,8 +14,10 @@ import java.util.Date;
  * @Since 1.8
  */
 @Data
-public class TweiApiCode {
+@TableName("twei_api_code")
+public class TweiApiCode implements Serializable {
 	/***/
+	@TableId
 	private String codeId; 
 	/***/
 	private String codeName; 

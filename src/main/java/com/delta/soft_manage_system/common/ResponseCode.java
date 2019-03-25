@@ -38,7 +38,12 @@ public enum ResponseCode {
     /**
      * bad request para info
      */
-    ILLEGAL_ARGUMENT(2,"ILLEGAL_ARGUMENT");
+    ILLEGAL_ARGUMENT(2,"ILLEGAL_ARGUMENT"),
+
+    /**
+     * op after refreshed
+     */
+    NEED_REFRESH(3,"刷新數據后再進行操作");
 
     /**
      * 编码

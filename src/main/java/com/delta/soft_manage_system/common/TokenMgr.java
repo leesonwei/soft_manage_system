@@ -108,6 +108,7 @@ public class TokenMgr {
 				.parseClaimsJws(jwt)
 				.getBody();
 		claims.setExpiration(new Date(System.currentTimeMillis() - 360000));
+
 	}
 	
 	/**

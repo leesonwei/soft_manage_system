@@ -1,7 +1,11 @@
 package com.delta.soft_manage_system.dto;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,8 +15,10 @@ import java.util.Date;
  * @Since 1.8
  */
 @Data
-public class TweiApi {
+@TableName("twei_api")
+public class TweiApi implements Serializable {
 	/***/
+	@TableId(type = IdType.NONE)
 	private Integer apiTypeId; 
 	/***/
 	private Integer apiId; 

@@ -10,6 +10,11 @@
  */
 package com.delta.soft_manage_system.service;
 
+import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.soft_manage_system.dto.TweiDictType;
+
+import java.util.List;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
@@ -19,5 +24,39 @@ package com.delta.soft_manage_system.service;
  * @since 1.0.0
  */
 public interface DictTypeService {
+
+    /**
+     * 新增
+     * @param dictType
+     * @return
+     */
+    ServerResponse<TweiDictType> insertOne(TweiDictType dictType, ServerResponse<TweiDictType> response);
+
+    /**
+     * 刪除
+     * @param dictType
+     * @return
+     */
+    ServerResponse<TweiDictType> deleteOne(TweiDictType dictType);
+
+    /**
+     * 更新
+     * @param dictType
+     * @return
+     */
+    ServerResponse<TweiDictType> updateOne(TweiDictType dictType);
+
+    /**
+     * 查找單個
+     * @param dictType
+     * @return
+     */
+    TweiDictType selectOne(TweiDictType dictType);
+
+    /**
+     * 查找list對象
+     * @return
+     */
+    List<TweiDictType> selectList();
 
 }
