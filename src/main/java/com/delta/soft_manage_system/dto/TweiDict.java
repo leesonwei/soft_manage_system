@@ -2,6 +2,7 @@ package com.delta.soft_manage_system.dto;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.delta.soft_manage_system.entitycheck.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,11 +18,14 @@ import java.util.Date;
 @TableName("twei_dict")
 public class TweiDict implements Serializable {
 	/***/
-	@TableId
+	@NullRule(name="數據字典類型")
 	private String typeId; 
 	/***/
+	@TableId
+	@Check(id=true,type= CheckId.AUTO,action = {ActionType.UPDATE,ActionType.DELETE})
 	private String dictId; 
 	/***/
+	@NullRule(name="數據字典名稱")
 	private String dictName; 
 	/***/
 	private String dictShortName; 
@@ -48,6 +52,7 @@ public class TweiDict implements Serializable {
 	/***/
 	private String pycode;
 	/***/
+	@DataVersion
 	private Integer dataVersion;
 
 	@Override

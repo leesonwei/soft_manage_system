@@ -10,6 +10,8 @@
  */
 package com.delta.soft_manage_system.service;
 
+import com.delta.soft_manage_system.dto.TweiApiType;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
@@ -18,6 +20,6 @@ package com.delta.soft_manage_system.service;
  * @create 3/23 0023
  * @since 1.0.0
  */
-public interface ApiTypeService {
+public interface ApiTypeService extends BaseService<TweiApiType> {
 
 }

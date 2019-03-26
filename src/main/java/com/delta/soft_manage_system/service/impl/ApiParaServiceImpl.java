@@ -10,6 +10,9 @@
  */
 package com.delta.soft_manage_system.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.delta.soft_manage_system.dao.TweiApiParaDao;
+import com.delta.soft_manage_system.dto.TweiApiPara;
 import com.delta.soft_manage_system.service.ApiParaService;
 
 /**
@@ -20,6 +23,16 @@ import com.delta.soft_manage_system.service.ApiParaService;
  * @create 3/23 0023
  * @since 1.0.0
  */
-public class ApiParaServiceImpl implements ApiParaService {
+public class ApiParaServiceImpl extends BaseServiceImpl<TweiApiParaDao, TweiApiPara> implements ApiParaService {
 
+
+    @Override
+    protected EntityWrapper<TweiApiPara> getDeleteAndUpdateWrapper(TweiApiPara tweiApiPara) {
+        return null;
+    }
+
+    @Override
+    protected TweiApiPara updateDataVersion(TweiApiPara tweiApiPara) {
+        return null;
+    }
 }

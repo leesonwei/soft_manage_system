@@ -3,6 +3,7 @@ package com.delta.soft_manage_system.dto;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.delta.soft_manage_system.entitycheck.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,8 +20,10 @@ import java.util.Date;
 public class TweiDictType implements Serializable {
 	/***/
 	@TableId(type = IdType.AUTO)
+	@Check(id = true, type = CheckId.INPUT, action = { ActionType.DELETE, ActionType.UPDATE})
 	private Long typeId;
 	/***/
+	@NullRule(action={ActionType.INSERT, ActionType.UPDATE}, name="類型名稱")
 	private String typeName; 
 	/***/
 	private String memo;
@@ -33,7 +36,9 @@ public class TweiDictType implements Serializable {
 	/***/
 	private Date updateAt;
 	/***/
+	@DataVersion
 	private Integer dataVersion;
+
 
 	@Override
 	public String toString() {

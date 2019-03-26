@@ -13,8 +13,8 @@ import java.io.Serializable;
  */
 public class ServerResponse<T> implements Serializable {
 
-    private int status;
-    private String msg;
+    private int status = ResponseCode.SUCCESS.getCode();
+    private String msg = ResponseCode.SUCCESS.getDesc();
     private T data;
 
     private ServerResponse(int status){
@@ -63,7 +63,7 @@ public class ServerResponse<T> implements Serializable {
 
     public static <T> ServerResponse<T> createBySuccess(T data){
         ServerResponse<T> serverResponse = new ServerResponse<T>(ResponseCode.SUCCESS.getCode(),data);
-        serverResponse.msg = "success";
+        serverResponse.msg = ResponseCode.SUCCESS.getDesc();
         return serverResponse;
     }
 

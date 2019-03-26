@@ -10,10 +10,10 @@
  */
 package com.delta.soft_manage_system.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.delta.soft_manage_system.dao.TweiApiCodeDao;
 import com.delta.soft_manage_system.dto.TweiApiCode;
 import com.delta.soft_manage_system.service.ApiCodeService;
-
-import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -23,30 +23,15 @@ import java.util.List;
  * @create 3/23 0023
  * @since 1.0.0
  */
-public class ApiCodeServiceImpl implements ApiCodeService {
+public class ApiCodeServiceImpl extends BaseServiceImpl<TweiApiCodeDao, TweiApiCode> implements ApiCodeService {
 
     @Override
-    public int insertOne(TweiApiCode apiCode) {
-        return 0;
-    }
-
-    @Override
-    public int deleteOne(TweiApiCode apiCode) {
-        return 0;
-    }
-
-    @Override
-    public int updateOne(TweiApiCode apiCode) {
-        return 0;
-    }
-
-    @Override
-    public TweiApiCode selectOne(TweiApiCode apiCode) {
+    protected EntityWrapper<TweiApiCode> getDeleteAndUpdateWrapper(TweiApiCode apiCode) {
         return null;
     }
 
     @Override
-    public List<TweiApiCode> selectList(TweiApiCode apiCode) {
+    protected TweiApiCode updateDataVersion(TweiApiCode apiCode) {
         return null;
     }
 }

@@ -1,5 +1,8 @@
 package com.delta.soft_manage_system.controller;
 
+import com.delta.soft_manage_system.dto.TweiDict;
+import com.delta.soft_manage_system.service.DictService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,6 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/admin/dict")
-public class DictController {
+public class DictController extends BaseController<DictService, TweiDict> {
 
+    public DictController(){}
+
+    @Autowired
+    public DictController(DictService dictService){
+        super(dictService);
+    }
 }

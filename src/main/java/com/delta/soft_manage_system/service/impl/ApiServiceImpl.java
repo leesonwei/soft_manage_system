@@ -10,6 +10,9 @@
  */
 package com.delta.soft_manage_system.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.delta.soft_manage_system.dao.TweiApiDao;
+import com.delta.soft_manage_system.dto.TweiApi;
 import com.delta.soft_manage_system.service.ApiService;
 
 /**
@@ -20,6 +23,15 @@ import com.delta.soft_manage_system.service.ApiService;
  * @create 3/23 0023
  * @since 1.0.0
  */
-public class ApiServiceImpl implements ApiService {
+public class ApiServiceImpl extends BaseServiceImpl<TweiApiDao, TweiApi> implements ApiService {
 
+    @Override
+    protected EntityWrapper<TweiApi> getDeleteAndUpdateWrapper(TweiApi tweiApi) {
+        return null;
+    }
+
+    @Override
+    protected TweiApi updateDataVersion(TweiApi tweiApi) {
+        return null;
+    }
 }

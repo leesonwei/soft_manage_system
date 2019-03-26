@@ -1,4 +1,4 @@
-package com.delta.soft_manage_system.common;
+package com.delta.soft_manage_system.entitycheck;
 
 /**
  * @Classname ActionType
@@ -8,7 +8,7 @@ package com.delta.soft_manage_system.common;
  */
 public enum ActionType {
     /**
-     * 增 刪 改 查
+     * 增 刪 改 查 不設置
      */
-    INSERT,DELETE,UPDATE,SELECT
+    INSERT,DELETE,UPDATE,SELECT,NONE
 }
