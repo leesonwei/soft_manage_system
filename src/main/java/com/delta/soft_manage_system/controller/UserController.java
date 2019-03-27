@@ -46,7 +46,6 @@ public class UserController {
         ServerResponse<User> serverResponse = userService.login(user);
         ServerResponse<String> res = null;
         if (serverResponse.isSuccess()) {
-            //generat jwt
             User successUser = serverResponse.getData();
             session.setAttribute(GlobalConst.CURRENT_USER,successUser);
             String token = TokenMgr.createJWT(successUser.getUserid(),JWTConstant.JWT_ISS,TokenMgr.generalSubject(user), JWTConstant.JWT_TTL);

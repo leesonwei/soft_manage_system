@@ -19,9 +19,9 @@ import java.util.Date;
 @TableName("twei_dict_type")
 public class TweiDictType implements Serializable {
 	/***/
-	@TableId(type = IdType.AUTO)
+	@TableId(type = IdType.INPUT)
 	@Check(id = true, type = CheckId.INPUT, action = { ActionType.DELETE, ActionType.UPDATE})
-	private Long typeId;
+	private String typeId;
 	/***/
 	@NullRule(action={ActionType.INSERT, ActionType.UPDATE}, name="類型名稱")
 	private String typeName; 

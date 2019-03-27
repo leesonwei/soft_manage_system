@@ -22,4 +22,11 @@ import com.delta.soft_manage_system.dto.TweiDict;
  */
 public interface DictService extends BaseService<TweiDict> {
 
+    /**
+     * 獲取子類型數量
+     * @param typeId
+     * @return
+     */
+    int getSubDictCount(String typeId);
+
 }

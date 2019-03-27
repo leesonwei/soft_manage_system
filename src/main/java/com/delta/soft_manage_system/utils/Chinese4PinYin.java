@@ -1,6 +1,7 @@
 package com.delta.soft_manage_system.utils;
 
 import com.github.houbb.opencc4j.util.ZhConverterUtil;
+import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 
@@ -10,6 +11,7 @@ import java.io.UnsupportedEncodingException;
  * @Author LIZONG.WEI
  * @Since 1.8
  */
+@Component
 public class Chinese4PinYin {
 
         private final static int[] li_SecPosValue = { 1601, 1637, 1833, 2078, 2274,
@@ -91,7 +93,7 @@ public class Chinese4PinYin {
 
         public static void main(String[] args) {
             Chinese4PinYin cte = new Chinese4PinYin();
-            String er = ZhConverterUtil.convertToSimple("韋利總");
+            String er = ZhConverterUtil.convertToSimple("666");
             System.out.println(er);
             System.out.println("获取拼音首字母："+ cte.getAllFirstLetter(er));
         }

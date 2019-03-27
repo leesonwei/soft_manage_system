@@ -1566,7 +1566,7 @@ var App = function () {
 			handleMobileSidebarToggle();
 			handleSidebarMinify();
 			handleSidebarMinifyFloatMenu();
-			handleToggleNavProfile();
+			//handleToggleNavProfile();
 			handleToggleNavbarSearch();
 			
 			if (!setting || (setting && !setting.disableSidebarScrollMemory)) {

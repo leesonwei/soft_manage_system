@@ -4,6 +4,7 @@ import com.delta.soft_manage_system.dto.TweiDictType;
 import com.delta.soft_manage_system.service.DictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -16,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/dicttype")
 public class DictTypeController extends BaseController<DictTypeService, TweiDictType> {
 
-    public DictTypeController(){}
-
     @Autowired
     public DictTypeController(DictTypeService dictTypeService){
         super(dictTypeService);
+    }
+
+    @GetMapping("/manage")
+    public String getDictTypeIndex(){
+        return "backend/dict/dict_manage";
     }
 
 }

@@ -1,7 +1,7 @@
 package com.delta.soft_manage_system.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.delta.soft_manage_system.dto.TweiApiCode;
+import com.delta.soft_manage_system.dto.AutoId;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,7 +10,12 @@ import org.springframework.stereotype.Repository;
  * @author lizong.wei
  * @Since 1.8
  */
-@Repository("apiCodeDao")
-public interface TweiApiCodeDao extends BaseMapper<TweiApiCode> {
+@Repository("autoIdDao")
+public interface AutoIdDao extends BaseMapper<AutoId> {
 
+    /**
+     *
+     * @param autoId
+     */
+    void getAutoId(AutoId autoId);
 }

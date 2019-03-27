@@ -16,7 +16,11 @@ import com.delta.soft_manage_system.dao.TweiDictTypeDao;
 import com.delta.soft_manage_system.dto.TweiDictType;
 import com.delta.soft_manage_system.entitycheck.ActionType;
 import com.delta.soft_manage_system.entitycheck.EntityCheck;
+import com.delta.soft_manage_system.service.DictService;
 import com.delta.soft_manage_system.service.DictTypeService;
+import com.delta.soft_manage_system.utils.Chinese4PinYin;
+import com.delta.soft_manage_system.utils.StringUtil;
+import com.github.houbb.opencc4j.util.ZhConverterUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +37,10 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class DictTypeServiceImpl extends BaseServiceImpl<TweiDictTypeDao,TweiDictType> implements DictTypeService {
 
-
-    public DictTypeServiceImpl(){}
+    @Autowired
+    private Chinese4PinYin chinese4PinYin;
+    @Autowired
+    private DictService dictService;
 
     @Autowired
     public DictTypeServiceImpl(TweiDictTypeDao dictTypeDao){
@@ -42,10 +48,22 @@ public class DictTypeServiceImpl extends BaseServiceImpl<TweiDictTypeDao,TweiDic
     }
 
     @Override
+    @EntityCheck(action = ActionType.INSERT, user = true)
+    public ServerResponse<TweiDictType> insertOne(TweiDictType dictType) {
+        if (!StringUtil.isBlank(dictType.getTypeName())) {
+            String er = ZhConverterUtil.convertToSimple(dictType.getTypeName());
+            dictType.setTypeId(chinese4PinYin.getAllFirstLetter(er).toUpperCase());
+        }
+        return super.insertOne(dictType);
+    }
+
+    @Override
     @EntityCheck(action = ActionType.DELETE, user = true)
     public ServerResponse<TweiDictType> deleteOne(TweiDictType dictType) {
-        // TODO: 2019/3/26 檢查外鍵是否已清空
-
+        int count =  dictService.getSubDictCount(dictType.getTypeId());
+        if (count > 0) {
+            return ServerResponse.createByErrorMessage("不能刪除,該類下面存在子類,需清空子類才能完成刪除");
+        }
         return super.deleteOne(dictType);
     }
 

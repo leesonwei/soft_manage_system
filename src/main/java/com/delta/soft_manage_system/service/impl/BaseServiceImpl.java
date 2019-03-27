@@ -18,9 +18,7 @@ public abstract class BaseServiceImpl<T extends BaseMapper,K> {
 
     protected T dao;
 
-    public BaseServiceImpl(){
-
-    }
+    //public BaseServiceImpl(){ }
 
     public BaseServiceImpl(T dao){
         this.dao = dao;

@@ -53,7 +53,8 @@ public class EntityCheckAspect {
             method = joinPoint.getTarget().getClass()
                     .getMethod(joinPoint.getSignature().getName(), argTypes);
         } catch (Exception e) {
-            log.info("====================補獲異常============", e);
+            log.info("====================反射獲取方法異常============", e);
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"程序內部出錯");
         }
         EntityCheck ma = method.getAnnotation(EntityCheck.class);
 
@@ -147,7 +148,8 @@ public class EntityCheckAspect {
         try {
             ret = joinPoint.proceed(args);
         } catch (Throwable throwable) {
-            log.info("====================補獲異常============", throwable);
+            log.info("====================執行目標方法異常============", throwable);
+            return ServerResponse.createByErrorMessage(throwable.getMessage());
         }
         return ret;
     }

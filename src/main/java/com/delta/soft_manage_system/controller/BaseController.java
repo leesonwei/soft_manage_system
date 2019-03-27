@@ -16,9 +16,10 @@ import java.util.List;
  * @Since 1.8
  */
 public abstract class BaseController<T extends BaseService,K> {
+
     protected  T service;
 
-    public BaseController(){}
+    //public BaseController(){}
 
     public BaseController(T t){
         this.service = t;

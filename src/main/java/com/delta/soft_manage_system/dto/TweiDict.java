@@ -22,7 +22,7 @@ public class TweiDict implements Serializable {
 	private String typeId; 
 	/***/
 	@TableId
-	@Check(id=true,type= CheckId.AUTO,action = {ActionType.UPDATE,ActionType.DELETE})
+	@Check(id=true,type= CheckId.INPUT,action = {ActionType.UPDATE,ActionType.DELETE})
 	private String dictId; 
 	/***/
 	@NullRule(name="數據字典名稱")

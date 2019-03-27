@@ -14,6 +14,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.delta.soft_manage_system.dao.TweiApiCodeDao;
 import com.delta.soft_manage_system.dto.TweiApiCode;
 import com.delta.soft_manage_system.service.ApiCodeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -23,7 +25,13 @@ import com.delta.soft_manage_system.service.ApiCodeService;
  * @create 3/23 0023
  * @since 1.0.0
  */
+@Service
 public class ApiCodeServiceImpl extends BaseServiceImpl<TweiApiCodeDao, TweiApiCode> implements ApiCodeService {
+
+    @Autowired
+    public ApiCodeServiceImpl(TweiApiCodeDao apiCodeDao){
+        super(apiCodeDao);
+    }
 
     @Override
     protected EntityWrapper<TweiApiCode> getDeleteAndUpdateWrapper(TweiApiCode apiCode) {

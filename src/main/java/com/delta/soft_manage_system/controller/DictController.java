@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/dict")
 public class DictController extends BaseController<DictService, TweiDict> {
 
-    public DictController(){}
-
     @Autowired
     public DictController(DictService dictService){
         super(dictService);

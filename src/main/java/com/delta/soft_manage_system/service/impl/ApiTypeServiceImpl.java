@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.delta.soft_manage_system.dao.TweiApiTypeDao;
 import com.delta.soft_manage_system.dto.TweiApiType;
 import com.delta.soft_manage_system.service.ApiTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,6 +27,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ApiTypeServiceImpl extends BaseServiceImpl<TweiApiTypeDao, TweiApiType> implements ApiTypeService {
+
+    @Autowired
+    public ApiTypeServiceImpl(TweiApiTypeDao apiTypeDao){
+        super(apiTypeDao);
+    }
 
     @Override
     protected EntityWrapper<TweiApiType> getDeleteAndUpdateWrapper(TweiApiType tweiApiType) {

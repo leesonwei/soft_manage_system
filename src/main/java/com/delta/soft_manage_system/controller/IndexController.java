@@ -1,9 +1,9 @@
 package com.delta.soft_manage_system.controller;
 
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @Classname IndexController
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Author LIZONG.WEI
  */
 @Controller
+@Slf4j
 public class IndexController {
 
     @ApiOperation(value="首页",notes = "项目首页")

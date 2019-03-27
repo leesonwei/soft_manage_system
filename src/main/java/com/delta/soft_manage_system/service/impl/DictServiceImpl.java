@@ -11,9 +11,13 @@
 package com.delta.soft_manage_system.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.delta.soft_manage_system.AutoInjectUserId.AutoUserId;
 import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.soft_manage_system.dao.AutoIdDao;
 import com.delta.soft_manage_system.dao.TweiDictDao;
 import com.delta.soft_manage_system.dto.TweiDict;
+import com.delta.soft_manage_system.entitycheck.ActionType;
+import com.delta.soft_manage_system.entitycheck.EntityCheck;
 import com.delta.soft_manage_system.service.DictService;
 import com.delta.soft_manage_system.utils.Chinese4PinYin;
 import com.delta.soft_manage_system.utils.StringUtil;
@@ -21,6 +25,10 @@ import com.github.houbb.opencc4j.util.ZhConverterUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -34,7 +42,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class DictServiceImpl extends BaseServiceImpl<TweiDictDao, TweiDict> implements DictService {
 
-    public DictServiceImpl(){}
+    @Autowired
+    private AutoIdDao autoIdDao;
 
     @Autowired
     public DictServiceImpl(TweiDictDao dictDao){
@@ -42,12 +51,15 @@ public class DictServiceImpl extends BaseServiceImpl<TweiDictDao, TweiDict> impl
     }
 
     @Override
+    @AutoUserId(tableName = "twei_dict", prefix="typeId", idField = "dictId", clazz="com.delta.soft_manage_system.dto.TweiDict")
+    @EntityCheck(action = ActionType.INSERT, user = true)
     public ServerResponse<TweiDict> insertOne(TweiDict dict){
         dict = generatePyCode(dict);
         return super.insertOne(dict);
     }
 
     @Override
+    @EntityCheck(action = ActionType.UPDATE, user = true)
     public ServerResponse<TweiDict> updateOne(TweiDict dict){
         dict = generatePyCode(dict);
         return super.updateOne(dict);
@@ -74,5 +86,13 @@ public class DictServiceImpl extends BaseServiceImpl<TweiDictDao, TweiDict> impl
             dict.setPycode(trans.getAllFirstLetter(ZhConverterUtil.convertToSimple(dict.getDictName())));
         }
         return dict;
+    }
+
+    @Override
+    public int getSubDictCount(String typeId) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("type_id", typeId);
+        List<TweiDict> dicts = dao.selectByMap(map);
+        return dicts.size();
     }
 }
