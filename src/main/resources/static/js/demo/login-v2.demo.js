@@ -40,7 +40,7 @@ var LoginV2 = function () {
 						//window.location.href = "/admin/index";
 						window.location.href = "/admin/index?token=" + Cookies.get('token');
 					} else {
-						swal(json.status+'',json.msg,"error");
+						layer.msg('錯誤代碼:' + json.status + ',' + json.msg);
 						$("#submit").text("登入系统");
 						$("#submit").removeAttr("disabled");
 					}

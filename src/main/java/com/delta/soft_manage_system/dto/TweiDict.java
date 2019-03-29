@@ -2,6 +2,7 @@ package com.delta.soft_manage_system.dto;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.delta.soft_manage_system.AutoField.FieldInfo;
 import com.delta.soft_manage_system.entitycheck.*;
 import lombok.Data;
 
@@ -18,41 +19,59 @@ import java.util.Date;
 @TableName("twei_dict")
 public class TweiDict implements Serializable {
 	/***/
-	@NullRule(name="數據字典類型")
-	private String typeId; 
-	/***/
 	@TableId
 	@Check(id=true,type= CheckId.INPUT,action = {ActionType.UPDATE,ActionType.DELETE})
-	private String dictId; 
+	@FieldInfo("ID")
+	private String dictId;
+
+	/***/
+	@NullRule(name="數據字典類型",action=ActionType.INSERT)
+	@FieldInfo("類型")
+	private String typeId; 
+
 	/***/
 	@NullRule(name="數據字典名稱")
+	@FieldInfo("名稱")
 	private String dictName; 
 	/***/
+	@FieldInfo("簡稱")
 	private String dictShortName; 
 	/***/
+	@FieldInfo("全稱")
 	private String dictFullName; 
 	/***/
+	@FieldInfo("創建人")
 	private String createBy; 
 	/***/
+	@FieldInfo("創建時間")
 	private Date createAt;
 	/***/
+	@FieldInfo("更新人")
 	private String updateBy; 
 	/***/
+	@FieldInfo("更新時間")
 	private Date updateAt;
 	/***/
+	@FieldInfo("審核狀態")
 	private Integer flag;
 	/***/
+	@FieldInfo("審核人")
 	private String checkBy; 
 	/***/
+	@FieldInfo("審核時間")
 	private Date checkAt;
 	/***/
+	@FieldInfo("啟用過")
 	private Integer isUsed; 
 	/***/
+	@FieldInfo("備註")
 	private String memo;
 	/***/
+	@FieldInfo("拼音碼")
 	private String pycode;
 	/***/
 	@DataVersion
+	@FieldInfo("數據版本")
 	private Integer dataVersion;
 
 	@Override

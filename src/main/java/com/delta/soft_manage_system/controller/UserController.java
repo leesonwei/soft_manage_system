@@ -53,6 +53,8 @@ public class UserController {
             Cookie cookie = new Cookie("token", token);
             response.addCookie(cookie);
             res = ServerResponse.createBySuccess(token);
+        } else {
+            res = ServerResponse.createByErrorCodeMessage(serverResponse.getStatus(),serverResponse.getMsg());
         }
         return res;
     }

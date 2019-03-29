@@ -1,10 +1,9 @@
 package com.delta.soft_manage_system.interceptor;
 
 import com.delta.soft_manage_system.common.ApplicationInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Author LIZONG.WEI
  */
 @Component
+@Slf4j
 public class GlobalInterceptor implements HandlerInterceptor {
     @Autowired
     private ApplicationInfo applicationInfo;
@@ -32,6 +32,8 @@ public class GlobalInterceptor implements HandlerInterceptor {
             sc.setAttribute("appname", applicationInfo.getName());
             sc.setAttribute("version", applicationInfo.getVersion());
             sc.setAttribute("company", applicationInfo.getCompany());
+            String path = httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(),"");
+            sc.setAttribute("path",path);
         }
         return true;
     }

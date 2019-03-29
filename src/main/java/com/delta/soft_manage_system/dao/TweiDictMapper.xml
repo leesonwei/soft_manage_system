@@ -3,7 +3,7 @@
 <mapper namespace="com.delta.soft_manage_system.dao.TweiDictDao">
 	<!-- TweiDict的resultMap,column是给数据库列起的别名,它对应property类的属性 -->
 	<resultMap id="result_TweiDict_Map" type="com.delta.soft_manage_system.dto.TweiDict">
-		
+
 		<result column="TYPE_ID" property="typeId" />
 		<result column="DICT_ID" property="dictId" />
 		<result column="DICT_NAME" property="dictName" />
@@ -13,13 +13,28 @@
 		<result column="CREATE_AT" property="createAt" />
 		<result column="UPDATE_BY" property="updateBy" />
 		<result column="UPDATE_AT" property="updateAt" />
-		<result column="FLAG" property="fLAG" />
+		<result column="FLAG" property="flag" />
 		<result column="CHECK_BY" property="checkBy" />
 		<result column="CHECK_AT" property="checkAt" />
 		<result column="IS_USED" property="isUsed" />
-		<result column="MEMO" property="mEMO" />
-		<result column="PYCODE" property="pYCODE" />
+		<result column="MEMO" property="memo" />
+		<result column="PYCODE" property="pycode" />
 		<result column="DATA_VERSION" property="dataVersion" />
 	</resultMap>
+
+	<select id="selectListByVo" parameterType="map" resultType="com.delta.soft_manage_system.vo.DictVo">
+		select tb.type_name as typeName, tc.user_name as createByer, td.user_name as updateByer, te.user_name as checkByer,
+		ta.type_id as  typeId,ta.dict_id as dictId,ta.dict_name as dictName,ta.dict_short_name as dictShortName,
+		ta.dict_full_name as dictFullName,ta.create_by as createBy,ta.create_at as createAt,
+		ta.update_by as updateBy,ta.update_at as updateAt,ta.flag,ta.check_by as checkBy,
+		ta.check_at as checkAt,ta.is_used as isUsed,ta.memo,ta.pycode,ta.data_version as dataVersion
+ 		from twei_dict ta
+		left join twei_dict_type tb on ta.type_id = tb.type_id
+		left join twei_user tc on ta.create_By = tc.userid
+		left join twei_user td on ta.update_By = td.userid
+		left join twei_user te on ta.check_By = te.userid
+		where ta.type_id = #{type_id}
+		Order by ta.create_at
+	</select>
 
 </mapper>

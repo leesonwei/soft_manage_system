@@ -39,10 +39,10 @@
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
 		<!-- begin #header -->
-		<div id="header" class="header navbar-default">
+		<div id="header" class="header navbar-default" th:fragment="header">
 			<!-- begin navbar-header -->
 			<div class="navbar-header">
-				<a href="javascript:void(0);" onclick="gotoUrl('/admin/index')" class="navbar-brand"><span class="navbar-logo"></span> <b th:text="${application.appname}">Color</b> </a>
+				<a href="javascript:void(0);" onclick="PublicFunc.gotoUrl('/admin/index')" class="navbar-brand"><span class="navbar-logo"></span> <b th:text="${application.appname}">Color</b> </a>
 				<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -82,7 +82,7 @@
 						<li class="media">
 							<a href="javascript:;">
 								<div class="media-left">
-									<img src="../static/img/user/user-1.jpg" class="media-object" alt="" />
+									<img th:src="@{/../static/img/user/user-1.jpg}" class="media-object" alt="" />
 									<i class="fab fa-facebook-messenger text-primary media-object-icon"></i>
 								</div>
 								<div class="media-body">
@@ -95,7 +95,7 @@
 						<li class="media">
 							<a href="javascript:;">
 								<div class="media-left">
-									<img src="../static/img/user/user-2.jpg" class="media-object" alt="" />
+									<img th:src="@{/../static/img/user/user-2.jpg}" class="media-object" alt="" />
 									<i class="fab fa-facebook-messenger text-primary media-object-icon"></i>
 								</div>
 								<div class="media-body">
@@ -135,8 +135,8 @@
 				</li>
 				<li class="dropdown navbar-user">
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-						<img src="../static/img/user/user-13.jpg" alt="" /> 
-						<span class="d-none d-md-inline" th:text="${session.current_user.userName}">Adam Schwartz</span> <b class="caret"></b>
+						<img th:src="@{/../static/img/user/user-13.jpg}" alt="" />
+						<span class="d-none d-md-inline" th:text="${session.current_user == null} ? '未登錄' : ${session.current_user.userName}">Adam Schwartz</span> <b class="caret"></b>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<a href="javascript:;" class="dropdown-item">編輯個人資料</a>
@@ -144,7 +144,7 @@
 						<a href="javascript:;" class="dropdown-item">日曆</a>
 						<a href="javascript:;" class="dropdown-item">設定</a>
 						<div class="dropdown-divider"></div>
-						<a href="javascript:;" onclick="logout('token')" class="dropdown-item">退出系統</a>
+						<a href="javascript:;" onclick="PublicFunc.logout('token')" class="dropdown-item">退出系統</a>
 					</div>
 				</li>
 			</ul>
@@ -153,7 +153,7 @@
 		<!-- end #header -->
 		
 		<!-- begin #sidebar -->
-		<div id="sidebar" class="sidebar">
+		<div id="sidebar" class="sidebar" th:fragment="sidebar">
 			<!-- begin sidebar scrollbar -->
 			<div data-scrollbar="true" data-height="100%">
 				<!-- begin sidebar user -->
@@ -162,11 +162,11 @@
 						<a href="javascript:;" data-toggle="nav-profile">
 							<div class="cover with-shadow"></div>
 							<div class="image">
-								<img src="../static/img/user/user-13.jpg" alt="" />
+								<img th:src="@{/../static/img/user/user-13.jpg}" alt="" />
 							</div>
 							<div class="info">
 								<b class="caret pull-right"></b>
-								<span th:text="${session.current_user.userName}"></span>
+								<span th:text="${session.current_user == null} ? '未登錄' : ${session.current_user.userName}"></span>
 								<small th:text="${'智能製造發展部'}">Front end developer</small>
 							</div>
 						</a>
@@ -209,8 +209,7 @@
 							<span>基礎資料管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="/admin/dicttype/manage">數據字典類型管理</a></li>
-							<li><a href="extra_timeline.html">數據字典管理</a></li>
+							<li><a href="/admin/dict/manage">數據字典管理</a></li>
 							<li><a href="extra_timeline.html">API異常碼管理</a></li>
 							<li><a href="extra_timeline.html">API參數管理</a></li>
 						</ul>

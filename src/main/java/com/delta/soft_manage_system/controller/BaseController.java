@@ -25,6 +25,7 @@ public abstract class BaseController<T extends BaseService,K> {
         this.service = t;
     }
 
+
     @PostMapping("/insert")
     @ResponseBody
     public ServerResponse<K> insertOne(K k, HttpSession session){

@@ -21,11 +21,13 @@ import com.delta.soft_manage_system.entitycheck.EntityCheck;
 import com.delta.soft_manage_system.service.DictService;
 import com.delta.soft_manage_system.utils.Chinese4PinYin;
 import com.delta.soft_manage_system.utils.StringUtil;
+import com.delta.soft_manage_system.vo.DictVo;
 import com.github.houbb.opencc4j.util.ZhConverterUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,8 +61,30 @@ public class DictServiceImpl extends BaseServiceImpl<TweiDictDao, TweiDict> impl
     }
 
     @Override
+    @EntityCheck(action = ActionType.DELETE, user = true)
+    public ServerResponse<TweiDict> deleteOne(TweiDict dict){
+        TweiDict origin = dao.selectById(dict);
+        if (null == origin) {
+            return ServerResponse.createByErrorMessage("刪除對象不存在");
+        }
+        if (origin.getFlag() == 1) {
+            return ServerResponse.createByErrorMessage("已審核不可刪除");
+        }
+        dict = generatePyCode(dict);
+        return super.deleteOne(dict);
+    }
+
+
+    @Override
     @EntityCheck(action = ActionType.UPDATE, user = true)
     public ServerResponse<TweiDict> updateOne(TweiDict dict){
+        TweiDict origin = dao.selectById(dict);
+        if (null == origin) {
+            return ServerResponse.createByErrorMessage("更新對象不存在");
+        }
+        if (origin.getFlag() == 1) {
+            return ServerResponse.createByErrorMessage("已審核不可更新");
+        }
         dict = generatePyCode(dict);
         return super.updateOne(dict);
     }
@@ -69,7 +93,6 @@ public class DictServiceImpl extends BaseServiceImpl<TweiDictDao, TweiDict> impl
     protected EntityWrapper<TweiDict> getDeleteAndUpdateWrapper(TweiDict tweiDict) {
         EntityWrapper<TweiDict> wrapper = new EntityWrapper<>();
         wrapper.eq("data_version", tweiDict.getDataVersion());
-        wrapper.eq("type_id", tweiDict.getTypeId());
         wrapper.eq("dict_id", tweiDict.getDictId());
         return wrapper;
     }
@@ -90,9 +113,29 @@ public class DictServiceImpl extends BaseServiceImpl<TweiDictDao, TweiDict> impl
 
     @Override
     public int getSubDictCount(String typeId) {
+        return selectList(typeId).size();
+    }
+
+    @Override
+    public List<DictVo> selectList(String typeId) {
         Map<String,Object> map = new HashMap<>();
         map.put("type_id", typeId);
-        List<TweiDict> dicts = dao.selectByMap(map);
-        return dicts.size();
+        List<DictVo> dicts = dao.selectListByVo(map);
+        return dicts;
+    }
+
+    @Override
+    public ServerResponse<TweiDict> checkOne(TweiDict tweiDict) {
+        TweiDict origin = dao.selectById(tweiDict);
+        if (null == origin) {
+            return ServerResponse.createByErrorMessage("審核對象不存在");
+        }
+        if (origin.getFlag() == 1) {
+            return ServerResponse.createByErrorMessage("對象已經是審核狀態");
+        }
+        origin.setFlag(1);
+        origin.setCheckBy(tweiDict.getCheckBy());
+        origin.setCheckAt(Calendar.getInstance().getTime());
+        return this.updateOne(origin);
     }
 }

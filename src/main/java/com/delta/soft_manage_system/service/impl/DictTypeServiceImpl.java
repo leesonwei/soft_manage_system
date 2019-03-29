@@ -33,7 +33,7 @@ import org.springframework.stereotype.Service;
  * @date 3/23 0023
  * @since 1.0.0
  */
-@Service("dictTypeService")
+@Service
 @Slf4j
 public class DictTypeServiceImpl extends BaseServiceImpl<TweiDictTypeDao,TweiDictType> implements DictTypeService {
 

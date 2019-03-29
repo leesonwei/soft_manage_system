@@ -10,7 +10,11 @@
  */
 package com.delta.soft_manage_system.service;
 
+import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.dto.TweiDict;
+import com.delta.soft_manage_system.vo.DictVo;
+
+import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -29,4 +33,7 @@ public interface DictService extends BaseService<TweiDict> {
      */
     int getSubDictCount(String typeId);
 
+    List<DictVo> selectList(String typeId);
+
+    ServerResponse<TweiDict> checkOne(TweiDict tweiDict);
 }
