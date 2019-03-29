@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.TweiDictTypeDao">
+	<!-- TweiDictType的resultMap,column是给数据库列起的别名,它对应property类的属性 -->
+	<resultMap id="result_TweiDictType_Map" type="com.entity.TweiDictType">
+		
+		<result column="TYPE_ID" property="typeId" />
+		<result column="TYPE_NAME" property="typeName" />
+		<result column="MEMO" property="mEMO" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_AT" property="createAt" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_AT" property="updateAt" />
+		<result column="DATA_VERSION" property="dataVersion" />
+	</resultMap>
+
+</mapper>
