@@ -284,12 +284,12 @@ var Dashboard = function () {
 		//main function
 		init: function () {
 			handleDashboardGritterNotification();
-			handleInteractiveChart();
-			handleDashboardSparkline();
-			handleDonutChart();
-			handleDashboardTodolist();
-			handleVectorMap();
-			handleDashboardDatepicker();
+			//handleInteractiveChart();
+			//handleDashboardSparkline();
+			//handleDonutChart();
+			//handleDashboardTodolist();
+			//handleVectorMap();
+			//handleDashboardDatepicker();
 		}
 	};
 }();

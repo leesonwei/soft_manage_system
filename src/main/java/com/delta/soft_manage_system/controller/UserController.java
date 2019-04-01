@@ -62,11 +62,7 @@ public class UserController {
     @ApiOperation(value="退出",notes = "退出登录")
     @GetMapping("/logout")
     public String logout(HttpSession httpSession, HttpServletRequest request, HttpServletResponse response){
-//        User user = (User)httpSession.getAttribute(GlobalConst.CURRENT_USER);
-//        String token = TokenMgr.createJWT(user.getUserid(),JWTConstant.JWT_ISS,TokenMgr.generalSubject(user), JWTConstant.JWT_EXP);
-//        response.addHeader("token", token);
-//        Cookie cookie = new Cookie("token", token);
-//        response.addCookie(cookie);
+        httpSession.setMaxInactiveInterval(1);
         request.changeSessionId();
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {

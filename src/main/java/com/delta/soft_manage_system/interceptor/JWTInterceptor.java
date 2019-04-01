@@ -70,6 +70,7 @@ public class JWTInterceptor implements HandlerInterceptor{
 			Claims claims = checkResult.getData();
 			log.info("token校检通过checkResult："+ JSON.toJSONString(checkResult));
 			User user = FastJsonUtil.toBean(claims.getSubject(), User.class);
+			//request.getSession().setAttribute(GlobalConst.CURRENT_USER, user);
 			log.info("token校检通过user："+user.toString());
 			return true;
 		} else {

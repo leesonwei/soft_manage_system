@@ -121,8 +121,7 @@
 							<table id="data-table-buttons" class="table table-striped table-bordered">
 								<thead>
 								<tr>
-									<th width="2%"></th>
-									<th width="2%" data-orderable="false">ID</th>
+                                    <th width="1%">ID</th>
 									<th class="text-nowrap">類型</th>
 									<th class="text-nowrap">名稱</th>
 									<th class="text-nowrap">簡稱</th>
@@ -133,14 +132,11 @@
 								<tbody>
 								<tr class="odd gradeX">
 									<td width="1%"></td>
-									<td width="1%"></td>
 									<td >Trident</td>
 									<td >Internet Explorer 4.0</td>
 									<td >Win 95+</td>
 									<td >4</td>
-									<td class="last">
-
-									</td>
+									<td class="last"></td>
 								</tr>
 								</tbody>
 							</table>
@@ -160,6 +156,60 @@
 		<!-- end scroll to top btn -->
 	</div>
 	<!-- end page container -->
+
+	<!-- begin add and edit model -->
+	<div id="addAndEditForm" class="hidden">
+		<div class="container">
+			<form action="/" method="POST">
+				<fieldset>
+					<legend class="m-b-15">數據字典</legend>
+					<div class="form-group row m-b-15">
+						<label class="col-md-3 col-form-label">ID</label>
+						<div class="col-md-7">
+							<input type="email" class="form-control" placeholder="ID" disabled>
+						</div>
+					</div>
+					<div class="form-group row m-b-15">
+						<label class="col-md-3 col-form-label">字典類型</label>
+						<div class="col-md-7">
+							<select class="form-control">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row m-b-15">
+						<label class="col-md-3 col-form-label">字典名稱</label>
+						<div class="col-md-7">
+							<input type="password" class="form-control" maxlength="50" placeholder="字典名稱">
+						</div>
+					</div>
+					<div class="form-group row m-b-15">
+						<label class="col-md-3 col-form-label">字典簡稱</label>
+						<div class="col-md-7">
+							<input type="password" class="form-control" maxlength="20" placeholder="字典名稱">
+						</div>
+					</div>
+					<div class="form-group row m-b-15">
+						<label class="col-md-3 col-form-label">字典全稱</label>
+						<div class="col-md-7">
+							<input type="password" class="form-control" maxlength="50" placeholder="字典名稱">
+						</div>
+					</div>
+					<div class="form-group row m-b-15">
+						<label class="col-md-3 col-form-label">備註</label>
+						<div class="col-md-7">
+							<input type="password" class="form-control" maxlength="100" placeholder="字典名稱">
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<!-- end add and edit model -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script th:src="@{/../static/plugins/jquery/jquery-3.3.1.min.js}"></script>
@@ -173,10 +223,11 @@
 	<script th:src="@{/../static/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
 	<script th:src="@{/../static/plugins/js-cookie/js.cookie.js}"></script>
 	<script th:src="@{/../static/js/theme/default.min.js}"></script>
-	<script th:src="@{/../static/js/apps.min.js}"></script>
+	<script th:src="@{/../static/js/apps.js}"></script>
 	<!-- ================== END BASE JS ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script th:src="@{/../static/delta/js/public.js(version=${application.version})}"></script>
 	<script th:src="@{/../static/plugins/DataTables/media/js/jquery.dataTables.js}"></script>
 	<script th:src="@{/../static/plugins/DataTables/media/js/dataTables.bootstrap.min.js}"></script>
 	<script th:src="@{/../static/plugins/DataTables/extensions/Buttons/js/dataTables.buttons.min.js}"></script>
@@ -189,10 +240,9 @@
 	<script th:src="@{/../static/plugins/DataTables/extensions/Buttons/js/buttons.print.min.js}"></script>
 	<script th:src="@{/../static/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js}"></script>
 	<script th:src="@{/../static/plugins/layui/layui.all.js}"></script>
-	<script th:src="@{/../static/js/demo/table-manage-buttons.demo.js}"></script>
+	<script th:src="@{/../static/js/demo/table-manage-buttons.dict.js(version=${application.version})}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
-	<script th:src="@{/../static/delta/js/public.js}"></script>
-	<script th:src="@{/../static/delta/js/dict.js}"></script>
+
 	
 	<script>
 		$(document).ready(function() {
@@ -219,13 +269,7 @@
 				}
 				var data = table.row(this).data();
 				targetRow = this;
-				target = jsonData.filter(function(json){
-					for(var obj in json){
-						if (json[obj] == data[1]){
-							return json;
-						}
-					}
-				});
+				target = data;
 			} );
 		});
 

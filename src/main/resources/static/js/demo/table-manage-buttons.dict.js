@@ -4,16 +4,13 @@ Version: 4.2.0
 Author: Sean Ngu
 Website: http://www.seantheme.com/color-admin-v4.2/admin/
 */
-var table;
-var jsonData;
-var target;
-var targetRow;
+
 var handleDataTableButtons = function() {
 	"use strict";
     
 	if ($('#data-table-buttons').length !== 0) {
 		table = $('#data-table-buttons').DataTable({
-			dom: 'Bfrtip',
+			dom: 'Bftip',
 			buttons: [
 				{ extend: 'add', className: 'btn-sm btn-primary' },
 				{ extend: 'edit', className: 'btn-sm btn-info' },
@@ -27,7 +24,6 @@ var handleDataTableButtons = function() {
 				{ extend: 'print', className: 'btn-sm' }
 			],
 			responsive: true,
-			scrollX:true,
 			oLanguage: {
 				"sLengthMenu": "每页显示 _MENU_ 条记录",
 				"sZeroRecords": "抱歉， 没有找到數據",
@@ -42,6 +38,38 @@ var handleDataTableButtons = function() {
 					"sLast": "尾页"
 				}
 			},
+            columnDefs: [{
+                "targets": 0,
+                "width": '50px',
+                "data": 'dictId'
+            },{
+                "targets": 1,
+                "data": 'typeName'
+            },{
+                "targets": 2,
+                "data": 'dictName'
+            },{
+                "targets": 3,
+                "data": 'dictShortName'
+            },{
+                "targets": 4,
+                "data": 'flag',
+                "render":function(data, type, row, meta){
+                    if (data === 0) {
+                        return '<span class="text-danger">未審核</span>';
+                    } else if (data === 1) {
+                        return '<span class="text-success">已審核</span>';
+                    } else {
+                        return "";
+                    }
+                }
+            },{
+                "targets": 5,
+                "data": '',
+                "render":function(data, type, row, meta){
+                    return "";
+                }
+            }],
 			ajax: {
 				"url": "/admin/dict/manage/json",
 				"data": function () {
@@ -54,15 +82,7 @@ var handleDataTableButtons = function() {
 					jsonData = data;
 					table.clear();
 					for(var obj in data){
-						table.row.add([
-							'',
-							data[obj].dictId,
-							data[obj].typeName,
-							data[obj].dictName,
-							data[obj].dictShortName,
-							data[obj].flag == 0?'未審核':'已審核',
-							''
-						]);
+						table.row.add(data[obj]);
 					}
 					table.draw(false);
 				}
@@ -71,19 +91,24 @@ var handleDataTableButtons = function() {
 	}
 };
 
-var reloadData = function () {
-	table.draw(false);
-}
-
 $.fn.dataTable.ext.buttons.add = {
 	text: '新增',
 	action: function ( e, dt, node, config ) {
 		layer.open({
-			title:'增加',
+			title:'增加數據字典',
 			type: 1,
+			resize: true,
 			skin: 'layui-layer-rim', //加上边框
-			area: ['420px', '240px'], //宽高
-			content: 'html内容'
+			area: [formSize.width, formSize.height], //宽高
+			content: $('#addAndEditForm').html(),
+			btn: ['保存', '取消'],
+			yes:function(){
+
+				PublicFunc.save(target,'/admin/dict/insert');
+			},
+			btn2:function(){
+				layer.closeAll();
+			}
 		});
 	}
 };
@@ -91,7 +116,7 @@ $.fn.dataTable.ext.buttons.edit = {
 	text: '修改',
 	action: function ( e, dt, node, config ) {
 		layer.open({
-			title:'修改',
+			title:'修改數據字典',
 			type: 1,
 			skin: 'layui-layer-rim', //加上边框
 			area: ['420px', '240px'], //宽高

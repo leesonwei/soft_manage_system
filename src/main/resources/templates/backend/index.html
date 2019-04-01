@@ -22,9 +22,6 @@
 	<!-- ================== END BASE CSS STYLE ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-	<link href="../static/plugins/jquery-jvectormap/jquery-jvectormap.css" rel="stylesheet" />
-	<link href="../static/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
-	<link href="../static/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
@@ -330,12 +327,8 @@
 	<!-- ================== END BASE JS ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="../static/plugins/gritter/js/jquery.gritter.js"></script>
-	<script src="../static/plugins/jquery-jvectormap/jquery-jvectormap.min.js"></script>
-	<script src="../static/plugins/jquery-jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="../static/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script src="../static/js/demo/dashboard.min.js"></script>
-	<script src="../static/delta/js/public.js"></script>
+	<script src="../static/js/demo/dashboard.js"></script>
+	<script th:src="@{/../static/delta/js/public.js(version=${application.version})}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 	
 	<script>

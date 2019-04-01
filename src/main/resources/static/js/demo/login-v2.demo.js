@@ -37,10 +37,24 @@ var LoginV2 = function () {
 					Cookies.set('token', json.data);
 					if (json.status === 0) {
 						$("#submit").text("登入成功");
-						//window.location.href = "/admin/index";
 						window.location.href = "/admin/index?token=" + Cookies.get('token');
 					} else {
-						layer.msg('錯誤代碼:' + json.status + ',' + json.msg);
+						//layer.msg('錯誤代碼:' + json.status + ',' + json.msg);
+						layer.open({
+							title:'<strong><i class="fa fa-exclamation-circle text-danger"></i> ' + json.status + ' </strong>'
+							,type:1
+							,icon:0
+							,offset: 'auto'
+							,id: 'error' //防止重复弹出
+							,content: '<div style="padding: 20px 100px;" class="text-danger">'+ json.msg +'</div>'
+							,btn: '关闭'
+							,btnAlign: 'r' //按钮居中
+							,shade: 0 //不显示遮罩
+							,yes: function(){
+								layer.closeAll();
+							}
+							,time:2000
+						});
 						$("#submit").text("登入系统");
 						$("#submit").removeAttr("disabled");
 					}
