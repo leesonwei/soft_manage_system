@@ -34,7 +34,7 @@
 		left join twei_user td on ta.update_By = td.userid
 		left join twei_user te on ta.check_By = te.userid
 		where ta.type_id = #{type_id}
-		Order by ta.dict_id
+		Order by ta.dict_id desc
 	</select>
 
 </mapper>

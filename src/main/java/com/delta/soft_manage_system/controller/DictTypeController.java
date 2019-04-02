@@ -1,11 +1,16 @@
 package com.delta.soft_manage_system.controller;
 
+import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.dto.TweiDictType;
 import com.delta.soft_manage_system.service.DictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @Classname DictTypeController
@@ -24,7 +29,14 @@ public class DictTypeController extends BaseController<DictTypeService, TweiDict
 
     @GetMapping("/manage")
     public String getDictTypeIndex(){
-        return "backend/dict/dict_manage";
+        return "backend/dict/dicttype_manage";
+    }
+
+    @PostMapping("/manage/json")
+    @ResponseBody
+    public ServerResponse getDictTypeJson(TweiDictType dictType){
+        List<TweiDictType> types = service.selectList(dictType);
+        return ServerResponse.createBySuccess(types);
     }
 
 }

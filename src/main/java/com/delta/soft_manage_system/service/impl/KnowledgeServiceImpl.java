@@ -7,6 +7,8 @@ import com.delta.soft_manage_system.service.KnowledgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Classname KnowledgeServiceImpl
  * @Date 2019/3/27 10:22
@@ -32,5 +34,14 @@ public class KnowledgeServiceImpl extends BaseServiceImpl<TweiKnowledgeDao, Twei
     protected TweiKnowledge updateDataVersion(TweiKnowledge tweiKnowledge) {
         tweiKnowledge.setDataVersion(tweiKnowledge.getDataVersion() + 1);
         return tweiKnowledge;
+    }
+
+    @Override
+    public List<TweiKnowledge> selectList(TweiKnowledge knowledge) {
+        EntityWrapper<TweiKnowledge> wrapper = new EntityWrapper<>();
+        if (knowledge != null) {
+
+        }
+        return dao.selectList(wrapper);
     }
 }

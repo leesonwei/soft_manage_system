@@ -12,6 +12,8 @@ package com.delta.soft_manage_system.service;
 
 import com.delta.soft_manage_system.dto.TweiApiPara;
 
+import java.util.List;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
@@ -21,5 +23,9 @@ import com.delta.soft_manage_system.dto.TweiApiPara;
  * @since 1.0.0
  */
 public interface ApiParaService extends BaseService<TweiApiPara> {
-
+    /**
+     * 查找list對象
+     * @return
+     */
+    List<TweiApiPara> selectList(TweiApiPara apiPara);
 }

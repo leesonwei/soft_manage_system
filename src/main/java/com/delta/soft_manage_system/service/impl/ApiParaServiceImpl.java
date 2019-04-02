@@ -17,6 +17,8 @@ import com.delta.soft_manage_system.service.ApiParaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
@@ -41,5 +43,14 @@ public class ApiParaServiceImpl extends BaseServiceImpl<TweiApiParaDao, TweiApiP
     @Override
     protected TweiApiPara updateDataVersion(TweiApiPara tweiApiPara) {
         return null;
+    }
+
+    @Override
+    public List<TweiApiPara> selectList(TweiApiPara apiPara) {
+        EntityWrapper<TweiApiPara> wrapper = new EntityWrapper<>();
+        if (apiPara != null) {
+
+        }
+        return dao.selectList(wrapper);
     }
 }

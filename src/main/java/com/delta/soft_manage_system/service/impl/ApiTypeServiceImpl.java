@@ -17,6 +17,8 @@ import com.delta.soft_manage_system.service.ApiTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
@@ -41,5 +43,14 @@ public class ApiTypeServiceImpl extends BaseServiceImpl<TweiApiTypeDao, TweiApiT
     @Override
     protected TweiApiType updateDataVersion(TweiApiType tweiApiType) {
         return null;
+    }
+
+    @Override
+    public List<TweiApiType> selectList(TweiApiType apiType) {
+        EntityWrapper<TweiApiType> wrapper = new EntityWrapper<>();
+        if (apiType != null) {
+
+        }
+        return dao.selectList(wrapper);
     }
 }

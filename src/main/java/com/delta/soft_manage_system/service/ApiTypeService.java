@@ -12,6 +12,8 @@ package com.delta.soft_manage_system.service;
 
 import com.delta.soft_manage_system.dto.TweiApiType;
 
+import java.util.List;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
@@ -21,5 +23,9 @@ import com.delta.soft_manage_system.dto.TweiApiType;
  * @since 1.0.0
  */
 public interface ApiTypeService extends BaseService<TweiApiType> {
-
+    /**
+     * 查找list對象
+     * @return
+     */
+    List<TweiApiType> selectList(TweiApiType apiType);
 }

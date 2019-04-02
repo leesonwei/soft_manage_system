@@ -17,6 +17,8 @@ import com.delta.soft_manage_system.service.ApiCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
@@ -41,5 +43,14 @@ public class ApiCodeServiceImpl extends BaseServiceImpl<TweiApiCodeDao, TweiApiC
     @Override
     protected TweiApiCode updateDataVersion(TweiApiCode apiCode) {
         return null;
+    }
+
+    @Override
+    public List<TweiApiCode> selectList(TweiApiCode apiCode) {
+        EntityWrapper<TweiApiCode> wrapper = new EntityWrapper<>();
+        if (apiCode != null) {
+
+        }
+        return dao.selectList(wrapper);
     }
 }

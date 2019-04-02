@@ -5,7 +5,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title th:text="${application.appname} + ' | 數據字典管理'">Color Admin | Managed Tables - Buttons</title>
+	<title th:text="${application.appname} + ' | 數據字典類型管理'">Color Admin | Managed Tables - Buttons</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -69,38 +69,9 @@
 		<div id="content" class="content">
 			<!-- begin row -->
 			<div class="row">
-				<!-- begin col-2 -->
-				<div class="col-lg-2">
-					<!-- begin panel -->
-					<div class="panel panel-inverse">
-						<!-- begin panel-heading -->
-						<div class="panel-heading">
-							<h4 class="panel-title">數據字典類型</h4>
-						</div>
-						<!-- end panel-heading -->
 
-						<!-- begin panel-body -->
-						<div class="panel-body">
-							<table id="data-table-type" class="table table-striped table-bordered">
-								<thead>
-								<tr>
-									<th class="text-nowrap"></th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr class="odd gradeX" th:each="type,typeStat:${typeList}">
-									<td th:class="${typeStat.first}?'dicttype selected':'dicttype'" th:attr="data-typeid=${type.typeId}" th:text="${type.typeName}"></td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
-						<!-- end panel-body -->
-					</div>
-					<!-- end panel -->
-				</div>
-				<!-- end col-2 -->
 				<!-- begin col-10 -->
-				<div class="col-lg-10">
+				<div class="col-lg-12">
 					<!-- begin panel -->
 					<div class="panel panel-inverse">
 						<!-- begin panel-heading -->
@@ -111,7 +82,7 @@
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 							</div>
-							<h4 class="panel-title">數據字典管理</h4>
+							<h4 class="panel-title">數據字典類型管理</h4>
 						</div>
 						<!-- end panel-heading -->
 
@@ -122,9 +93,7 @@
 								<thead>
 								<tr>
                                     <th width="1%">ID</th>
-									<th class="text-nowrap">類型</th>
 									<th class="text-nowrap">名稱</th>
-									<th class="text-nowrap">簡稱</th>
 									<th class="text-nowrap">創建人</th>
 									<th class="text-nowrap">創建時間</th>
 									<th class="text-nowrap">審核狀態</th>
@@ -136,9 +105,7 @@
 								<tbody>
 								<tr class="odd gradeX">
 									<td width="1%">ID</td>
-									<td >類型</td>
 									<td >名稱</td>
-									<td >簡稱</td>
 									<td >創建人</td>
 									<td>創建時間</td>
 									<td>審核狀態</td>
@@ -178,29 +145,11 @@
 						</div>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典類型</label>
-						<div class="col-md-7">
-							<input id="typeId" type="text" class="form-control" placeholder="數據字典類型" disabled>
-						</div>
-					</div>
-					<div class="form-group row m-b-15">
 						<label class="col-md-3 col-form-label">字典名稱</label>
 						<div class="col-md-7">
-							<input id="dictName" type="text" class="form-control" maxlength="50" placeholder="字典名稱" required>
+							<input id="typeName" type="text" class="form-control" maxlength="10" placeholder="字典名稱" required>
 						</div>
 						<label class="col-md-2 col-form-label text-danger">必填項</label>
-					</div>
-					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典簡稱</label>
-						<div class="col-md-7">
-							<input id="dictShortName" type="text" class="form-control" maxlength="20" placeholder="字典簡稱">
-						</div>
-					</div>
-					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典全稱</label>
-						<div class="col-md-7">
-							<input id="dictFullName" type="text" class="form-control" maxlength="50" placeholder="不超過50字的字典全稱">
-						</div>
 					</div>
 					<div class="form-group row m-b-15">
 						<label class="col-md-3 col-form-label">備註</label>
@@ -243,7 +192,7 @@
 	<script th:src="@{/../static/plugins/DataTables/extensions/Buttons/js/buttons.print.min.js}"></script>
 	<script th:src="@{/../static/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js}"></script>
 	<script th:src="@{/../static/plugins/layui/layui.all.js}"></script>
-	<script th:src="@{/../static/js/demo/table-manage-buttons.dict.js(version=${application.version})}"></script>
+	<script th:src="@{/../static/js/demo/table-manage-buttons.dicttype.js(version=${application.version})}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 
 	
@@ -251,17 +200,6 @@
 		$(document).ready(function() {
 			App.init();
 			TableManageButtons.init();
-
-			$('.dicttype').click(function(){
-				var _this = $(this);
-				if (_this.hasClass('selected')) {
-					return;
-				}
-				var p = _this.data('typeid');
-				_this.parent().siblings().children().removeClass('selected');
-				_this.addClass('selected');
-				TableManageButtons.load();
-			});
 
 			$('#data-table-buttons tbody').on('click','tr',function() {
 				$(this).siblings().removeClass('selected');

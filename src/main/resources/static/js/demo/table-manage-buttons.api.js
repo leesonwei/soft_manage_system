@@ -41,30 +41,24 @@ var handleDataTableButtons = function() {
             columnDefs: [{
                 "targets": 0,
                 "width": '50px',
-                "data": 'dictId'
+                "data": 'typeId'
             },{
                 "targets": 1,
                 "data": 'typeName'
             },{
                 "targets": 2,
-                "data": 'dictName'
-            },{
-                "targets": 3,
-                "data": 'dictShortName'
-            },{
-                "targets": 4,
                 "data": 'createBy',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             },{
-                "targets": 5,
+                "targets": 3,
                 "data": 'createAt',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             },{
-                "targets": 6,
+                "targets": 4,
                 "data": 'flag',
                 "render":function(data, type, row, meta){
                     if (data === 0) {
@@ -76,26 +70,26 @@ var handleDataTableButtons = function() {
                     }
                 }
             },{
-                "targets": 7,
+                "targets": 5,
                 "data": 'checkBy',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             },{
-                "targets": 8,
+                "targets": 6,
                 "data": 'checkAt',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             },{
-                "targets": 9,
+                "targets": 7,
                 "data": 'memo',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             }],
 			ajax: {
-				"url": "/admin/dict/manage/json",
+				"url": "/admin/dicttype/manage/json",
 				"data": function () {
 					var data = {};
 					data.typeId = $('#data-table-type .selected').data('typeid');
@@ -103,9 +97,9 @@ var handleDataTableButtons = function() {
 				},
 				"type":'post',
 				"success":function(data){
-					jsonData = data;
+					jsonData = data.data;
 					table.clear();
-					table.rows.add(data);
+                    table.rows.add(data.data);
                     table.draw(true);
 				}
 			}
@@ -131,8 +125,7 @@ $.fn.dataTable.ext.buttons.add = {
                 layero.find('#typeId').val($('.dicttype.selected').text());
                 layero.find('#typeId').data('typeid',$('.dicttype.selected').data('typeid'));
             },
-			yes:function(index1, layero){
-                if (target === undefined) target = {};
+			yes:function(index, layero){
                 target.typeId = layero.find('#typeId').data('typeid');
                 target.dictName = layero.find('#dictName').val();
                 if (target.dictName === undefined || '' === target.dictName) {
@@ -148,25 +141,31 @@ $.fn.dataTable.ext.buttons.add = {
                 target.memo = $(layero.find('#memo')).val();
                 layer.confirm('您確定保存這條記錄嗎？',{
                     btn: ['確定','取消']
-                }, function(index2){
-                    layer.close(index2);
+                }, function(){
                     layero.find('a.layui-layer-btn0').text('正在提交...');
-                    var l = layer.load();
+                    layero.find('a.layui-layer-btn0').addClass('disabled');
                     PublicFunc.ajaxCRUD(target,'/admin/dict/insert',function(ret){
                         layer.closeAll();
                         layer.msg('增加成功', {icon: 1, time:2000});
                         table.ajax.reload().draw(true);
                         target  = undefined;
-                    },function(ret){
+                    },function(ret,index){
                         layer.msg("增加失敗. 錯誤代碼:" + ret.status + "," + ret.msg, {
                             icon:2,
                             time: 3000,
                         });
-                        layer.close(index1);
+                        layero.find('a.layui-layer-btn0').text('保存');
+                        layero.find('a.layui-layer-btn0').removeClass('disabled');
+                        layer.close(index);
                     });
+                    layero.find('a.layui-layer-btn0').text('保存');
+                    layero.find('a.layui-layer-btn0').removeClass('disabled');
+                    layer.close(index);
                 });
 			},
 			btn2:function(index, layero){
+                layero.find('a.layui-layer-btn0').text('保存');
+                layero.find('a.layui-layer-btn0').removeClass('disabled');
 				layer.close(index);
 			}
 		});
@@ -200,6 +199,7 @@ $.fn.dataTable.ext.buttons.edit = {
             content: $('#addAndEditForm').html(),
             btn: ['保存', '取消'],
             success:function(layero, index){
+                console.log(target.typeName);
                 layero.find('#id').val(target.dictId);
                 layero.find('#typeId').val(target.typeName);
                 layero.find('#dictName').val(target.dictName);
@@ -207,11 +207,10 @@ $.fn.dataTable.ext.buttons.edit = {
                 layero.find('#dictFullName').val(target.dictFullName);
                 layero.find('#memo').val(target.memo);
             },
-            yes:function(index1, layero){
+            yes:function(index, layero){
                 layer.confirm('您確定保存所有的修改嗎？',{
                     btn: ['確定','取消']
-                }, function(index2){
-                    layer.close(index2);
+                }, function(){
                     target.typeId = layero.find('#typeId').data('typeid');
                     target.dictName = layero.find('#dictName').val();
                     if (target.dictName === undefined || '' === target.dictName) {
@@ -226,7 +225,7 @@ $.fn.dataTable.ext.buttons.edit = {
                     target.dictFullName = layero.find('#dictFullName').val();
                     target.memo = $(layero.find('#memo')).val();
                     layero.find('a.layui-layer-btn0').text('正在提交...');
-                    var l = layer.load();
+                    layero.find('a.layui-layer-btn0').addClass('disabled');
                     PublicFunc.ajaxCRUD(target,'/admin/dict/update',function(ret){
                         layer.closeAll();
                         layer.msg('修改成功', {icon: 1, time:2000});
@@ -237,11 +236,18 @@ $.fn.dataTable.ext.buttons.edit = {
                             icon:2,
                             time: 3000,
                         });
-                        layer.close(index1);
+                        layero.find('a.layui-layer-btn0').text('保存');
+                        layero.find('a.layui-layer-btn0').removeClass('disabled');
+                        layer.close(index);
                     });
+                    layero.find('a.layui-layer-btn0').text('保存');
+                    layero.find('a.layui-layer-btn0').removeClass('disabled');
+                    layer.close(index);
                 });
             },
             btn2:function(index, layero){
+                layero.find('a.layui-layer-btn0').text('保存');
+                layero.find('a.layui-layer-btn0').removeClass('disabled');
                 layer.close(index);
             }
         });

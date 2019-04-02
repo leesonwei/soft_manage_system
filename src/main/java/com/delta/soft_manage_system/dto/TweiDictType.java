@@ -38,6 +38,15 @@ public class TweiDictType implements Serializable {
 	@FieldInfo("創建時間")
 	private Date createAt;
 	/***/
+	@FieldInfo("審核狀態")
+	private Integer flag;
+	/***/
+	@FieldInfo("審核人")
+	private Date checkBy;
+	/***/
+	@FieldInfo("審核時間")
+	private Date checkAt;
+	/***/
 	@FieldInfo("更新人")
 	private String updateBy; 
 	/***/

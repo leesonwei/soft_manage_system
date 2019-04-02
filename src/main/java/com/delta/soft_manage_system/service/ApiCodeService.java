@@ -12,6 +12,8 @@ package com.delta.soft_manage_system.service;
 
 import com.delta.soft_manage_system.dto.TweiApiCode;
 
+import java.util.List;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
@@ -21,5 +23,9 @@ import com.delta.soft_manage_system.dto.TweiApiCode;
  * @since 1.0.0
  */
 public interface ApiCodeService extends BaseService<TweiApiCode> {
-
+    /**
+     * 查找list對象
+     * @return
+     */
+    List<TweiApiCode> selectList(TweiApiCode apiCode);
 }

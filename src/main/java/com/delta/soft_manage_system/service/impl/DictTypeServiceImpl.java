@@ -25,6 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
@@ -54,6 +56,12 @@ public class DictTypeServiceImpl extends BaseServiceImpl<TweiDictTypeDao,TweiDic
             String er = ZhConverterUtil.convertToSimple(dictType.getTypeName());
             dictType.setTypeId(chinese4PinYin.getAllFirstLetter(er).toUpperCase());
         }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        dictType.setFlag(0);
         return super.insertOne(dictType);
     }
 
@@ -81,4 +89,12 @@ public class DictTypeServiceImpl extends BaseServiceImpl<TweiDictTypeDao,TweiDic
         return dictType;
     }
 
+    @Override
+    public List<TweiDictType> selectList(TweiDictType dictType) {
+        EntityWrapper<TweiDictType> wrapper = new EntityWrapper<>();
+        if (null != dictType && null != dictType.getFlag()) {
+            wrapper.eq("flag", dictType.getFlag());
+        }
+        return dao.selectList(wrapper);
+    }
 }

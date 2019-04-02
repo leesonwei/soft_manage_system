@@ -40,34 +40,29 @@ public class DictController extends BaseController<DictService, TweiDict> {
     }
 
     @GetMapping("/manage")
-    public String manage(String typeId, ModelMap model){
-        model = getModel(typeId, model);
+    public String manage(ModelMap model){
+        model.addAttribute("typeList", getModel());
         return "backend/dict/dict_manage";
     }
 
-    private ModelMap getModel(String typeId, ModelMap model){
-        List<TweiDictType> typeList = dictTypeService.selectList();
-        List<DictVo> list = new ArrayList<>();
-        if (StringUtil.isBlank(typeId) && (typeList != null || typeList.size() > 0)) {
-            typeId = typeList.get(0).getTypeId();
-        }
-        if (!typeList.isEmpty()) {
-            list = service.selectList(typeId);
-        }
-        model.addAttribute("typeList",typeList);
-        model.addAttribute("dicts",list);
-        return model;
+    private List<TweiDictType> getModel(){
+        TweiDictType dictType = new TweiDictType();
+        dictType.setFlag(1);
+        List<TweiDictType> typeList = dictTypeService.selectList(dictType);
+        return typeList;
     }
 
     @PostMapping("/manage/json")
     @ResponseBody
     public Object manageJson(String typeId, ModelMap model){
-        List<TweiDictType> typeList = dictTypeService.selectList();
         List<DictVo> list = new ArrayList<>();
-        if (StringUtil.isBlank(typeId) && (typeList != null || typeList.size() > 0)) {
-            typeId = typeList.get(0).getTypeId();
+        if (StringUtil.isBlank(typeId)) {
+            List<TweiDictType> typeList = getModel();
+            if (typeList != null && typeList.size() > 0) {
+                typeId = typeList.get(0).getTypeId();
+            }
         }
-        if (!typeList.isEmpty()) {
+        if (!StringUtil.isBlank(typeId)) {
             list = service.selectList(typeId);
         }
         return list;
