@@ -35,6 +35,6 @@ public class ApiTypeController extends BaseController<ApiTypeService, TweiApiTyp
     @ResponseBody
     public ServerResponse getKnowLedgeJson(TweiApiType apiType){
         List<TweiApiType> apis = service.selectList(apiType);
-        return ServerResponse.createBySuccess(apiType);
+        return ServerResponse.createBySuccess(apis);
     }
 }

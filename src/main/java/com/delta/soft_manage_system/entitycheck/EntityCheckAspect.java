@@ -4,6 +4,7 @@ import com.delta.soft_manage_system.common.GlobalConst;
 import com.delta.soft_manage_system.common.ResponseCode;
 import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.dto.User;
+import com.delta.soft_manage_system.utils.RegUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -102,9 +103,35 @@ public class EntityCheckAspect {
                         l = Arrays.asList(c.action());
                         if (l.contains(ma.action()) && c.id() && (c.type() != CheckId.AUTO && c.type() != CheckId.ID_WORKER && c.type() != CheckId.UUID)) {
                             v = field.get(obj);
-                            if (null == v) {
+                            if (null == v || "".equals(v)) {
                                 response = ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),
                                         "主鍵值不能為空");
+                            }
+                        }
+                    }
+
+                    //檢查url
+                    UrlRule u = field.getAnnotation(UrlRule.class);
+                    if (null != u) {
+                        v = field.get(obj);
+                        if (null != v || !"".equals(v)) {
+                            boolean check = RegUtil.isUrl(v.toString());
+                            if (!check) {
+                                response = ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),
+                                        String.format("%s%s", u.value(), "不是正確的URL格式"));
+                            }
+                        }
+                    }
+
+                    //檢查Email
+                    EmailRule e = field.getAnnotation(EmailRule.class);
+                    if (null != e) {
+                        v = field.get(obj);
+                        if (null != v || !"".equals(v)) {
+                            boolean check = RegUtil.isEmail(v.toString());
+                            if (!check) {
+                                response = ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),
+                                        String.format("%s%s", u.value(), "不是正確的EMAIL格式"));
                             }
                         }
                     }
@@ -115,7 +142,7 @@ public class EntityCheckAspect {
                         l = Arrays.asList(n.action());
                         if (l.contains(ma.action())) {
                             v = field.get(obj);
-                            if ((!n.able()) && null == v) {
+                            if ((!n.able()) && (null == v || "".equals(v))) {
                                 response = ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),
                                         String.format("%s%s", n.name(), n.value()));
                             }
@@ -127,7 +154,7 @@ public class EntityCheckAspect {
                     if (null != d) {
                         if (ma.action() == ActionType.UPDATE || ma.action() == ActionType.DELETE) {
                             v = field.get(obj);
-                            if (null == v) {
+                            if (null == v || "".equals(v) || " ".equals(v)) {
                                 response = ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),
                                         String.format("%s%s", "數據版本", "不能為空"));
                             }

@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.delta.soft_manage_system.dao.TweiApiParaDao;
 import com.delta.soft_manage_system.dto.TweiApiPara;
 import com.delta.soft_manage_system.service.ApiParaService;
+import com.delta.soft_manage_system.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,19 +38,25 @@ public class ApiParaServiceImpl extends BaseServiceImpl<TweiApiParaDao, TweiApiP
 
     @Override
     protected EntityWrapper<TweiApiPara> getDeleteAndUpdateWrapper(TweiApiPara tweiApiPara) {
-        return null;
+        EntityWrapper<TweiApiPara> wrapper = new EntityWrapper<>();
+        wrapper.eq("para_id",tweiApiPara.getParaId());
+        wrapper.eq("data_version", tweiApiPara.getDataVersion());
+        return wrapper;
     }
 
     @Override
     protected TweiApiPara updateDataVersion(TweiApiPara tweiApiPara) {
-        return null;
+        tweiApiPara.setDataVersion(tweiApiPara.getDataVersion() + 1);
+        return tweiApiPara;
     }
 
     @Override
     public List<TweiApiPara> selectList(TweiApiPara apiPara) {
         EntityWrapper<TweiApiPara> wrapper = new EntityWrapper<>();
         if (apiPara != null) {
-
+            if (!StringUtil.isBlank(apiPara.getApiId())){
+                wrapper.eq("api_id", apiPara.getApiId());
+            }
         }
         return dao.selectList(wrapper);
     }

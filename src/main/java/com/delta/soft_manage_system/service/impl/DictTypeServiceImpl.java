@@ -25,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -96,5 +97,20 @@ public class DictTypeServiceImpl extends BaseServiceImpl<TweiDictTypeDao,TweiDic
             wrapper.eq("flag", dictType.getFlag());
         }
         return dao.selectList(wrapper);
+    }
+
+    @Override
+    public ServerResponse<TweiDictType> checkOne(TweiDictType dictType) {
+        TweiDictType origin = dao.selectById(dictType);
+        if (null == origin) {
+            return ServerResponse.createByErrorMessage("審核對象不存在");
+        }
+        if (origin.getFlag() == 1) {
+            return ServerResponse.createByErrorMessage("對象已經是審核狀態");
+        }
+        origin.setFlag(1);
+        origin.setCheckBy(dictType.getCheckBy());
+        origin.setCheckAt(Calendar.getInstance().getTime());
+        return this.updateOne(origin);
     }
 }

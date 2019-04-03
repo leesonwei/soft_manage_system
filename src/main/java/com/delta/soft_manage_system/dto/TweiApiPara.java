@@ -2,6 +2,7 @@ package com.delta.soft_manage_system.dto;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.delta.soft_manage_system.entitycheck.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,11 +18,13 @@ import java.util.Date;
 @TableName("twei_api_para")
 public class TweiApiPara implements Serializable {
 	/***/
+	private String apiId;
+	/***/
 	@TableId
-	private Integer apiId; 
+	@Check(id = true, type = CheckId.INPUT, action = { ActionType.DELETE, ActionType.UPDATE})
+	private String paraId;
 	/***/
-	private Integer paraId; 
-	/***/
+	@NullRule(name = "參數名稱", action={ActionType.INSERT,ActionType.UPDATE})
 	private String paraName; 
 	/***/
 	private String paraType; 
@@ -42,6 +45,7 @@ public class TweiApiPara implements Serializable {
 	/***/
 	private Date updateAt;
 	/***/
+	@DataVersion
 	private Integer dataVersion;
 
 	@Override

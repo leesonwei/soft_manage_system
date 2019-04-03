@@ -10,6 +10,7 @@
  */
 package com.delta.soft_manage_system.service;
 
+import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.dto.TweiDictType;
 
 import java.util.List;
@@ -28,4 +29,6 @@ public interface DictTypeService extends BaseService<TweiDictType> {
      * @return
      */
     List<TweiDictType> selectList(TweiDictType dictType);
+
+    ServerResponse<TweiDictType> checkOne(TweiDictType dictType);
 }

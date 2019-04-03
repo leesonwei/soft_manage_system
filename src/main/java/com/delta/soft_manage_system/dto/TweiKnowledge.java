@@ -2,6 +2,7 @@ package com.delta.soft_manage_system.dto;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.delta.soft_manage_system.entitycheck.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,16 +16,22 @@ import java.util.Date;
  */
 
 @Data
-@TableName("twei_hnowledge")
+@TableName("twei_knowledge")
 public class TweiKnowledge implements Serializable {
 	/***/
-	@TableId
 	private String codeId; 
 	/***/
-	private String knowId; 
+	@TableId
+	@Check(id = true, type = CheckId.INPUT, action = { ActionType.DELETE, ActionType.UPDATE})
+	private String knowId;
 	/***/
+	@NullRule(action={ActionType.INSERT, ActionType.UPDATE}, name="知識庫標題")
+	private String knowTitle;
+	/***/
+	@NullRule(action={ActionType.INSERT, ActionType.UPDATE}, name="知識庫詳情")
 	private String knowDetail; 
 	/***/
+	@NullRule(action={ActionType.INSERT, ActionType.UPDATE}, name="知識庫類型")
 	private String knowType; 
 	/***/
 	private Integer isHelp; 
@@ -39,6 +46,7 @@ public class TweiKnowledge implements Serializable {
 	/***/
 	private Date updateAt;
 	/***/
+	@DataVersion
 	private Integer dataVersion;
 
 	@Override

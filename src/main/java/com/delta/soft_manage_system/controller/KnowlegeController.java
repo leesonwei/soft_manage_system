@@ -1,10 +1,13 @@
 package com.delta.soft_manage_system.controller;
 
 import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.soft_manage_system.dto.TweiApiCode;
 import com.delta.soft_manage_system.dto.TweiKnowledge;
+import com.delta.soft_manage_system.service.ApiCodeService;
 import com.delta.soft_manage_system.service.KnowledgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +25,15 @@ import java.util.List;
 @RequestMapping("/admin/knowledge")
 public class KnowlegeController extends BaseController<KnowledgeService, TweiKnowledge> {
     @Autowired
+    private ApiCodeService apiCodeService;
+    @Autowired
     public KnowlegeController(KnowledgeService knowledgeService) {
         super(knowledgeService);
     }
     @GetMapping("/manage")
-    public String getKnowledgeIndex(){
+    public String getKnowledgeIndex(ModelMap modelMap){
+        List<TweiApiCode> codes = apiCodeService.selectList();
+        modelMap.addAttribute("codes", codes);
         return "backend/knowledge/knowledge_manage";
     }
 

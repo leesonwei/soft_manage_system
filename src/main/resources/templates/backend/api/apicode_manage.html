@@ -5,7 +5,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title th:text="${application.appname} + ' | 數據字典管理'">Color Admin | Managed Tables - Buttons</title>
+	<title th:text="${application.appname} + ' | API代碼管理'">Color Admin | Managed Tables - Buttons</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -70,12 +70,12 @@
 			<!-- begin row -->
 			<div class="row">
 				<!-- begin col-2 -->
-				<div class="col-lg-2">
+				<div class="col-lg-3">
 					<!-- begin panel -->
 					<div class="panel panel-inverse">
 						<!-- begin panel-heading -->
 						<div class="panel-heading">
-							<h4 class="panel-title">數據字典類型</h4>
+							<h4 class="panel-title">API列表</h4>
 						</div>
 						<!-- end panel-heading -->
 
@@ -88,8 +88,8 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr class="odd gradeX" th:each="type,typeStat:${typeList}">
-									<td th:class="${typeStat.first}?'dicttype selected':'dicttype'" th:attr="data-typeid=${type.typeId}" th:text="${type.typeName}"></td>
+								<tr class="odd gradeX" th:each="api,apiStat:${apis}">
+									<td th:class="${apiStat.first}?'dicttype selected':'dicttype'" th:attr="data-apiid=${api.apiId}" th:text="${api.apiName}"></td>
 								</tr>
 								</tbody>
 							</table>
@@ -100,18 +100,18 @@
 				</div>
 				<!-- end col-2 -->
 				<!-- begin col-10 -->
-				<div class="col-lg-10">
+				<div class="col-lg-9">
 					<!-- begin panel -->
 					<div class="panel panel-inverse">
 						<!-- begin panel-heading -->
 						<div class="panel-heading">
 							<div class="panel-heading-btn">
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+								<a id="table-reload" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 							</div>
-							<h4 class="panel-title">數據字典管理</h4>
+							<h4 class="panel-title">API代碼管理</h4>
 						</div>
 						<!-- end panel-heading -->
 
@@ -122,29 +122,23 @@
 								<thead>
 								<tr>
                                     <th width="1%">ID</th>
-									<th class="text-nowrap">類型</th>
-									<th class="text-nowrap">名稱</th>
-									<th class="text-nowrap">簡稱</th>
+									<th class="text-nowrap">API</th>
+									<th class="text-nowrap">代碼名稱</th>
+									<th class="text-nowrap">代碼類型</th>
 									<th class="text-nowrap">創建人</th>
 									<th class="text-nowrap">創建時間</th>
-									<th class="text-nowrap">審核狀態</th>
-									<th class="text-nowrap">審核人</th>
-									<th class="text-nowrap">審核時間</th>
-									<th>備註</th>
+									<th class="text-nowrap">定義</th>
 								</tr>
 								</thead>
 								<tbody>
 								<tr class="odd gradeX">
 									<td width="1%">ID</td>
-									<td >類型</td>
-									<td >名稱</td>
-									<td >簡稱</td>
-									<td >創建人</td>
+									<td >API</td>
+									<td >代碼名稱</td>
+									<td >代碼類型</td>
+									<td>創建人</td>
 									<td>創建時間</td>
-									<td>審核狀態</td>
-									<td>審核人</td>
-									<td>審核時間</td>
-									<td>備註</td>
+									<td >定義</td>
 								</tr>
 								</tbody>
 							</table>
@@ -178,35 +172,34 @@
 						</div>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典類型</label>
+						<label class="col-md-3 col-form-label">所屬API</label>
 						<div class="col-md-7">
-							<input id="typeId" type="text" class="form-control" placeholder="數據字典類型" disabled>
-						</div>
-					</div>
-					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典名稱</label>
-						<div class="col-md-7">
-							<input id="dictName" type="text" class="form-control" maxlength="50" placeholder="字典名稱" required>
+							<select class="form-control" name="apiId" id="apiId">
+								<option value="">請選擇所屬API</option>
+							</select>
 						</div>
 						<label class="col-md-2 col-form-label text-danger">必填項</label>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典簡稱</label>
+						<label class="col-md-3 col-form-label">代碼名稱</label>
 						<div class="col-md-7">
-							<input id="dictShortName" type="text" class="form-control" maxlength="20" placeholder="字典簡稱">
+							<input id="codeName" type="text" class="form-control" placeholder="代碼名稱">
 						</div>
+						<label class="col-md-2 col-form-label text-danger">必填項</label>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典全稱</label>
+						<label class="col-md-3 col-form-label">代碼類型</label>
 						<div class="col-md-7">
-							<input id="dictFullName" type="text" class="form-control" maxlength="50" placeholder="不超過50字的字典全稱">
+							<input id="codeType" type="text" class="form-control" maxlength="50" placeholder="代碼類型" required>
 						</div>
+						<label class="col-md-2 col-form-label text-danger">必填項</label>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">備註</label>
+						<label class="col-md-3 col-form-label">代碼定義</label>
 						<div class="col-md-7">
-							<textarea id="memo" height="300px" class="form-control" maxlength="100" placeholder="不超過100字的字典備註"></textarea>
+							<textarea id="definition" height="300px" class="form-control" maxlength="100" placeholder="不超過500字的代碼定義"></textarea>
 						</div>
+						<label class="col-md-2 col-form-label text-danger">必填項</label>
 					</div>
 				</fieldset>
 			</form>

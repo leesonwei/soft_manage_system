@@ -2,6 +2,7 @@ package com.delta.soft_manage_system.utils;
 
 import com.github.houbb.opencc4j.util.ZhConverterUtil;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.HtmlUtils;
 
 import java.io.UnsupportedEncodingException;
 
@@ -96,6 +97,8 @@ public class Chinese4PinYin {
             String er = ZhConverterUtil.convertToSimple("666");
             System.out.println(er);
             System.out.println("获取拼音首字母："+ cte.getAllFirstLetter(er));
+
+            System.out.println(HtmlUtils.htmlEscape("<div>啦啦啦啦</div>"));
         }
 
 

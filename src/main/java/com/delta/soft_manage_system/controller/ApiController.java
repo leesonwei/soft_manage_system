@@ -2,9 +2,12 @@ package com.delta.soft_manage_system.controller;
 
 import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.dto.TweiApi;
+import com.delta.soft_manage_system.dto.TweiApiType;
 import com.delta.soft_manage_system.service.ApiService;
+import com.delta.soft_manage_system.service.ApiTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +25,16 @@ import java.util.List;
 @RequestMapping("/admin/api")
 public class ApiController extends BaseController<ApiService, TweiApi> {
     @Autowired
+    private ApiTypeService apiTypeService;
+
+    @Autowired
     public ApiController(ApiService apiService){
         super(apiService);
     }
     @GetMapping("/manage")
-    public String getKnowledgeIndex(){
+    public String getKnowledgeIndex(ModelMap modelMap){
+        List<TweiApiType> apiTypes  = apiTypeService.selectList();
+        modelMap.addAttribute("apiTypes", apiTypes);
         return "backend/api/api_manage";
     }
 
@@ -34,6 +42,6 @@ public class ApiController extends BaseController<ApiService, TweiApi> {
     @ResponseBody
     public ServerResponse getKnowLedgeJson(TweiApi api){
         List<TweiApi> apis = service.selectList(api);
-        return ServerResponse.createBySuccess(api);
+        return ServerResponse.createBySuccess(apis);
     }
 }

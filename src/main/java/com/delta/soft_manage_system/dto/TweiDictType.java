@@ -42,7 +42,7 @@ public class TweiDictType implements Serializable {
 	private Integer flag;
 	/***/
 	@FieldInfo("審核人")
-	private Date checkBy;
+	private String checkBy;
 	/***/
 	@FieldInfo("審核時間")
 	private Date checkAt;

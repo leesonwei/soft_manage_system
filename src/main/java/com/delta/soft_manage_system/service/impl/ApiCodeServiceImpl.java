@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.delta.soft_manage_system.dao.TweiApiCodeDao;
 import com.delta.soft_manage_system.dto.TweiApiCode;
 import com.delta.soft_manage_system.service.ApiCodeService;
+import com.delta.soft_manage_system.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,19 +38,25 @@ public class ApiCodeServiceImpl extends BaseServiceImpl<TweiApiCodeDao, TweiApiC
 
     @Override
     protected EntityWrapper<TweiApiCode> getDeleteAndUpdateWrapper(TweiApiCode apiCode) {
-        return null;
+        EntityWrapper<TweiApiCode> wrapper = new EntityWrapper<>();
+        wrapper.eq("code_id",apiCode.getCodeId());
+        wrapper.eq("data_version", apiCode.getDataVersion());
+        return wrapper;
     }
 
     @Override
     protected TweiApiCode updateDataVersion(TweiApiCode apiCode) {
-        return null;
+        apiCode.setDataVersion(apiCode.getDataVersion() + 1);
+        return apiCode;
     }
 
     @Override
     public List<TweiApiCode> selectList(TweiApiCode apiCode) {
         EntityWrapper<TweiApiCode> wrapper = new EntityWrapper<>();
         if (apiCode != null) {
-
+            if (StringUtil.isBlank(apiCode.getApiId())){
+                wrapper.eq("api_id", apiCode.getApiId());
+            }
         }
         return dao.selectList(wrapper);
     }

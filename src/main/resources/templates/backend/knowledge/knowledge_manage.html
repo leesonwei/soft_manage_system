@@ -5,7 +5,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title th:text="${application.appname} + ' | 數據字典管理'">Color Admin | Managed Tables - Buttons</title>
+	<title th:text="${application.appname} + ' | 知識庫管理'">Color Admin | Managed Tables - Buttons</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -75,7 +75,7 @@
 					<div class="panel panel-inverse">
 						<!-- begin panel-heading -->
 						<div class="panel-heading">
-							<h4 class="panel-title">數據字典類型</h4>
+							<h4 class="panel-title">異常碼列表</h4>
 						</div>
 						<!-- end panel-heading -->
 
@@ -88,8 +88,8 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr class="odd gradeX" th:each="type,typeStat:${typeList}">
-									<td th:class="${typeStat.first}?'dicttype selected':'dicttype'" th:attr="data-typeid=${type.typeId}" th:text="${type.typeName}"></td>
+								<tr class="odd gradeX" th:each="code,codeStat:${codes}">
+									<td th:class="${codeStat.first}?'dicttype selected':'dicttype'" th:attr="data-codeid=${code.codeId}" th:text="${code.codeName}"></td>
 								</tr>
 								</tbody>
 							</table>
@@ -111,7 +111,7 @@
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 							</div>
-							<h4 class="panel-title">數據字典管理</h4>
+							<h4 class="panel-title">知識庫管理</h4>
 						</div>
 						<!-- end panel-heading -->
 
@@ -123,13 +123,12 @@
 								<tr>
                                     <th width="1%">ID</th>
 									<th class="text-nowrap">類型</th>
-									<th class="text-nowrap">名稱</th>
-									<th class="text-nowrap">簡稱</th>
+									<th class="text-nowrap">標題</th>
+									<th class="text-nowrap">詳情</th>
 									<th class="text-nowrap">創建人</th>
 									<th class="text-nowrap">創建時間</th>
-									<th class="text-nowrap">審核狀態</th>
-									<th class="text-nowrap">審核人</th>
-									<th class="text-nowrap">審核時間</th>
+									<th class="text-nowrap">有用</th>
+									<th class="text-nowrap">沒用</th>
 									<th>備註</th>
 								</tr>
 								</thead>
@@ -137,13 +136,12 @@
 								<tr class="odd gradeX">
 									<td width="1%">ID</td>
 									<td >類型</td>
-									<td >名稱</td>
-									<td >簡稱</td>
+									<td >標題</td>
+									<td >詳情</td>
 									<td >創建人</td>
 									<td>創建時間</td>
-									<td>審核狀態</td>
-									<td>審核人</td>
-									<td>審核時間</td>
+									<td>有用</td>
+									<td>沒用</td>
 									<td>備註</td>
 								</tr>
 								</tbody>

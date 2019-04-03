@@ -5,7 +5,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title th:text="${application.appname} + ' | 數據字典管理'">Color Admin | Managed Tables - Buttons</title>
+	<title th:text="${application.appname} + ' | API管理'">Color Admin | Managed Tables - Buttons</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -75,7 +75,7 @@
 					<div class="panel panel-inverse">
 						<!-- begin panel-heading -->
 						<div class="panel-heading">
-							<h4 class="panel-title">數據字典類型</h4>
+							<h4 class="panel-title">API菜單列表</h4>
 						</div>
 						<!-- end panel-heading -->
 
@@ -88,8 +88,8 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr class="odd gradeX" th:each="type,typeStat:${typeList}">
-									<td th:class="${typeStat.first}?'dicttype selected':'dicttype'" th:attr="data-typeid=${type.typeId}" th:text="${type.typeName}"></td>
+								<tr class="odd gradeX" th:each="apitype,apitypeStat:${apiTypes}">
+									<td th:class="${apitypeStat.first}?'dicttype selected':'dicttype'" th:attr="data-apitypeid=${apitype.apiTypeId}" th:text="${apitype.apiTypeName}"></td>
 								</tr>
 								</tbody>
 							</table>
@@ -111,7 +111,7 @@
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 							</div>
-							<h4 class="panel-title">數據字典管理</h4>
+							<h4 class="panel-title">API管理</h4>
 						</div>
 						<!-- end panel-heading -->
 
@@ -122,29 +122,29 @@
 								<thead>
 								<tr>
                                     <th width="1%">ID</th>
-									<th class="text-nowrap">類型</th>
-									<th class="text-nowrap">名稱</th>
-									<th class="text-nowrap">簡稱</th>
+									<th class="text-nowrap">API類型</th>
+									<th class="text-nowrap">API名稱</th>
+									<th class="text-nowrap">請求地址</th>
+									<th class="text-nowrap">方法名</th>
+									<th class="text-nowrap">返回示例</th>
 									<th class="text-nowrap">創建人</th>
 									<th class="text-nowrap">創建時間</th>
-									<th class="text-nowrap">審核狀態</th>
-									<th class="text-nowrap">審核人</th>
-									<th class="text-nowrap">審核時間</th>
-									<th>備註</th>
+									<th class="text-nowrap">查看詳情</th>
+									<th class="text-nowrap">API描述</th>
 								</tr>
 								</thead>
 								<tbody>
 								<tr class="odd gradeX">
 									<td width="1%">ID</td>
-									<td >類型</td>
-									<td >名稱</td>
-									<td >簡稱</td>
-									<td >創建人</td>
+									<td >API類型</td>
+									<td >API名稱</td>
+									<td >請求地址</td>
+									<td >方法名</td>
+									<td>返回示例</td>
+									<td>創建人</td>
 									<td>創建時間</td>
-									<td>審核狀態</td>
-									<td>審核人</td>
-									<td>審核時間</td>
-									<td>備註</td>
+									<td>查看詳情</td>
+									<td >API描述</td>
 								</tr>
 								</tbody>
 							</table>
@@ -164,55 +164,6 @@
 		<!-- end scroll to top btn -->
 	</div>
 	<!-- end page container -->
-
-	<!-- begin add and edit model -->
-	<div id="addAndEditForm" class="hide">
-		<div class="container" style="padding: 10px 30px">
-			<form id="dict" action="/" method="POST">
-				<fieldset>
-					<!--<legend class="m-b-15">數據字典</legend>-->
-					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">ID</label>
-						<div class="col-md-7">
-							<input id="id" type="text" class="form-control" placeholder="ID" disabled>
-						</div>
-					</div>
-					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典類型</label>
-						<div class="col-md-7">
-							<input id="typeId" type="text" class="form-control" placeholder="數據字典類型" disabled>
-						</div>
-					</div>
-					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典名稱</label>
-						<div class="col-md-7">
-							<input id="dictName" type="text" class="form-control" maxlength="50" placeholder="字典名稱" required>
-						</div>
-						<label class="col-md-2 col-form-label text-danger">必填項</label>
-					</div>
-					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典簡稱</label>
-						<div class="col-md-7">
-							<input id="dictShortName" type="text" class="form-control" maxlength="20" placeholder="字典簡稱">
-						</div>
-					</div>
-					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典全稱</label>
-						<div class="col-md-7">
-							<input id="dictFullName" type="text" class="form-control" maxlength="50" placeholder="不超過50字的字典全稱">
-						</div>
-					</div>
-					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">備註</label>
-						<div class="col-md-7">
-							<textarea id="memo" height="300px" class="form-control" maxlength="100" placeholder="不超過100字的字典備註"></textarea>
-						</div>
-					</div>
-				</fieldset>
-			</form>
-		</div>
-	</div>
-	<!-- end add and edit model -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script th:src="@{/../static/plugins/jquery/jquery-3.3.1.min.js}"></script>
@@ -243,6 +194,7 @@
 	<script th:src="@{/../static/plugins/DataTables/extensions/Buttons/js/buttons.print.min.js}"></script>
 	<script th:src="@{/../static/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js}"></script>
 	<script th:src="@{/../static/plugins/layui/layui.all.js}"></script>
+	<script th:src="@{/../static/plugins/jquery.serializeJSON-master/jquery.serializejson.js}"></script>
 	<script th:src="@{/../static/js/demo/table-manage-buttons.api.js(version=${application.version})}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 
@@ -278,4 +230,73 @@
 
 	</script>
 </body>
+<!-- begin add and edit model -->
+<div id="addAndEditForm" class="hide">
+	<div class="container" style="padding: 10px 30px">
+		<form id="api" action="/" method="POST">
+			<fieldset>
+
+				<div class="form-group row m-b-15">
+					<label class="col-md-3 col-form-label">ID</label>
+					<div class="col-md-7">
+						<input id="id" type="text" class="form-control" placeholder="ID" disabled>
+					</div>
+				</div>
+				<div class="form-group row m-b-15">
+					<label class="col-md-3 col-form-label">API類型</label>
+					<div class="col-md-7">
+						<input id="apiTypeId" name="apiTypeId" type="text" class="form-control" placeholder="API類型" disabled>
+					</div>
+				</div>
+				<div class="form-group row m-b-15">
+					<label class="col-md-3 col-form-label">API名稱</label>
+					<div class="col-md-7">
+						<input id="apiName" name="apiName" type="text" class="form-control" maxlength="50" placeholder="API名稱" required>
+					</div>
+					<label class="col-md-2 col-form-label text-danger">必填項</label>
+				</div>
+				<div class="form-group row m-b-15">
+					<label class="col-md-3 col-form-label">請求地址</label>
+					<div class="col-md-7">
+						<input id="apiUrl" name="apiUrl" type="url" class="form-control" maxlength="50" placeholder="請求地址">
+					</div>
+				</div>
+				<div class="form-group row m-b-15">
+					<label class="col-md-3 col-form-label">請求方法</label>
+					<div class="col-md-7">
+						<input id="apiMethod" name="apiMethod" type="text" class="form-control" maxlength="50" placeholder="請求方法">
+					</div>
+				</div>
+				<div class="form-group row m-b-15">
+					<label class="col-md-3 col-form-label">API描述</label>
+					<div class="col-md-7">
+						<textarea id="apiDesc" name="apiDesc" height="300px" class="form-control" maxlength="500" placeholder="不超過500字的API描述"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group row m-b-15">
+					<label class="col-md-3 col-form-label">請求示例</label>
+					<div class="col-md-7">
+						<textarea id="requestExample" name="requestExample" height="300px" class="form-control" placeholder="請求示例"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group row m-b-15">
+					<label class="col-md-3 col-form-label">響應示例</label>
+					<div class="col-md-7">
+						<textarea id="responseExample" name="responseExample" height="300px" class="form-control" placeholder="響應示例"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group row m-b-15">
+					<label class="col-md-3 col-form-label">異常示例</label>
+					<div class="col-md-7">
+						<textarea id="faultExample" name="faultExample" height="300px" class="form-control" placeholder="異常示例"></textarea>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+<!-- end add and edit model -->
 </html>

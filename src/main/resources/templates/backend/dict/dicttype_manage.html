@@ -78,7 +78,7 @@
 						<div class="panel-heading">
 							<div class="panel-heading-btn">
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+								<a id="table-reload" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 							</div>
@@ -99,7 +99,7 @@
 									<th class="text-nowrap">審核狀態</th>
 									<th class="text-nowrap">審核人</th>
 									<th class="text-nowrap">審核時間</th>
-									<th>備註</th>
+									<th class="text-nowrap">備註</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -135,7 +135,7 @@
 	<!-- begin add and edit model -->
 	<div id="addAndEditForm" class="hide">
 		<div class="container" style="padding: 10px 30px">
-			<form id="dict" action="/" method="POST">
+			<form id="dictType" action="/" method="POST">
 				<fieldset>
 					<!--<legend class="m-b-15">數據字典</legend>-->
 					<div class="form-group row m-b-15">

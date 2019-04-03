@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.delta.soft_manage_system.dao.TweiKnowledgeDao;
 import com.delta.soft_manage_system.dto.TweiKnowledge;
 import com.delta.soft_manage_system.service.KnowledgeService;
+import com.delta.soft_manage_system.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ public class KnowledgeServiceImpl extends BaseServiceImpl<TweiKnowledgeDao, Twei
     @Override
     protected EntityWrapper<TweiKnowledge> getDeleteAndUpdateWrapper(TweiKnowledge tweiKnowledge) {
         EntityWrapper<TweiKnowledge> wrapper = new EntityWrapper<>();
+        wrapper.eq("KNOW_ID",tweiKnowledge.getKnowId());
         wrapper.eq("data_version", tweiKnowledge.getDataVersion());
         return wrapper;
     }
@@ -40,7 +42,9 @@ public class KnowledgeServiceImpl extends BaseServiceImpl<TweiKnowledgeDao, Twei
     public List<TweiKnowledge> selectList(TweiKnowledge knowledge) {
         EntityWrapper<TweiKnowledge> wrapper = new EntityWrapper<>();
         if (knowledge != null) {
-
+            if (!StringUtil.isBlank(knowledge.getCodeId())){
+                wrapper.eq("code_id", knowledge.getCodeId());
+            }
         }
         return dao.selectList(wrapper);
     }

@@ -151,12 +151,12 @@ $.fn.dataTable.ext.buttons.add = {
                 }, function(index2){
                     layer.close(index2);
                     layero.find('a.layui-layer-btn0').text('正在提交...');
-                    var l = layer.load();
                     PublicFunc.ajaxCRUD(target,'/admin/dict/insert',function(ret){
-                        layer.closeAll();
                         layer.msg('增加成功', {icon: 1, time:2000});
-                        table.ajax.reload().draw(true);
+                        table.ajax.reload().draw(false);
                         target  = undefined;
+                        layero.find('a.layui-layer-btn0').text('增加成功');
+                        layer.close(index1);
                     },function(ret){
                         layer.msg("增加失敗. 錯誤代碼:" + ret.status + "," + ret.msg, {
                             icon:2,
@@ -226,12 +226,12 @@ $.fn.dataTable.ext.buttons.edit = {
                     target.dictFullName = layero.find('#dictFullName').val();
                     target.memo = $(layero.find('#memo')).val();
                     layero.find('a.layui-layer-btn0').text('正在提交...');
-                    var l = layer.load();
                     PublicFunc.ajaxCRUD(target,'/admin/dict/update',function(ret){
-                        layer.closeAll();
                         layer.msg('修改成功', {icon: 1, time:2000});
-                        table.ajax.reload().draw(true);
+                        table.ajax.reload().draw(false);
                         target = undefined;
+                        layero.find('a.layui-layer-btn0').text('操作成功');
+                        layer.close(index1);
                     },function(ret){
                         layer.msg("修改失敗. 錯誤代碼:" + ret.status + "," + ret.msg, {
                             icon:2,
@@ -304,7 +304,7 @@ $.fn.dataTable.ext.buttons.check = {
         }, function(){
             PublicFunc.ajaxCRUD(target,'/admin/dict/check',function(ret){
                 layer.msg('審核成功', {icon: 1, time:2000});
-                table.ajax.reload();
+                table.ajax.reload().draw(false);
                 target  = undefined;
             });
         });
@@ -325,9 +325,9 @@ var TableManageButtons = function () {
 			handleDataTableButtons();
 		},
 		load:function(){
-			var ii = layer.load();
+			var loadlayer = layer.load();
 			table.ajax.reload().draw(true);
-			layer.close(ii);
+			layer.close(loadlayer);
 		}
 	};
 }();
