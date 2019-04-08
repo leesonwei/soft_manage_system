@@ -14,6 +14,8 @@ tableconst.buttons = [
     { extend: 'pdf', className: 'btn-sm' },
     { extend: 'print', className: 'btn-sm' }
 ];
+
+
 var handleDataTableButtons = function() {
 	"use strict";
     
@@ -43,7 +45,10 @@ var handleDataTableButtons = function() {
                 "data": 'knowId'
             },{
                 "targets": 1,
-                "data": 'knowType'
+                "data": 'knowType',
+                "render": function(data, type, row, meta){
+                    return $('.dicttype[data-dictid='+data+']').text();
+                }
             },{
                 "targets": 2,
                 "data": 'knowTitle',
@@ -54,19 +59,15 @@ var handleDataTableButtons = function() {
                 "targets": 3,
                 "data": 'knowDetail',
                 "render":function(data, type, row, meta){
-                    return data;
+                    var html;
+                    html='<div style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:150px;" title='+data+'>'+data+'</div>';
+                    return html;
                 }
             },{
                 "targets": 4,
                 "data": 'createBy',
                 "render":function(data, type, row, meta){
-                    if (data === 0) {
-                        return '<span class="text-danger">未審核</span>';
-                    } else if (data === 1) {
-                        return '<span class="text-success">已審核</span>';
-                    } else {
-                        return "";
-                    }
+                    return data;
                 }
             },{
                 "targets": 5,
@@ -82,6 +83,12 @@ var handleDataTableButtons = function() {
                 }
             },{
                 "targets": 7,
+                "data": 'isUnhelp',
+                "render":function(data, type, row, meta){
+                    return data;
+                }
+            },{
+                "targets": 8,
                 "data": 'knowDetail',
                 "render":function(data, type, row, meta){
                     return data;
@@ -91,7 +98,7 @@ var handleDataTableButtons = function() {
 				"url": "/admin/knowledge/manage/json",
 				"data": function () {
 					var data = {};
-					data.codeId = $('#data-table-type .selected').data('codeid');
+					data.knowType = $('#data-table-type .selected').data('dictid');
 					return data;
 				},
 				"type":'post',
@@ -121,19 +128,14 @@ $.fn.dataTable.ext.buttons.add = {
 			btn: ['保存', '取消'],
             success:function(layero, index){
                 layero.find('#id').val('自動獲取');
+                layero.find('#knowType').val($('#data-table-type .selected').data('dictid'));
             },
 			yes:function(index1, layero){
                 if (target === undefined) target = {};
-                target.typeName = layero.find('#typeName').val();
-                if (target.typeName === undefined || '' === target.typeName) {
-                    layer.msg("數據字典類型名稱不能為空", {
-                        icon:2,
-                        time: 3000,
-                    });
-                    layero.find('#typeName').focus();
-                    return;
-                }
-                target.memo = $(layero.find('#memo')).val();
+                target.knowType = layero.find('#knowType').val();
+                target.knowTitle = layero.find('#knowTitle').val();
+                target.knowDetail = layero.find('#knowDetail').val();
+
                 layer.confirm('您確定保存這條記錄嗎？',{
                     btn: ['確定','取消']
                 }, function(index2,layerc){
@@ -189,25 +191,21 @@ $.fn.dataTable.ext.buttons.edit = {
             content: $('#addAndEditForm').html(),
             btn: ['保存', '取消'],
             success:function(layero, index){
-                layero.find('#id').val(target.typeId);
-                layero.find('#typeName').val(target.typeName);
-                layero.find('#memo').val(target.memo);
+                layero.find('#id').val(target.knowId);
+                layero.find('#knowType').val(target.knowType);
+                layero.find('#knowTitle').val(target.knowTitle);
+                layero.find('#knowDetail').val(target.knowDetail);
             },
             yes:function(index1, layero){
                 layer.confirm('您確定保存所有的修改嗎？',{
                     btn: ['確定','取消']
                 }, function(index2){
                     layer.close(index2);
-                    target.typeName = layero.find('#typeName').val();
-                    if (target.typeName === undefined || '' === target.typeName) {
-                        layer.msg("數據字典類型名稱不能為空", {
-                            icon:2,
-                            time: 3000,
-                        });
-                        layero.find('#typeName').focus();
-                        return;
-                    }
-                    target.memo = layero.find('#memo').val();
+                    if (target === undefined) target = {};
+                    target.knowType = layero.find('#knowType').val();
+                    target.knowTitle = layero.find('#knowTitle').val();
+                    target.knowDetail = layero.find('#knowDetail').val();
+
                     layero.find('a.layui-layer-btn0').text('正在提交...');
                     PublicFunc.ajaxCRUD(target,'/admin/knowledge/update',function(ret){
                         layer.msg('修改成功', {icon: 1, time:2000});

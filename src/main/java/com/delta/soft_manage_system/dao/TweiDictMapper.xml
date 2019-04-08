@@ -22,7 +22,7 @@
 		<result column="DATA_VERSION" property="dataVersion" />
 	</resultMap>
 
-	<select id="selectListByVo" parameterType="map" resultType="com.delta.soft_manage_system.vo.DictVo">
+	<select id="selectListByVo" parameterType="map" resultType="com.delta.soft_manage_system.dto.DictVo">
 		select tb.type_name as typeName, tc.user_name as createByer, td.user_name as updateByer, te.user_name as checkByer,
 		ta.type_id as  typeId,ta.dict_id as dictId,ta.dict_name as dictName,ta.dict_short_name as dictShortName,
 		ta.dict_full_name as dictFullName,ta.create_by as createBy,ta.create_at as createAt,
@@ -33,7 +33,9 @@
 		left join twei_user tc on ta.create_By = tc.userid
 		left join twei_user td on ta.update_By = td.userid
 		left join twei_user te on ta.check_By = te.userid
-		where ta.type_id = #{type_id}
+		where 1=1
+		<if test="type_id != null"> and ta.type_id = #{type_id}</if>
+		<if test="flag != null"> and ta.flag = #{flag}</if>
 		Order by ta.dict_id desc
 	</select>
 

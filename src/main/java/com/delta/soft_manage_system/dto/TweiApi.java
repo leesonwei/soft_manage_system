@@ -18,6 +18,7 @@ import java.util.Date;
 @TableName("twei_api")
 public class TweiApi implements Serializable {
 	/***/
+	@NullRule(action={ActionType.INSERT, ActionType.UPDATE}, name="API外鍵ID")
 	private String apiTypeId;
 	/***/
 	@TableId
@@ -32,7 +33,7 @@ public class TweiApi implements Serializable {
 	private String apiDesc; 
 	/***/
 	@NullRule(action={ActionType.INSERT, ActionType.UPDATE}, name="API地址")
-	@UrlRule("API地址")
+	@UrlRule(value = "API地址",action = ActionType.INSERT)
 	private String apiUrl; 
 	/***/
 	@NullRule(action={ActionType.INSERT, ActionType.UPDATE}, name="API方法")

@@ -1,15 +1,15 @@
 package com.delta.soft_manage_system.controller;
 
-import com.delta.soft_manage_system.common.GlobalConst;
-import com.delta.soft_manage_system.common.ResponseCode;
-import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.auth.dto.TweiUser;
+import com.delta.common.code.ResponseCode;
+import com.delta.common.constant.GlobalConst;
+import com.delta.common.utils.ServerResponse;
+import com.delta.common.utils.StringUtil;
+import com.delta.soft_manage_system.dto.DictVo;
 import com.delta.soft_manage_system.dto.TweiDict;
 import com.delta.soft_manage_system.dto.TweiDictType;
-import com.delta.soft_manage_system.dto.User;
 import com.delta.soft_manage_system.service.DictService;
 import com.delta.soft_manage_system.service.DictTypeService;
-import com.delta.soft_manage_system.utils.StringUtil;
-import com.delta.soft_manage_system.vo.DictVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -54,16 +54,16 @@ public class DictController extends BaseController<DictService, TweiDict> {
 
     @PostMapping("/manage/json")
     @ResponseBody
-    public Object manageJson(String typeId, ModelMap model){
+    public Object manageJson(TweiDict dict, ModelMap model){
         List<DictVo> list = new ArrayList<>();
-        if (StringUtil.isBlank(typeId)) {
+        if (StringUtil.isBlank(dict.getTypeId())) {
             List<TweiDictType> typeList = getModel();
             if (typeList != null && typeList.size() > 0) {
-                typeId = typeList.get(0).getTypeId();
+                dict.setTypeId(typeList.get(0).getTypeId());
             }
         }
-        if (!StringUtil.isBlank(typeId)) {
-            list = service.selectList(typeId);
+        if (!StringUtil.isBlank(dict.getTypeId())) {
+            list = service.selectList(dict);
         }
         return list;
     }
@@ -71,7 +71,7 @@ public class DictController extends BaseController<DictService, TweiDict> {
     @PostMapping("/check")
     @ResponseBody
     public ServerResponse check(TweiDict dict, HttpSession session){
-        User user = (User)session.getAttribute(GlobalConst.CURRENT_USER);
+        TweiUser user = (TweiUser)session.getAttribute(GlobalConst.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }

@@ -43,9 +43,9 @@ var handleDataTableButtons = function() {
                 "data": 'codeId'
             },{
                 "targets": 1,
-                "data": 'apiName',
+                "data": 'apiId',
                 "render":function(data, type, row, meta){
-                    return data;
+                    return $('.dicttype[data-apiid='+data+']').text();
                 }
             },{
                 "targets": 2,
@@ -72,7 +72,7 @@ var handleDataTableButtons = function() {
                     return data;
                 }
             },{
-                "targets": 5,
+                "targets": 6,
                 "data": 'definition',
                 "render":function(data, type, row, meta){
                     return data;
@@ -82,7 +82,7 @@ var handleDataTableButtons = function() {
 				"url": "/admin/apicode/manage/json",
 				"data": function () {
 					var data = {};
-					data.apiid = $('#data-table-type .selected').data('apiid');
+					data.apiId = $('#data-table-type .selected').data('apiid');
 					return data;
 				},
 				"type":'post',
@@ -97,20 +97,22 @@ var handleDataTableButtons = function() {
 	}
 };
 
-//獲取和檢驗表單數據
-var getData = function(){
-    if (target === undefined) target = {};
-    target.typeName = layero.find('#typeName').val();
-    if (target.typeName === undefined || '' === target.typeName) {
-        layer.msg("數據字典類型名稱不能為空", {
-            icon:2,
-            time: 3000,
-        });
-        layero.find('#typeName').focus();
-        return;
-    }
-    target.memo = $(layero.find('#memo')).val();
-}
+$("#id").on('blur',function(){
+    $.ajax({
+        url:"/admin/apicode/select/one",
+        data:{codeId:$("#id").val()},
+        dataType:'json',
+        type:'get',
+        success:function(ret){
+            var text = "";
+            if (ret !== undefined && ret !== null) {
+                text = "此ID已被使用";
+            }
+            $("#id").parent().parent().find('.tips').text(text);
+        }
+    });
+});
+
 $.fn.dataTable.ext.buttons.add = {
 	text: '新增',
 	action: function ( e, dt, node, config ) {
@@ -125,10 +127,16 @@ $.fn.dataTable.ext.buttons.add = {
 			content: $('#addAndEditForm').html(),
 			btn: ['保存', '取消'],
             success:function(layero, index){
-                layero.find('#id').val('自動獲取');
+                layero.find('#apiId').val($('#data-table-type .selected').data('apiid'));
             },
 			yes:function(index1, layero){
-                getData();
+                if (target === undefined) target = {};
+                target.codeId = layero.find('#id').val();
+                target.apiId = layero.find('#apiId').val();
+                target.codeName = layero.find('#codeName').val();
+                target.codeType = layero.find('#codeType').val();
+                target.definition = layero.find('#definition').val();
+
                 layer.confirm('您確定保存這條記錄嗎？',{
                     btn: ['確定','取消']
                 }, function(index2,layerc){
@@ -184,16 +192,24 @@ $.fn.dataTable.ext.buttons.edit = {
             content: $('#addAndEditForm').html(),
             btn: ['保存', '取消'],
             success:function(layero, index){
-                layero.find('#id').val(target.typeId);
-                layero.find('#typeName').val(target.typeName);
-                layero.find('#memo').val(target.memo);
+                layero.find('#id').val(target.codeId);
+                layero.find('#id').attr('disabled','disabled');
+                layero.find('#apiId').val(target.apiId);
+                layero.find('#codeName').val(target.codeName);
+                layero.find('#codeType').val(target.codeType);
+                layero.find('#definition').val(target.definition);
             },
             yes:function(index1, layero){
                 layer.confirm('您確定保存所有的修改嗎？',{
                     btn: ['確定','取消']
                 }, function(index2){
                     layer.close(index2);
-                    getData();
+                    if (target === undefined) target = {};
+                    target.apiId = layero.find('#apiId').val();
+                    target.codeName = layero.find('#codeName').val();
+                    target.codeType = layero.find('#codeType').val();
+                    target.definition = layero.find('#definition').val();
+
                     layero.find('a.layui-layer-btn0').text('正在提交...');
                     PublicFunc.ajaxCRUD(target,'/admin/apicode/update',function(ret){
                         layer.msg('修改成功', {icon: 1, time:2000});

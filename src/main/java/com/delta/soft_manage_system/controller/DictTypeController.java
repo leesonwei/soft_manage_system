@@ -1,10 +1,10 @@
 package com.delta.soft_manage_system.controller;
 
-import com.delta.soft_manage_system.common.GlobalConst;
-import com.delta.soft_manage_system.common.ResponseCode;
-import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.auth.dto.TweiUser;
+import com.delta.common.code.ResponseCode;
+import com.delta.common.constant.GlobalConst;
+import com.delta.common.utils.ServerResponse;
 import com.delta.soft_manage_system.dto.TweiDictType;
-import com.delta.soft_manage_system.dto.User;
 import com.delta.soft_manage_system.service.DictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +46,7 @@ public class DictTypeController extends BaseController<DictTypeService, TweiDict
     @PostMapping("/check")
     @ResponseBody
     public ServerResponse check(TweiDictType dictType, HttpSession session){
-        User user = (User)session.getAttribute(GlobalConst.CURRENT_USER);
+        TweiUser user = (TweiUser)session.getAttribute(GlobalConst.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }

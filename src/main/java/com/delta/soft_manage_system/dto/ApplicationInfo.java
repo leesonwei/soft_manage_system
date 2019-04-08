@@ -1,4 +1,4 @@
-package com.delta.soft_manage_system.common;
+package com.delta.soft_manage_system.dto;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

@@ -43,36 +43,42 @@ var handleDataTableButtons = function() {
                 "data": 'paraId'
             },{
                 "targets": 1,
-                "data": 'paraName'
+                "data": 'paraName',
+                "render":function(data, type, row, meta){
+                    return $('.dicttype[data-apiid='+data+']').text();
+                }
             },{
                 "targets": 2,
+                "data": 'paraName'
+            },{
+                "targets": 3,
                 "data": 'paraDataType',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             },{
-                "targets": 3,
+                "targets": 4,
                 "data": 'isNullable',
                 "render":function(data, type, row, meta){
-                    return data == 1 ? "是" : "否";
+                    return data === 1 ? "是" : "否";
                 }
             },{
-                "targets": 4,
+                "targets": 5,
                 "data": 'createBy',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             },{
-                "targets": 5,
+                "targets": 6,
                 "data": 'createAt',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             },{
                 "targets": 7,
-                "data": 'paraName',
+                "data": 'paraMemo',
                 "render":function(data, type, row, meta){
-                    return "";
+                    return data;
                 }
             }],
 			ajax: {
@@ -112,16 +118,13 @@ $.fn.dataTable.ext.buttons.add = {
             },
 			yes:function(index1, layero){
                 if (target === undefined) target = {};
-                target.typeName = layero.find('#typeName').val();
-                if (target.typeName === undefined || '' === target.typeName) {
-                    layer.msg("數據字典類型名稱不能為空", {
-                        icon:2,
-                        time: 3000,
-                    });
-                    layero.find('#typeName').focus();
-                    return;
-                }
-                target.memo = $(layero.find('#memo')).val();
+                target.apiId = $('#data-table-type .selected').data('apiid');
+                target.paraName = layero.find('#paraName').val();
+                target.paraDataType = layero.find('#paraDataType').val();
+                target.isNullable = layero.find('#isNullable').is(':checked')?"1":"0";
+                target.paraMemo = layero.find('#paraMemo').val();
+                target.parentParaId = layero.find('#parentParaId').val();
+
                 layer.confirm('您確定保存這條記錄嗎？',{
                     btn: ['確定','取消']
                 }, function(index2,layerc){
@@ -178,24 +181,23 @@ $.fn.dataTable.ext.buttons.edit = {
             btn: ['保存', '取消'],
             success:function(layero, index){
                 layero.find('#id').val(target.typeId);
-                layero.find('#typeName').val(target.typeName);
-                layero.find('#memo').val(target.memo);
+                layero.find('#paraName').val(target.paraName);
+                layero.find('#paraDataType').val(target.paraDataType);
+                layero.find('#isNullable').attr("checked",target.isNullable);
+                layero.find('#paraMemo').val(target.paraMemo);
             },
             yes:function(index1, layero){
                 layer.confirm('您確定保存所有的修改嗎？',{
                     btn: ['確定','取消']
                 }, function(index2){
                     layer.close(index2);
-                    target.typeName = layero.find('#typeName').val();
-                    if (target.typeName === undefined || '' === target.typeName) {
-                        layer.msg("數據字典類型名稱不能為空", {
-                            icon:2,
-                            time: 3000,
-                        });
-                        layero.find('#typeName').focus();
-                        return;
-                    }
-                    target.memo = layero.find('#memo').val();
+                    target.apiId = $('#data-table-type .selected').data('apiid');
+                    target.paraName = layero.find('#paraName').val();
+                    target.paraDataType = layero.find('#paraDataType').val();
+                    target.isNullable = layero.find('#isNullable').is(':checked')?"1":"0";
+                    target.paraMemo = layero.find('#paraMemo').val();
+                    target.parentParaId = layero.find('#parentParaId').val();
+
                     layero.find('a.layui-layer-btn0').text('正在提交...');
                     PublicFunc.ajaxCRUD(target,'/admin/apipara/update',function(ret){
                         layer.msg('修改成功', {icon: 1, time:2000});

@@ -2,7 +2,7 @@ package com.delta.soft_manage_system.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.delta.soft_manage_system.dto.TweiDict;
-import com.delta.soft_manage_system.vo.DictVo;
+import com.delta.soft_manage_system.dto.DictVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -122,6 +122,7 @@
 								<thead>
 								<tr>
                                     <th width="1%">ID</th>
+									<th class="text-nowrap">API</th>
 									<th class="text-nowrap">名稱</th>
 									<th class="text-nowrap">數據類型</th>
 									<th class="text-nowrap">是否必須</th>
@@ -133,6 +134,7 @@
 								<tbody>
 								<tr class="odd gradeX">
 									<td width="1%">ID</td>
+									<td >API</td>
 									<td >名稱</td>
 									<td >數據類型</td>
 									<td >是否必須</td>
@@ -172,34 +174,30 @@
 						</div>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典類型</label>
+						<label class="col-md-3 col-form-label">參數名稱</label>
 						<div class="col-md-7">
-							<input id="typeId" type="text" class="form-control" placeholder="數據字典類型" disabled>
-						</div>
-					</div>
-					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典名稱</label>
-						<div class="col-md-7">
-							<input id="dictName" type="text" class="form-control" maxlength="50" placeholder="字典名稱" required>
+							<input id="paraName" type="text" class="form-control" placeholder="參數名稱">
 						</div>
 						<label class="col-md-2 col-form-label text-danger">必填項</label>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典簡稱</label>
+						<label class="col-md-3 col-form-label">數據類型</label>
 						<div class="col-md-7">
-							<input id="dictShortName" type="text" class="form-control" maxlength="20" placeholder="字典簡稱">
+							<input id="paraDataType" type="text" class="form-control" maxlength="10" placeholder="數據類型" required>
 						</div>
+						<label class="col-md-2 col-form-label text-danger">必填項</label>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典全稱</label>
-						<div class="col-md-7">
-							<input id="dictFullName" type="text" class="form-control" maxlength="50" placeholder="不超過50字的字典全稱">
+						<label class="col-md-3 col-form-label">是否必須</label>
+						<div class="col-md-7" style="position: relative;">
+							<input style="position: relative;left:0px; display: inline-block; width:25px;" class="form-control" type="checkbox" id="isNullable" name="isNullable" />
+							<label style="position: relative;top:-15px;" for="isNullable">是</label>
 						</div>
 					</div>
 					<div class="form-group row m-b-15">
 						<label class="col-md-3 col-form-label">備註</label>
 						<div class="col-md-7">
-							<textarea id="memo" height="300px" class="form-control" maxlength="100" placeholder="不超過100字的字典備註"></textarea>
+							<textarea id="paraMemo" height="300px" class="form-control" maxlength="100" placeholder="不超過100字的備註"></textarea>
 						</div>
 					</div>
 				</fieldset>

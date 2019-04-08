@@ -11,17 +11,17 @@
 package com.delta.soft_manage_system.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.delta.common.utils.Chinese4PinYin;
+import com.delta.common.utils.ServerResponse;
+import com.delta.common.utils.StringUtil;
 import com.delta.soft_manage_system.AutoInjectUserId.AutoUserId;
-import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.dao.AutoIdDao;
 import com.delta.soft_manage_system.dao.TweiDictDao;
+import com.delta.soft_manage_system.dto.DictVo;
 import com.delta.soft_manage_system.dto.TweiDict;
 import com.delta.soft_manage_system.entitycheck.ActionType;
 import com.delta.soft_manage_system.entitycheck.EntityCheck;
 import com.delta.soft_manage_system.service.DictService;
-import com.delta.soft_manage_system.utils.Chinese4PinYin;
-import com.delta.soft_manage_system.utils.StringUtil;
-import com.delta.soft_manage_system.vo.DictVo;
 import com.github.houbb.opencc4j.util.ZhConverterUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,21 +105,29 @@ public class DictServiceImpl extends BaseServiceImpl<TweiDictDao, TweiDict> impl
 
     private TweiDict generatePyCode(TweiDict dict){
         if (!StringUtil.isBlank(dict.getDictName())) {
-            Chinese4PinYin trans = new Chinese4PinYin();
-            dict.setPycode(trans.getAllFirstLetter(ZhConverterUtil.convertToSimple(dict.getDictName())));
+            dict.setPycode(Chinese4PinYin.getInstant().getAllFirstLetter(ZhConverterUtil.convertToSimple(dict.getDictName())));
         }
         return dict;
     }
 
     @Override
     public int getSubDictCount(String typeId) {
-        return selectList(typeId).size();
+        TweiDict tweiDict = new TweiDict();
+        tweiDict.setTypeId(typeId);
+        return selectList(tweiDict).size();
     }
 
     @Override
-    public List<DictVo> selectList(String typeId) {
+    public List<DictVo> selectList(TweiDict tweiDict) {
         Map<String,Object> map = new HashMap<>();
-        map.put("type_id", typeId);
+        if (tweiDict != null) {
+            if (!StringUtil.isBlank(tweiDict.getTypeId())){
+                map.put("type_id", tweiDict.getTypeId());
+            }
+            if (null != tweiDict.getFlag()){
+                map.put("flag", tweiDict.getFlag());
+            }
+        }
         List<DictVo> dicts = dao.selectListByVo(map);
         return dicts;
     }

@@ -1,6 +1,5 @@
-package com.delta.soft_manage_system.vo;
+package com.delta.soft_manage_system.dto;
 
-import com.delta.soft_manage_system.dto.TweiDict;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

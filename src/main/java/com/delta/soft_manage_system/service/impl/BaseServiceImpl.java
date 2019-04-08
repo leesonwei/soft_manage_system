@@ -2,7 +2,7 @@ package com.delta.soft_manage_system.service.impl;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.common.utils.ServerResponse;
 import com.delta.soft_manage_system.entitycheck.ActionType;
 import com.delta.soft_manage_system.entitycheck.EntityCheck;
 
@@ -36,6 +36,9 @@ public abstract class BaseServiceImpl<T extends BaseMapper,K> {
     @EntityCheck(action = ActionType.DELETE, user = true)
     public ServerResponse<K> deleteOne(K k) {
         EntityWrapper<K> wrapper = getDeleteAndUpdateWrapper(k);
+        if (null == wrapper || wrapper.isEmptyOfWhere()) {
+            return ServerResponse.createByErrorMessage("刪除條件不能為空");
+        }
         int count = dao.delete(wrapper);
         if (count != 1) {
             return ServerResponse.createByErrorMessage("刪除失敗");

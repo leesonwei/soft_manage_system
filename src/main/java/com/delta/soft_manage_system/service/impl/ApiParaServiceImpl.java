@@ -11,13 +11,18 @@
 package com.delta.soft_manage_system.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.delta.common.utils.ServerResponse;
+import com.delta.common.utils.StringUtil;
+import com.delta.soft_manage_system.AutoInjectUserId.AutoUserId;
 import com.delta.soft_manage_system.dao.TweiApiParaDao;
 import com.delta.soft_manage_system.dto.TweiApiPara;
+import com.delta.soft_manage_system.entitycheck.ActionType;
+import com.delta.soft_manage_system.entitycheck.EntityCheck;
 import com.delta.soft_manage_system.service.ApiParaService;
-import com.delta.soft_manage_system.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +42,17 @@ public class ApiParaServiceImpl extends BaseServiceImpl<TweiApiParaDao, TweiApiP
     }
 
     @Override
+    @AutoUserId(tableName = "twei_api_para", idField = "paraId", clazz="com.delta.soft_manage_system.dto.TweiApiPara")
+    @EntityCheck(action = ActionType.INSERT, user = true)
+    public ServerResponse<TweiApiPara> insertOne(TweiApiPara apiPara) {
+        int count = dao.insert(apiPara);
+        if (count != 1) {
+            return ServerResponse.createByErrorMessage("添加失敗");
+        }
+        return ServerResponse.createBySuccess(apiPara);
+    }
+
+    @Override
     protected EntityWrapper<TweiApiPara> getDeleteAndUpdateWrapper(TweiApiPara tweiApiPara) {
         EntityWrapper<TweiApiPara> wrapper = new EntityWrapper<>();
         wrapper.eq("para_id",tweiApiPara.getParaId());
@@ -53,11 +69,10 @@ public class ApiParaServiceImpl extends BaseServiceImpl<TweiApiParaDao, TweiApiP
     @Override
     public List<TweiApiPara> selectList(TweiApiPara apiPara) {
         EntityWrapper<TweiApiPara> wrapper = new EntityWrapper<>();
-        if (apiPara != null) {
-            if (!StringUtil.isBlank(apiPara.getApiId())){
-                wrapper.eq("api_id", apiPara.getApiId());
-            }
+        if (apiPara == null || StringUtil.isBlank(apiPara.getApiId())) {
+            return new ArrayList<>();
         }
+        wrapper.eq("api_id", apiPara.getApiId());
         return dao.selectList(wrapper);
     }
 }

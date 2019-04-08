@@ -11,8 +11,8 @@
 package com.delta.soft_manage_system.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.delta.common.utils.ServerResponse;
 import com.delta.soft_manage_system.AutoInjectUserId.AutoUserId;
-import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.dao.TweiApiTypeDao;
 import com.delta.soft_manage_system.dto.TweiApiType;
 import com.delta.soft_manage_system.entitycheck.ActionType;

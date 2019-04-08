@@ -75,7 +75,7 @@
 					<div class="panel panel-inverse">
 						<!-- begin panel-heading -->
 						<div class="panel-heading">
-							<h4 class="panel-title">異常碼列表</h4>
+							<h4 class="panel-title">知識庫類型列表</h4>
 						</div>
 						<!-- end panel-heading -->
 
@@ -88,8 +88,8 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr class="odd gradeX" th:each="code,codeStat:${codes}">
-									<td th:class="${codeStat.first}?'dicttype selected':'dicttype'" th:attr="data-codeid=${code.codeId}" th:text="${code.codeName}"></td>
+								<tr class="odd gradeX" th:each="dict,dictStat:${dicts}">
+									<td th:class="${dictStat.first}?'dicttype selected':'dicttype'" th:attr="data-dictid=${dict.dictId}" th:text="${dict.dictName}"></td>
 								</tr>
 								</tbody>
 							</table>
@@ -176,35 +176,30 @@
 						</div>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典類型</label>
+						<label class="col-md-3 col-form-label">知識庫類型</label>
 						<div class="col-md-7">
-							<input id="typeId" type="text" class="form-control" placeholder="數據字典類型" disabled>
+							<input id="knowType" type="text" class="form-control" placeholder="知識庫類型" disabled>
 						</div>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典名稱</label>
+						<label class="col-md-3 col-form-label">標題</label>
 						<div class="col-md-7">
-							<input id="dictName" type="text" class="form-control" maxlength="50" placeholder="字典名稱" required>
+							<input id="knowTitle" type="text" class="form-control" maxlength="50" placeholder="標題" required>
 						</div>
 						<label class="col-md-2 col-form-label text-danger">必填項</label>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典簡稱</label>
+						<label class="col-md-3 col-form-label">異常碼</label>
 						<div class="col-md-7">
-							<input id="dictShortName" type="text" class="form-control" maxlength="20" placeholder="字典簡稱">
+							<input id="codeId" type="text" class="form-control" maxlength="50" placeholder="異常碼" required>
 						</div>
 					</div>
 					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">字典全稱</label>
+						<label class="col-md-3 col-form-label">詳情</label>
 						<div class="col-md-7">
-							<input id="dictFullName" type="text" class="form-control" maxlength="50" placeholder="不超過50字的字典全稱">
+							<textarea id="knowDetail" type="text" height="500px" class="form-control" placeholder="知識點詳細資料"></textarea>
 						</div>
-					</div>
-					<div class="form-group row m-b-15">
-						<label class="col-md-3 col-form-label">備註</label>
-						<div class="col-md-7">
-							<textarea id="memo" height="300px" class="form-control" maxlength="100" placeholder="不超過100字的字典備註"></textarea>
-						</div>
+						<label class="col-md-2 col-form-label text-danger">必填項</label>
 					</div>
 				</fieldset>
 			</form>
@@ -229,6 +224,7 @@
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
     <script th:src="@{/../static/delta/js/public.js(version=${application.version})}"></script>
+	<script th:src="@{/../static/delta/js/mditor.js(version=${application.version})}"></script>
 	<script th:src="@{/../static/plugins/DataTables/media/js/jquery.dataTables.js}"></script>
 	<script th:src="@{/../static/plugins/DataTables/media/js/dataTables.bootstrap.min.js}"></script>
 	<script th:src="@{/../static/plugins/DataTables/extensions/Buttons/js/dataTables.buttons.min.js}"></script>

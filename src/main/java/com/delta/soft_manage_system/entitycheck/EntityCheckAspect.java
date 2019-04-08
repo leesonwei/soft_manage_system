@@ -1,10 +1,10 @@
 package com.delta.soft_manage_system.entitycheck;
 
-import com.delta.soft_manage_system.common.GlobalConst;
-import com.delta.soft_manage_system.common.ResponseCode;
-import com.delta.soft_manage_system.common.ServerResponse;
-import com.delta.soft_manage_system.dto.User;
-import com.delta.soft_manage_system.utils.RegUtil;
+import com.delta.auth.dto.TweiUser;
+import com.delta.common.code.ResponseCode;
+import com.delta.common.constant.GlobalConst;
+import com.delta.common.utils.RegUtil;
+import com.delta.common.utils.ServerResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -60,9 +60,9 @@ public class EntityCheckAspect {
         EntityCheck ma = method.getAnnotation(EntityCheck.class);
 
         if (ma != null) {
-            User user = null;
+            TweiUser user = null;
             if (ma.user()) {
-                user = (User)session.getAttribute(GlobalConst.CURRENT_USER);
+                user = (TweiUser)session.getAttribute(GlobalConst.CURRENT_USER);
             }
             if (user == null) {
                 return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "請先登錄再進行操作");
@@ -113,12 +113,15 @@ public class EntityCheckAspect {
                     //檢查url
                     UrlRule u = field.getAnnotation(UrlRule.class);
                     if (null != u) {
-                        v = field.get(obj);
-                        if (null != v || !"".equals(v)) {
-                            boolean check = RegUtil.isUrl(v.toString());
-                            if (!check) {
-                                response = ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),
-                                        String.format("%s%s", u.value(), "不是正確的URL格式"));
+                        l = Arrays.asList(u.action());
+                        if (l.contains(ma.action())) {
+                            v = field.get(obj);
+                            if (null != v || !"".equals(v)) {
+                                boolean check = RegUtil.isUrl(v.toString());
+                                if (!check) {
+                                    response = ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),
+                                            String.format("%s%s", u.value(), "不是正確的URL格式"));
+                                }
                             }
                         }
                     }
@@ -126,12 +129,15 @@ public class EntityCheckAspect {
                     //檢查Email
                     EmailRule e = field.getAnnotation(EmailRule.class);
                     if (null != e) {
-                        v = field.get(obj);
-                        if (null != v || !"".equals(v)) {
-                            boolean check = RegUtil.isEmail(v.toString());
-                            if (!check) {
-                                response = ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),
-                                        String.format("%s%s", u.value(), "不是正確的EMAIL格式"));
+                        l = Arrays.asList(e.action());
+                        if (l.contains(ma.action())) {
+                            v = field.get(obj);
+                            if (null != v || !"".equals(v)) {
+                                boolean check = RegUtil.isEmail(v.toString());
+                                if (!check) {
+                                    response = ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),
+                                            String.format("%s%s", u.value(), "不是正確的EMAIL格式"));
+                                }
                             }
                         }
                     }

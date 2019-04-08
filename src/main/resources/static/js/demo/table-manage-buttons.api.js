@@ -22,7 +22,6 @@ var handleDataTableButtons = function() {
 			dom: 'Bftip',
 			buttons: tableconst.buttons,
 			responsive: true,
-            scrollX:true,
             order:[[3, "des"]],
 			oLanguage: {
 				"sLengthMenu": "每页显示 _MENU_ 条记录",
@@ -85,12 +84,6 @@ var handleDataTableButtons = function() {
                 "targets": 8,
                 "data": 'apiDesc',
                 "render":function(data, type, row, meta){
-                    return "<a class='detail-show' data-apiid='" + data + "' href='javascript:;'>查看詳情</a>";
-                }
-            },{
-                "targets": 9,
-                "data": 'apiDesc',
-                "render":function(data, type, row, meta){
                     return data;
                 }
             }],
@@ -98,7 +91,7 @@ var handleDataTableButtons = function() {
 				"url": "/admin/api/manage/json",
 				"data": function () {
 					var data = {};
-					data.apiTypeId = $('#data-table-type .selected').data('apitypeid');
+					data.apiTypeId = $('#data-table-type .selected').data('dictid');
 					return data;
 				},
 				"type":'post',
@@ -127,7 +120,7 @@ $.fn.dataTable.ext.buttons.add = {
 			btn: ['保存', '取消'],
             success:function(layero, index){
                 layero.find('#id').val('自動獲取');
-                layero.find('#apiTypeId').val($('.dicttype.selected').data('apitypeid'));
+                layero.find('#apiTypeId').val($('.dicttype.selected').data('dictid'));
             },
 			yes:function(index1, layero){
                 if (target === undefined) target = {};
@@ -195,9 +188,15 @@ $.fn.dataTable.ext.buttons.edit = {
             content: $('#addAndEditForm').html(),
             btn: ['保存', '取消'],
             success:function(layero, index){
-                layero.find('#id').val(target.typeId);
-                layero.find('#typeName').val(target.typeName);
-                layero.find('#memo').val(target.memo);
+                layero.find('#id').val(target.apiId);
+                layero.find('#apiTypeId').val(target.apiTypeId);
+                layero.find('#apiName').val(target.apiName);
+                layero.find('#apiUrl').val(target.apiUrl);
+                layero.find('#apiMethod').val(target.apiMethod);
+                layero.find('#apiDesc').val(target.apiDesc);
+                layero.find('#requestExample').val(target.requestExample);
+                layero.find('#responseExample').val(target.responseExample);
+                layero.find('#faultExample').val(target.faultExample);
             },
             yes:function(index1, layero){
                 layer.confirm('您確定保存所有的修改嗎？',{

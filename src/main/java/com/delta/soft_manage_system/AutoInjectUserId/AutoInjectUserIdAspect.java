@@ -1,6 +1,6 @@
 package com.delta.soft_manage_system.AutoInjectUserId;
 
-import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.common.utils.ServerResponse;
 import com.delta.soft_manage_system.dao.AutoIdDao;
 import com.delta.soft_manage_system.dto.AutoId;
 import lombok.extern.slf4j.Slf4j;
@@ -81,6 +81,7 @@ public class AutoInjectUserIdAspect {
                             autoId.setPrefix(prefix);
                             autoIdDao.getAutoId(autoId);
                             if ("0".equals(autoId.getAutoid())) {
+                                log.info("請求id參數:========>" + autoId.toString());
                                 return ServerResponse.createByErrorMessage("獲取id出錯");
                             }
                             field.set(obj, autoId.getAutoid());

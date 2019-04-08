@@ -1,7 +1,7 @@
 package com.delta.soft_manage_system.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.common.utils.ServerResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;

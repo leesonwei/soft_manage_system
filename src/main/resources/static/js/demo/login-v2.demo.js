@@ -28,12 +28,14 @@ var LoginV2 = function () {
 			var formData = $("#login").serializeJSON();
 			$("#submit").text("正在登录...");
 			$("#submit").attr("disabled", "disabled");
-			$.ajax({
-				url:'login',
+			$.post({
+				url:'/user/login',
+				header:Cookies.get('token'),
 				type:'post',
 				data:formData,
-				dataType:'json',
-				success:function(json){
+				dataType:'text',
+				success:function(data){
+					var json = JSON.parse(data);
 					Cookies.set('token', json.data);
 					if (json.status === 0) {
 						$("#submit").text("登入成功");

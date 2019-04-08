@@ -75,7 +75,7 @@
 					<div class="panel panel-inverse">
 						<!-- begin panel-heading -->
 						<div class="panel-heading">
-							<h4 class="panel-title">API菜單列表</h4>
+							<h4 class="panel-title">API類型列表</h4>
 						</div>
 						<!-- end panel-heading -->
 
@@ -88,8 +88,8 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr class="odd gradeX" th:each="apitype,apitypeStat:${apiTypes}">
-									<td th:class="${apitypeStat.first}?'dicttype selected':'dicttype'" th:attr="data-apitypeid=${apitype.apiTypeId}" th:text="${apitype.apiTypeName}"></td>
+								<tr class="odd gradeX" th:each="dict,dictStat:${dicts}">
+									<td th:class="${dictStat.first}?'dicttype selected':'dicttype'" th:attr="data-dictid=${dict.dictId}" th:text="${dict.dictName}"></td>
 								</tr>
 								</tbody>
 							</table>
@@ -129,8 +129,7 @@
 									<th class="text-nowrap">返回示例</th>
 									<th class="text-nowrap">創建人</th>
 									<th class="text-nowrap">創建時間</th>
-									<th class="text-nowrap">查看詳情</th>
-									<th class="text-nowrap">API描述</th>
+									<th>API描述</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -143,7 +142,6 @@
 									<td>返回示例</td>
 									<td>創建人</td>
 									<td>創建時間</td>
-									<td>查看詳情</td>
 									<td >API描述</td>
 								</tr>
 								</tbody>

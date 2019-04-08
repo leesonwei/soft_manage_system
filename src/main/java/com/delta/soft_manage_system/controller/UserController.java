@@ -1,11 +1,11 @@
 package com.delta.soft_manage_system.controller;
 
-import com.delta.soft_manage_system.common.GlobalConst;
-import com.delta.soft_manage_system.common.JWTConstant;
-import com.delta.soft_manage_system.common.ServerResponse;
-import com.delta.soft_manage_system.common.TokenMgr;
-import com.delta.soft_manage_system.dto.User;
-import com.delta.soft_manage_system.service.UserService;
+import com.delta.auth.Service.UserService;
+import com.delta.auth.dto.TweiUser;
+import com.delta.common.constant.GlobalConst;
+import com.delta.common.constant.JWTConstant;
+import com.delta.common.utils.ServerResponse;
+import com.delta.common.utils.TokenMgr;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +42,13 @@ public class UserController {
     @ApiOperation(value="登入",notes = "登入系统")
     @PostMapping("/login")
     @ResponseBody
-    public ServerResponse<String> login(User user, HttpSession session, HttpServletResponse response){
-        ServerResponse<User> serverResponse = userService.login(user);
+    public ServerResponse<String> login(TweiUser user, HttpSession session, HttpServletResponse response){
+        ServerResponse<TweiUser> serverResponse = userService.login(user);
         ServerResponse<String> res = null;
         if (serverResponse.isSuccess()) {
-            User successUser = serverResponse.getData();
+            TweiUser successUser = serverResponse.getData();
             session.setAttribute(GlobalConst.CURRENT_USER,successUser);
-            String token = TokenMgr.createJWT(successUser.getUserid(),JWTConstant.JWT_ISS,TokenMgr.generalSubject(user), JWTConstant.JWT_TTL);
+            String token = TokenMgr.createJWT(successUser.getUserid(), JWTConstant.JWT_ISS,TokenMgr.generalSubject(user), JWTConstant.JWT_TTL);
             response.addHeader("token", token);
             Cookie cookie = new Cookie("token", token);
             response.addCookie(cookie);

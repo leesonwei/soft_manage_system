@@ -1,6 +1,6 @@
 package com.delta.soft_manage_system.controller;
 
-import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.common.utils.ServerResponse;
 import com.delta.soft_manage_system.dto.TweiApi;
 import com.delta.soft_manage_system.dto.TweiApiCode;
 import com.delta.soft_manage_system.service.ApiCodeService;

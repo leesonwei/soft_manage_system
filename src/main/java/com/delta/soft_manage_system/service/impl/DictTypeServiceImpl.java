@@ -11,15 +11,15 @@
 package com.delta.soft_manage_system.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.common.utils.Chinese4PinYin;
+import com.delta.common.utils.ServerResponse;
+import com.delta.common.utils.StringUtil;
 import com.delta.soft_manage_system.dao.TweiDictTypeDao;
 import com.delta.soft_manage_system.dto.TweiDictType;
 import com.delta.soft_manage_system.entitycheck.ActionType;
 import com.delta.soft_manage_system.entitycheck.EntityCheck;
 import com.delta.soft_manage_system.service.DictService;
 import com.delta.soft_manage_system.service.DictTypeService;
-import com.delta.soft_manage_system.utils.Chinese4PinYin;
-import com.delta.soft_manage_system.utils.StringUtil;
 import com.github.houbb.opencc4j.util.ZhConverterUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +41,6 @@ import java.util.List;
 public class DictTypeServiceImpl extends BaseServiceImpl<TweiDictTypeDao,TweiDictType> implements DictTypeService {
 
     @Autowired
-    private Chinese4PinYin chinese4PinYin;
-    @Autowired
     private DictService dictService;
 
     @Autowired
@@ -55,12 +53,7 @@ public class DictTypeServiceImpl extends BaseServiceImpl<TweiDictTypeDao,TweiDic
     public ServerResponse<TweiDictType> insertOne(TweiDictType dictType) {
         if (!StringUtil.isBlank(dictType.getTypeName())) {
             String er = ZhConverterUtil.convertToSimple(dictType.getTypeName());
-            dictType.setTypeId(chinese4PinYin.getAllFirstLetter(er).toUpperCase());
-        }
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            dictType.setTypeId(Chinese4PinYin.getInstant().getAllFirstLetter(er).toUpperCase());
         }
         dictType.setFlag(0);
         return super.insertOne(dictType);

@@ -1,6 +1,6 @@
 package com.delta.soft_manage_system.controller;
 
-import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.common.utils.ServerResponse;
 import com.delta.soft_manage_system.service.BaseService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

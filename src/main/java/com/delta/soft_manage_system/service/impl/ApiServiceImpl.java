@@ -11,17 +11,18 @@
 package com.delta.soft_manage_system.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.delta.common.utils.ServerResponse;
+import com.delta.common.utils.StringUtil;
 import com.delta.soft_manage_system.AutoInjectUserId.AutoUserId;
-import com.delta.soft_manage_system.common.ServerResponse;
 import com.delta.soft_manage_system.dao.TweiApiDao;
 import com.delta.soft_manage_system.dto.TweiApi;
 import com.delta.soft_manage_system.entitycheck.ActionType;
 import com.delta.soft_manage_system.entitycheck.EntityCheck;
 import com.delta.soft_manage_system.service.ApiService;
-import com.delta.soft_manage_system.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,11 +68,10 @@ public class ApiServiceImpl extends BaseServiceImpl<TweiApiDao, TweiApi> impleme
     @Override
     public List<TweiApi> selectList(TweiApi api) {
         EntityWrapper<TweiApi> wrapper = new EntityWrapper<>();
-        if (api != null) {
-            if (!StringUtil.isBlank(api.getApiTypeId())) {
-                wrapper.eq("api_type_id", api.getApiTypeId());
-            }
+        if (api == null || StringUtil.isBlank(api.getApiTypeId())) {
+            return new ArrayList<>();
         }
+        wrapper.eq("api_type_id", api.getApiTypeId());
         return dao.selectList(wrapper);
     }
 }

@@ -18,6 +18,7 @@ import java.util.Date;
 @TableName("twei_api_para")
 public class TweiApiPara implements Serializable {
 	/***/
+	@NullRule(name = "所屬API", action={ActionType.INSERT,ActionType.UPDATE})
 	private String apiId;
 	/***/
 	@TableId

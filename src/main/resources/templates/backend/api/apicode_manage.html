@@ -168,15 +168,14 @@
 					<div class="form-group row m-b-15">
 						<label class="col-md-3 col-form-label">ID</label>
 						<div class="col-md-7">
-							<input id="id" type="text" class="form-control" placeholder="ID" disabled>
+							<input id="id" type="text" class="form-control" placeholder="ID">
 						</div>
+						<label class="col-md-2 col-form-label text-danger tips">必填項</label>
 					</div>
 					<div class="form-group row m-b-15">
 						<label class="col-md-3 col-form-label">所屬API</label>
 						<div class="col-md-7">
-							<select class="form-control" name="apiId" id="apiId">
-								<option value="">請選擇所屬API</option>
-							</select>
+							<input id="apiId" type="text" class="form-control" placeholder="所屬API" disabled>
 						</div>
 						<label class="col-md-2 col-form-label text-danger">必填項</label>
 					</div>
@@ -199,7 +198,6 @@
 						<div class="col-md-7">
 							<textarea id="definition" height="300px" class="form-control" maxlength="100" placeholder="不超過500字的代碼定義"></textarea>
 						</div>
-						<label class="col-md-2 col-form-label text-danger">必填項</label>
 					</div>
 				</fieldset>
 			</form>

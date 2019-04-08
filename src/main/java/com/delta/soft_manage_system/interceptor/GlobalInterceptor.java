@@ -1,6 +1,6 @@
 package com.delta.soft_manage_system.interceptor;
 
-import com.delta.soft_manage_system.common.ApplicationInfo;
+import com.delta.soft_manage_system.dto.ApplicationInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,13 +1,18 @@
 package com.delta.soft_manage_system.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.delta.common.utils.ServerResponse;
+import com.delta.common.utils.StringUtil;
+import com.delta.soft_manage_system.AutoInjectUserId.AutoUserId;
 import com.delta.soft_manage_system.dao.TweiKnowledgeDao;
 import com.delta.soft_manage_system.dto.TweiKnowledge;
+import com.delta.soft_manage_system.entitycheck.ActionType;
+import com.delta.soft_manage_system.entitycheck.EntityCheck;
 import com.delta.soft_manage_system.service.KnowledgeService;
-import com.delta.soft_manage_system.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +30,12 @@ public class KnowledgeServiceImpl extends BaseServiceImpl<TweiKnowledgeDao, Twei
     }
 
     @Override
+    @AutoUserId(tableName = "twei_knowledge", idField = "knowId", clazz="com.delta.soft_manage_system.dto.TweiKnowledge")
+    @EntityCheck(action = ActionType.INSERT, user = true)
+    public ServerResponse<TweiKnowledge> insertOne(TweiKnowledge knowledge){
+        return super.insertOne(knowledge);
+    }
+    @Override
     protected EntityWrapper<TweiKnowledge> getDeleteAndUpdateWrapper(TweiKnowledge tweiKnowledge) {
         EntityWrapper<TweiKnowledge> wrapper = new EntityWrapper<>();
         wrapper.eq("KNOW_ID",tweiKnowledge.getKnowId());
@@ -41,11 +52,10 @@ public class KnowledgeServiceImpl extends BaseServiceImpl<TweiKnowledgeDao, Twei
     @Override
     public List<TweiKnowledge> selectList(TweiKnowledge knowledge) {
         EntityWrapper<TweiKnowledge> wrapper = new EntityWrapper<>();
-        if (knowledge != null) {
-            if (!StringUtil.isBlank(knowledge.getCodeId())){
-                wrapper.eq("code_id", knowledge.getCodeId());
-            }
+        if (knowledge == null || StringUtil.isBlank(knowledge.getKnowType())) {
+            return new ArrayList<>();
         }
+        wrapper.eq("know_type", knowledge.getKnowType());
         return dao.selectList(wrapper);
     }
 }

@@ -1,10 +1,12 @@
 package com.delta.soft_manage_system.controller;
 
-import com.delta.soft_manage_system.common.ServerResponse;
+import com.delta.common.constant.GlobalConst;
+import com.delta.common.utils.ServerResponse;
+import com.delta.soft_manage_system.dto.DictVo;
 import com.delta.soft_manage_system.dto.TweiApi;
-import com.delta.soft_manage_system.dto.TweiApiType;
+import com.delta.soft_manage_system.dto.TweiDict;
 import com.delta.soft_manage_system.service.ApiService;
-import com.delta.soft_manage_system.service.ApiTypeService;
+import com.delta.soft_manage_system.service.DictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,7 +27,7 @@ import java.util.List;
 @RequestMapping("/admin/api")
 public class ApiController extends BaseController<ApiService, TweiApi> {
     @Autowired
-    private ApiTypeService apiTypeService;
+    private DictService dictService;
 
     @Autowired
     public ApiController(ApiService apiService){
@@ -33,8 +35,11 @@ public class ApiController extends BaseController<ApiService, TweiApi> {
     }
     @GetMapping("/manage")
     public String getKnowledgeIndex(ModelMap modelMap){
-        List<TweiApiType> apiTypes  = apiTypeService.selectList();
-        modelMap.addAttribute("apiTypes", apiTypes);
+        TweiDict dict = new TweiDict();
+        dict.setTypeId(GlobalConst.API_TYPE);
+        dict.setFlag(1);
+        List<DictVo> dicts = dictService.selectList(dict);
+        modelMap.addAttribute("dicts", dicts);
         return "backend/api/api_manage";
     }
 

@@ -15,4 +15,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UrlRule {
     String value() default "";
+    ActionType[] action() default ActionType.NONE;
 }

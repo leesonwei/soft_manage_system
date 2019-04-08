@@ -1,9 +1,14 @@
 package com.delta.soft_manage_system.interceptor;
 
 import com.alibaba.fastjson.JSON;
-import com.delta.soft_manage_system.common.*;
-import com.delta.soft_manage_system.dto.User;
-import com.delta.soft_manage_system.utils.FastJsonUtil;
+import com.delta.auth.dto.TweiUser;
+import com.delta.common.code.JWTCode;
+import com.delta.common.code.ResponseCode;
+import com.delta.common.constant.GlobalConst;
+import com.delta.common.utils.FastJsonUtil;
+import com.delta.common.utils.ServerResponse;
+import com.delta.common.utils.TokenMgr;
+import com.delta.soft_manage_system.dto.ApplicationInfo;
 import com.delta.soft_manage_system.utils.RequestUtil;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +54,7 @@ public class JWTInterceptor implements HandlerInterceptor{
 
 		if (applicationInfo.getDebug()) {
 			//debug模式不驗證jwt
-			User user = new User();
+			TweiUser user = new TweiUser();
 			user.setUserid("weilizong");
 			user.setUserName("韋利總");
 			request.getSession().setAttribute(GlobalConst.CURRENT_USER, user);
@@ -69,25 +74,25 @@ public class JWTInterceptor implements HandlerInterceptor{
 		if (checkResult.isSuccess()) {
 			Claims claims = checkResult.getData();
 			log.info("token校检通过checkResult："+ JSON.toJSONString(checkResult));
-			User user = FastJsonUtil.toBean(claims.getSubject(), User.class);
+			TweiUser user = FastJsonUtil.toBean(claims.getSubject(), TweiUser.class);
 			//request.getSession().setAttribute(GlobalConst.CURRENT_USER, user);
 			log.info("token校检通过user："+user.toString());
 			return true;
 		} else {
 			ServerResponse<String> res = ServerResponse
-					.createByErrorCodeMessage(JWTConstant.JWT_ERRCODE_EXPIRE
+					.createByErrorCodeMessage(JWTCode.JWT_ERRCODE_EXPIRE.getCode()
 							,"沒有權限");
 			switch(checkResult.getStatus()) {
 				// 签名过期，返回过期提示码
-				case JWTConstant.JWT_ERRCODE_EXPIRE:
+				case 1005:
 					res = ServerResponse
-							.createByErrorCodeMessage(JWTConstant.JWT_ERRCODE_EXPIRE
+							.createByErrorCodeMessage(JWTCode.JWT_ERRCODE_EXPIRE.getCode()
 									,"token 過期");
 					break;
 				// 签名验证不通过
-				case JWTConstant.JWT_ERRCODE_FAIL:
+				case 1006:
 					res = ServerResponse
-							.createByErrorCodeMessage(JWTConstant.JWT_ERRCODE_EXPIRE
+							.createByErrorCodeMessage(JWTCode.JWT_ERRCODE_EXPIRE.getCode()
 									,"沒有權限");
 					break;
 				default:

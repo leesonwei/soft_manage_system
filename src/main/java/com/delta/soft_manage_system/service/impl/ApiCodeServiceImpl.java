@@ -11,13 +11,18 @@
 package com.delta.soft_manage_system.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.delta.common.code.ResponseCode;
+import com.delta.common.utils.ServerResponse;
+import com.delta.common.utils.StringUtil;
 import com.delta.soft_manage_system.dao.TweiApiCodeDao;
 import com.delta.soft_manage_system.dto.TweiApiCode;
+import com.delta.soft_manage_system.entitycheck.ActionType;
+import com.delta.soft_manage_system.entitycheck.EntityCheck;
 import com.delta.soft_manage_system.service.ApiCodeService;
-import com.delta.soft_manage_system.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +42,20 @@ public class ApiCodeServiceImpl extends BaseServiceImpl<TweiApiCodeDao, TweiApiC
     }
 
     @Override
+    @EntityCheck(action = ActionType.INSERT, user = true)
+    public ServerResponse<TweiApiCode> insertOne(TweiApiCode apiCode) {
+        TweiApiCode exsist = dao.selectById(apiCode);
+        if (null != exsist) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
+        }
+        int count = dao.insert(apiCode);
+        if (count != 1) {
+            return ServerResponse.createByErrorMessage("添加失敗");
+        }
+        return ServerResponse.createBySuccess(apiCode);
+    }
+
+    @Override
     protected EntityWrapper<TweiApiCode> getDeleteAndUpdateWrapper(TweiApiCode apiCode) {
         EntityWrapper<TweiApiCode> wrapper = new EntityWrapper<>();
         wrapper.eq("code_id",apiCode.getCodeId());
@@ -53,11 +72,10 @@ public class ApiCodeServiceImpl extends BaseServiceImpl<TweiApiCodeDao, TweiApiC
     @Override
     public List<TweiApiCode> selectList(TweiApiCode apiCode) {
         EntityWrapper<TweiApiCode> wrapper = new EntityWrapper<>();
-        if (apiCode != null) {
-            if (StringUtil.isBlank(apiCode.getApiId())){
-                wrapper.eq("api_id", apiCode.getApiId());
-            }
+        if (apiCode == null || StringUtil.isBlank(apiCode.getApiId())) {
+            return new ArrayList<>();
         }
+        wrapper.eq("api_id", apiCode.getApiId());
         return dao.selectList(wrapper);
     }
 }
