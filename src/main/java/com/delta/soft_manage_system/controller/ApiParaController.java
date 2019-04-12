@@ -35,6 +35,7 @@ public class ApiParaController extends BaseController<ApiParaService, TweiApiPar
     public String getKnowledgeIndex(ModelMap modelMap){
         List<TweiApi> apis = apiService.selectList();
         modelMap.addAttribute("apis",apis);
+        setActiveMenu("6");
         return "backend/api/apipara_manage";
     }
 

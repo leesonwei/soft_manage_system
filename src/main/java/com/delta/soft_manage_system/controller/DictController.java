@@ -42,6 +42,7 @@ public class DictController extends BaseController<DictService, TweiDict> {
     @GetMapping("/manage")
     public String manage(ModelMap model){
         model.addAttribute("typeList", getModel());
+        setActiveMenu("5");
         return "backend/dict/dict_manage";
     }
 

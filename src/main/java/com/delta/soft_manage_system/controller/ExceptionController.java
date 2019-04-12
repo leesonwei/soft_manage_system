@@ -2,6 +2,7 @@ package com.delta.soft_manage_system.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.delta.common.utils.ServerResponse;
+import com.delta.soft_manage_system.log2db.Log2db;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -22,6 +23,7 @@ public class ExceptionController {
     private HttpServletRequest request;
 
     @ExceptionHandler(Exception.class)
+    @Log2db("EXCEPTION")
     public String handler(Exception e){
         log.error("====================系統異常=================",e);
         if (request.getHeader("X-Requested-With") != null) {

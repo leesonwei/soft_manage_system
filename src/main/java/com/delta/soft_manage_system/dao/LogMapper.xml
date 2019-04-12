@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.delta.soft_manage_system.dao.LogMapper">
+  <!--<insert id="insert" parameterType="com.delta.soft_manage_system.dto.Log">-->
+    <!--insert into twei_app_log(-->
+      <!--log_id, log_type, log_content, log_at, log_by, log_result-->
+    <!--)-->
+    <!--values(-->
+      <!--#{logId,jdbcType=INTEGER}, #{logType,jdbcType=VARCHAR}, #{logContent,jdbcType=VARCHAR}, #{logAt,jdbcType=DATE}, #{logBy,jdbcType=VARCHAR}, #{logResult,jdbcType=VARCHAR}-->
+    <!--)-->
+  <!--</insert>-->
+
+</mapper>

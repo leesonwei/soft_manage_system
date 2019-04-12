@@ -9,6 +9,7 @@ tableconst.buttons = [
     { extend: 'add', className: 'btn-sm btn-primary' },
     { extend: 'edit', className: 'btn-sm btn-info' },
     { extend: 'delete', className: 'btn-sm btn-danger' },
+    { extend: 'setauths', className: 'btn-sm btn-success' },
     { extend: 'empty', className: 'btn-sm disabled' },
     { extend: 'excel', className: 'btn-sm' },
     { extend: 'pdf', className: 'btn-sm' },
@@ -22,7 +23,7 @@ var handleDataTableButtons = function() {
 	if ($('#data-table-buttons').length !== 0) {
 		table = $('#data-table-buttons').DataTable({
 			dom: 'Bftip',
-			buttons: tableconst.buttons,
+            buttons:tableconst.buttons,
 			responsive: true,
             order:[[3, "des"]],
 			oLanguage: {
@@ -42,26 +43,24 @@ var handleDataTableButtons = function() {
             columnDefs: [{
                 "targets": 0,
                 "width": '50px',
-                "data": 'knowId'
+                "data": 'roleId'
             },{
                 "targets": 1,
-                "data": 'knowType',
+                "data": 'roleParentId',
                 "render": function(data, type, row, meta){
-                    return $('.dicttype[data-dictid='+data+']').text();
+                    return data;
                 }
             },{
                 "targets": 2,
-                "data": 'knowTitle',
-                "render":function(data, type, row, meta){
+                "data": 'roleName',
+                "render": function(data, type, row, meta){
                     return data;
                 }
             },{
                 "targets": 3,
-                "data": 'knowDetail',
+                "data": 'createAt',
                 "render":function(data, type, row, meta){
-                    var html;
-                    html='<div style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:150px;" title='+data+'>'+data+'</div>';
-                    return html;
+                    return data;
                 }
             },{
                 "targets": 4,
@@ -71,31 +70,21 @@ var handleDataTableButtons = function() {
                 }
             },{
                 "targets": 5,
-                "data": 'createAt',
+                "data": 'roleDesc',
                 "render":function(data, type, row, meta){
-                    return data;
+                    var html;
+                    html='<div style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:150px;" title='+data+'>'+data+'</div>';
+                    return html;
                 }
             },{
                 "targets": 6,
-                "data": 'isHelp',
-                "render":function(data, type, row, meta){
-                    return data;
-                }
-            },{
-                "targets": 7,
-                "data": 'isUnhelp',
-                "render":function(data, type, row, meta){
-                    return data;
-                }
-            },{
-                "targets": 8,
-                "data": 'knowDetail',
+                "data": 'roleDesc',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             }],
 			ajax: {
-				"url": "/admin/knowledge/manage/json",
+				"url": "/admin/role/manage/json",
 				"data": function () {
 					var data = {};
 					data.knowType = $('#data-table-type .selected').data('dictid');
@@ -118,7 +107,7 @@ $.fn.dataTable.ext.buttons.add = {
 	action: function ( e, dt, node, config ) {
 		layer.open({
             id:'layer-add',
-			title:'增加數據字典類型',
+			title:'增加角色',
 			type: 1,
 			resize: true,
             shadeClose:true,
@@ -128,21 +117,24 @@ $.fn.dataTable.ext.buttons.add = {
 			btn: ['保存', '取消'],
             success:function(layero, index){
                 layero.find('#id').val('自動獲取');
-                layero.find('#knowType').val($('#data-table-type .selected').data('dictid'));
+                var data = table.row($('#data-table-buttons tbody').find("tr.selected")).data();
+                if (data != undefined && data.roleId != undefined) {
+                    layero.find('#roleParentId').val(data.roleId);
+                }
             },
 			yes:function(index1, layero){
                 if (target === undefined) target = {};
-                target.knowType = layero.find('#knowType').val();
-                target.codeId = layero.find('#codeId').val();
-                target.knowTitle = layero.find('#knowTitle').val();
-                target.knowDetail = layero.find('#knowDetail').val();
+                target.roleParentId = layero.find('#roleParentId').val();
+                target.roleName = layero.find('#roleName').val();
+                target.roleDesc = layero.find('#roleDesc').val();
+                target.roleLevel = layero.find('#roleLevel').val();
 
                 layer.confirm('您確定保存這條記錄嗎？',{
                     btn: ['確定','取消']
                 }, function(index2,layerc){
                     layer.close(index2);
                     layero.find('a.layui-layer-btn0').text('正在提交...');
-                    PublicFunc.ajaxCRUD(target,'/admin/knowledge/insert',function(ret){
+                    PublicFunc.ajaxCRUD(target,'/admin/role/insert',function(ret){
                         layer.msg('增加成功', {icon: 1, time:2000});
                         table.ajax.reload().draw(false);
                         target  = undefined;
@@ -183,7 +175,7 @@ $.fn.dataTable.ext.buttons.edit = {
         }
         layer.open({
             id:'layer-edit',
-            title:'修改數據字典類型',
+            title:'修改角色',
             type: 1,
             resize: true,
             shadeClose:true,
@@ -192,11 +184,11 @@ $.fn.dataTable.ext.buttons.edit = {
             content: $('#addAndEditForm').html(),
             btn: ['保存', '取消'],
             success:function(layero, index){
-                layero.find('#id').val(target.knowId);
-                layero.find('#knowType').val(target.knowType);
-                layero.find('#knowTitle').val(target.knowTitle);
-                layero.find('#knowDetail').val(target.knowDetail);
-                layero.find('#codeId').val(target.codeId);
+                layero.find('#id').val(target.roleId);
+                layero.find('#roleParentId').val(target.roleParentId);
+                layero.find('#roleName').val(target.roleName);
+                layero.find('#roleDesc').val(target.roleDesc);
+                layero.find('#roleLevel').val(target.roleLevel);
             },
             yes:function(index1, layero){
                 layer.confirm('您確定保存所有的修改嗎？',{
@@ -204,15 +196,14 @@ $.fn.dataTable.ext.buttons.edit = {
                 }, function(index2){
                     layer.close(index2);
                     if (target === undefined) target = {};
-                    target.knowType = layero.find('#knowType').val();
-                    target.codeId = layero.find('#codeId').val();
-                    target.knowTitle = layero.find('#knowTitle').val();
-                    target.knowDetail = layero.find('#knowDetail').val();
+                    target.roleName = layero.find('#roleName').val();
+                    target.roleDesc = layero.find('#roleDesc').val();
+                    target.roleLevel = layero.find('#roleLevel').val();
 
                     layero.find('a.layui-layer-btn0').text('正在提交...');
-                    PublicFunc.ajaxCRUD(target,'/admin/knowledge/update',function(ret){
+                    PublicFunc.ajaxCRUD(target,'/admin/role/update',function(ret){
                         layer.msg('修改成功', {icon: 1, time:2000});
-                        table.ajax.reload().draw(true);
+                        table.ajax.reload().draw(false);
                         target = undefined;
                         layero.find('a.layui-layer-btn0').text('增加成功');
                         layer.close(index1);
@@ -251,13 +242,133 @@ $.fn.dataTable.ext.buttons.delete = {
         layer.confirm('您確定刪除這條記錄嗎？',{
             btn: ['確定','取消']
         }, function(){
-            PublicFunc.ajaxCRUD(target,'/admin/knowledge/delete',function(ret){
+            PublicFunc.ajaxCRUD(target,'/admin/role/delete',function(ret){
                 layer.msg('刪除成功', {icon: 1, time:2000});
                 table.row(targetRow).remove().draw(false);
                 target = undefined;
             });
         })
 	}
+};
+var setting = {
+    view: {
+        selectedMulti: false
+    },
+    check: {
+        enable: true
+    },
+    data: {
+        key: {
+            children: "children",
+            name: "authName",
+            title: "",
+            url: "url",
+            icon: "icon"
+        },
+        simpleData: {
+            enable: true,
+            idKey: "authId",
+            pIdKey: "authParentId",
+            rootPId: null
+        }
+    },
+    edit: {
+        enable: false
+    }
+};
+
+var zTree;
+
+$.fn.dataTable.ext.buttons.setauths = {
+    text: '設置權限',
+    action: function ( e, dt, node, config ) {
+        if (target === undefined || target.length === 0){
+            layer.msg("請選擇一個角色", {
+                icon:0,
+                time: 2000,
+            });
+            return;
+        }
+
+        var htmls = '';
+        $.ajax({
+            url:'/admin/auth/manage/json',
+            header:Cookies.get('token'),
+            data:{roleId:target.roleId},
+            type:'post',
+            dataType:'json',
+            success:function(ret){
+                if (ret.status === 0) {
+                    var data = ret.data;
+                    layer.open({
+                        id:'layer-setRoles',
+                        title:'設置權限',
+                        type: 1,
+                        resize: true,
+                        shadeClose:true,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: [formSize.width, 300], //宽高
+                        content: '<div style="height:300px; padding: 15px 30px; text-align: center" id="auths" class="ztree"></div>',
+                        btn: ['保存', '取消'],
+                        success:function(){
+                            $.fn.zTree.init($("#auths"), setting, data);
+                            zTree = $.fn.zTree.getZTreeObj("auths");
+                            zTree.expandAll(true);
+                            zTree.checkAllNodes(true);
+                            var nodes = zTree.getNodesByParam("hasCheck",false);
+                            for (var obj in nodes) {
+                                zTree.checkNode(nodes[obj],false);
+                            }
+                        },
+                        yes:function(index, layero){
+                            var nodes = zTree.getCheckedNodes(true);
+                            var data = [];
+                            for(var obj in nodes){
+                                var dataSub = {};
+                                dataSub.roleId = target.roleId;
+                                dataSub.authId =nodes[obj].authId;
+                                data.push(dataSub);
+                            }
+                            $.ajax({
+                                url:'/admin/role/setauths/json',
+                                type:'post',
+                                dataType:'json',
+                                data: {json:JSON.stringify(data)},
+                                success:function(ret){
+                                    if (ret.status == 0) {
+                                        layer.msg('設置權限成功', {icon: 1, time:2000});
+                                    } else {
+                                        layer.msg('設置權限失敗', {icon: 2, time:2000});
+                                    }
+                                },
+                                error:function(ret){
+                                    layer.msg("服務器出錯" + ret.status, {
+                                        icon:2,
+                                        time: 3000,
+                                    });
+                                }
+                            })
+                            layer.close(index);
+                        },
+                        btn2:function(index, layero){
+                            layer.close(index);
+                        }
+                    });
+                } else {
+                    layer.msg("獲取權限列表失敗" + ret.status, {
+                        icon:2,
+                        time: 3000,
+                    });
+                }
+            },
+            error:function(ret){
+                layer.msg("獲取角色列表失敗" + ret.status, {
+                    icon:2,
+                    time: 3000,
+                });
+            }
+        });
+    }
 };
 
 $.fn.dataTable.ext.buttons.empty = {

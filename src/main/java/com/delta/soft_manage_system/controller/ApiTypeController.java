@@ -28,6 +28,7 @@ public class ApiTypeController extends BaseController<ApiTypeService, TweiApiTyp
 
     @GetMapping("/manage")
     public String getKnowledgeIndex(){
+        setActiveMenu("6");
         return "backend/api/apitype_manage";
     }
 

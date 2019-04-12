@@ -40,6 +40,7 @@ public class ApiController extends BaseController<ApiService, TweiApi> {
         dict.setFlag(1);
         List<DictVo> dicts = dictService.selectList(dict);
         modelMap.addAttribute("dicts", dicts);
+        setActiveMenu("6");
         return "backend/api/api_manage";
     }
 

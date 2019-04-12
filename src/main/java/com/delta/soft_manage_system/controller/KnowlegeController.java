@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Classname KnowlegeController
@@ -28,17 +30,22 @@ import java.util.List;
 public class KnowlegeController extends BaseController<KnowledgeService, TweiKnowledge> {
     @Autowired
     private DictService dictService;
+    public final String menuid = "4000";
+
     @Autowired
     public KnowlegeController(KnowledgeService knowledgeService) {
         super(knowledgeService);
     }
     @GetMapping("/manage")
-    public String getKnowledgeIndex(ModelMap modelMap){
+    public String getKnowledgeIndex(ModelMap modelMap, HttpSession session){
         TweiDict dict = new TweiDict();
         dict.setTypeId(GlobalConst.KNOWLEDGE_TYPE);
         dict.setFlag(1);
         List<DictVo> dicts = dictService.selectList(dict);
         modelMap.addAttribute("dicts", dicts);
+        setActiveMenu("15");
+        Map<String,Object> button = (Map<String,Object>)session.getAttribute(GlobalConst.AUTHVALUE);
+        session.setAttribute(GlobalConst.SINGLEAUTHVALUE, button.get(menuid));
         return "backend/knowledge/knowledge_manage";
     }
 

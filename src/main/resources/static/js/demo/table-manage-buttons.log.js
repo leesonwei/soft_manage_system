@@ -21,8 +21,7 @@ var handleDataTableButtons = function() {
     
 	if ($('#data-table-buttons').length !== 0) {
 		table = $('#data-table-buttons').DataTable({
-			dom: 'Bftip',
-			buttons: tableconst.buttons,
+			dom: 'ftip',
 			responsive: true,
             order:[[3, "des"]],
 			oLanguage: {
@@ -42,60 +41,51 @@ var handleDataTableButtons = function() {
             columnDefs: [{
                 "targets": 0,
                 "width": '50px',
-                "data": 'knowId'
+                "data": 'logId'
             },{
                 "targets": 1,
-                "data": 'knowType',
+                "data": 'logType',
                 "render": function(data, type, row, meta){
-                    return $('.dicttype[data-dictid='+data+']').text();
-                }
-            },{
-                "targets": 2,
-                "data": 'knowTitle',
-                "render":function(data, type, row, meta){
                     return data;
                 }
             },{
-                "targets": 3,
-                "data": 'knowDetail',
+                "targets": 2,
+                "data": 'logContent',
                 "render":function(data, type, row, meta){
                     var html;
                     html='<div style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:150px;" title='+data+'>'+data+'</div>';
                     return html;
                 }
             },{
+                "targets": 3,
+                "data": 'logAt',
+                "render":function(data, type, row, meta){
+                    return data;
+                }
+            },{
                 "targets": 4,
-                "data": 'createBy',
+                "data": 'logBy',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             },{
                 "targets": 5,
-                "data": 'createAt',
+                "data": 'logResult',
                 "render":function(data, type, row, meta){
                     return data;
+                    // var html;
+                    // html='<div style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:150px;" title='+data+'>'+data+'</div>';
+                    // return html;
                 }
             },{
                 "targets": 6,
-                "data": 'isHelp',
-                "render":function(data, type, row, meta){
-                    return data;
-                }
-            },{
-                "targets": 7,
-                "data": 'isUnhelp',
-                "render":function(data, type, row, meta){
-                    return data;
-                }
-            },{
-                "targets": 8,
-                "data": 'knowDetail',
+                "data": 'logContent',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             }],
 			ajax: {
-				"url": "/admin/knowledge/manage/json",
+				"url": "/admin/log/manage/json",
 				"data": function () {
 					var data = {};
 					data.knowType = $('#data-table-type .selected').data('dictid');
@@ -133,7 +123,6 @@ $.fn.dataTable.ext.buttons.add = {
 			yes:function(index1, layero){
                 if (target === undefined) target = {};
                 target.knowType = layero.find('#knowType').val();
-                target.codeId = layero.find('#codeId').val();
                 target.knowTitle = layero.find('#knowTitle').val();
                 target.knowDetail = layero.find('#knowDetail').val();
 
@@ -196,7 +185,6 @@ $.fn.dataTable.ext.buttons.edit = {
                 layero.find('#knowType').val(target.knowType);
                 layero.find('#knowTitle').val(target.knowTitle);
                 layero.find('#knowDetail').val(target.knowDetail);
-                layero.find('#codeId').val(target.codeId);
             },
             yes:function(index1, layero){
                 layer.confirm('您確定保存所有的修改嗎？',{
@@ -205,7 +193,6 @@ $.fn.dataTable.ext.buttons.edit = {
                     layer.close(index2);
                     if (target === undefined) target = {};
                     target.knowType = layero.find('#knowType').val();
-                    target.codeId = layero.find('#codeId').val();
                     target.knowTitle = layero.find('#knowTitle').val();
                     target.knowDetail = layero.find('#knowDetail').val();
 

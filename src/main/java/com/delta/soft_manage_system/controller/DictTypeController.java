@@ -33,6 +33,7 @@ public class DictTypeController extends BaseController<DictTypeService, TweiDict
 
     @GetMapping("/manage")
     public String getDictTypeIndex(){
+        setActiveMenu("5");
         return "backend/dict/dicttype_manage";
     }
 

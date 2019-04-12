@@ -15,16 +15,15 @@ tableconst.buttons = [
     { extend: 'print', className: 'btn-sm' }
 ];
 
-
 var handleDataTableButtons = function() {
 	"use strict";
     
 	if ($('#data-table-buttons').length !== 0) {
 		table = $('#data-table-buttons').DataTable({
 			dom: 'Bftip',
-			buttons: tableconst.buttons,
+            buttons:tableconst.buttons,
 			responsive: true,
-            order:[[3, "des"]],
+            order:[[1, "des"],[0, "des"]],
 			oLanguage: {
 				"sLengthMenu": "每页显示 _MENU_ 条记录",
 				"sZeroRecords": "抱歉， 没有找到數據",
@@ -42,30 +41,28 @@ var handleDataTableButtons = function() {
             columnDefs: [{
                 "targets": 0,
                 "width": '50px',
-                "data": 'knowId'
+                "data": 'menuId'
             },{
                 "targets": 1,
-                "data": 'knowType',
+                "data": 'menuParentIdName',
                 "render": function(data, type, row, meta){
-                    return $('.dicttype[data-dictid='+data+']').text();
+                    return data;
                 }
             },{
                 "targets": 2,
-                "data": 'knowTitle',
+                "data": 'menuName',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             },{
                 "targets": 3,
-                "data": 'knowDetail',
+                "data": 'menuLevel',
                 "render":function(data, type, row, meta){
-                    var html;
-                    html='<div style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:150px;" title='+data+'>'+data+'</div>';
-                    return html;
+                    return data;
                 }
             },{
                 "targets": 4,
-                "data": 'createBy',
+                "data": 'authIdUrl',
                 "render":function(data, type, row, meta){
                     return data;
                 }
@@ -77,25 +74,25 @@ var handleDataTableButtons = function() {
                 }
             },{
                 "targets": 6,
-                "data": 'isHelp',
+                "data": 'createBy',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             },{
                 "targets": 7,
-                "data": 'isUnhelp',
+                "data": 'menuIcon',
                 "render":function(data, type, row, meta){
-                    return data;
+                    return '<i class="' + data + '"></i>';
                 }
             },{
                 "targets": 8,
-                "data": 'knowDetail',
+                "data": 'authIdUrl',
                 "render":function(data, type, row, meta){
                     return data;
                 }
             }],
 			ajax: {
-				"url": "/admin/knowledge/manage/json",
+				"url": "/admin/menu/manage/json",
 				"data": function () {
 					var data = {};
 					data.knowType = $('#data-table-type .selected').data('dictid');
@@ -128,21 +125,25 @@ $.fn.dataTable.ext.buttons.add = {
 			btn: ['保存', '取消'],
             success:function(layero, index){
                 layero.find('#id').val('自動獲取');
-                layero.find('#knowType').val($('#data-table-type .selected').data('dictid'));
+                var data = table.row($('#data-table-buttons tbody').find("tr.selected")).data();
+                if (data != undefined && data.menuId != undefined) {
+                    layero.find('#menuParentId').val(data.menuId);
+                }
             },
 			yes:function(index1, layero){
                 if (target === undefined) target = {};
-                target.knowType = layero.find('#knowType').val();
-                target.codeId = layero.find('#codeId').val();
-                target.knowTitle = layero.find('#knowTitle').val();
-                target.knowDetail = layero.find('#knowDetail').val();
+                target.menuName = layero.find('#menuName').val();
+                target.menuParentId = layero.find('#menuParentId').val();
+                target.menuLevel = layero.find('#menuLevel').val();
+                target.authId = layero.find('#authId option:selected').val();
+                target.menuIcon = layero.find('#menuIcon').val();
 
                 layer.confirm('您確定保存這條記錄嗎？',{
                     btn: ['確定','取消']
                 }, function(index2,layerc){
                     layer.close(index2);
                     layero.find('a.layui-layer-btn0').text('正在提交...');
-                    PublicFunc.ajaxCRUD(target,'/admin/knowledge/insert',function(ret){
+                    PublicFunc.ajaxCRUD(target,'/admin/menu/insert',function(ret){
                         layer.msg('增加成功', {icon: 1, time:2000});
                         table.ajax.reload().draw(false);
                         target  = undefined;
@@ -181,6 +182,7 @@ $.fn.dataTable.ext.buttons.edit = {
             });
             return;
         }
+        $('#authId option[value = ' + target.authId + ']').attr('selected', 'selected');
         layer.open({
             id:'layer-edit',
             title:'修改數據字典類型',
@@ -192,11 +194,11 @@ $.fn.dataTable.ext.buttons.edit = {
             content: $('#addAndEditForm').html(),
             btn: ['保存', '取消'],
             success:function(layero, index){
-                layero.find('#id').val(target.knowId);
-                layero.find('#knowType').val(target.knowType);
-                layero.find('#knowTitle').val(target.knowTitle);
-                layero.find('#knowDetail').val(target.knowDetail);
-                layero.find('#codeId').val(target.codeId);
+                layero.find('#id').val(target.menuId);
+                layero.find('#menuName').val(target.menuName);
+                layero.find('#menuParentId').val(target.menuParentId);
+                layero.find('#menuLevel').val(target.menuLevel);
+                layero.find('#menuIcon').val(target.menuIcon);
             },
             yes:function(index1, layero){
                 layer.confirm('您確定保存所有的修改嗎？',{
@@ -204,15 +206,16 @@ $.fn.dataTable.ext.buttons.edit = {
                 }, function(index2){
                     layer.close(index2);
                     if (target === undefined) target = {};
-                    target.knowType = layero.find('#knowType').val();
-                    target.codeId = layero.find('#codeId').val();
-                    target.knowTitle = layero.find('#knowTitle').val();
-                    target.knowDetail = layero.find('#knowDetail').val();
+                    target.menuName = layero.find('#menuName').val();
+                    target.menuParentId = layero.find('#menuParentId').val();
+                    target.menuLevel = layero.find('#menuLevel').val();
+                    target.authId = layero.find('#authId option:selected').val();
+                    target.menuIcon = layero.find('#menuIcon').val();
 
                     layero.find('a.layui-layer-btn0').text('正在提交...');
-                    PublicFunc.ajaxCRUD(target,'/admin/knowledge/update',function(ret){
+                    PublicFunc.ajaxCRUD(target,'/admin/menu/update',function(ret){
                         layer.msg('修改成功', {icon: 1, time:2000});
-                        table.ajax.reload().draw(true);
+                        table.ajax.reload().draw(false);
                         target = undefined;
                         layero.find('a.layui-layer-btn0').text('增加成功');
                         layer.close(index1);
@@ -251,7 +254,7 @@ $.fn.dataTable.ext.buttons.delete = {
         layer.confirm('您確定刪除這條記錄嗎？',{
             btn: ['確定','取消']
         }, function(){
-            PublicFunc.ajaxCRUD(target,'/admin/knowledge/delete',function(ret){
+            PublicFunc.ajaxCRUD(target,'/admin/menu/delete',function(ret){
                 layer.msg('刪除成功', {icon: 1, time:2000});
                 table.row(targetRow).remove().draw(false);
                 target = undefined;

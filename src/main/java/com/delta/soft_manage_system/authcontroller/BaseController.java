@@ -1,10 +1,10 @@
-package com.delta.soft_manage_system.controller;
+package com.delta.soft_manage_system.authcontroller;
 
+import com.delta.auth.Service.BaseService;
 import com.delta.auth.common.MenuUtil;
 import com.delta.auth.dto.TweiMenuVo;
 import com.delta.common.utils.ServerResponse;
 import com.delta.soft_manage_system.log2db.Log2db;
-import com.delta.soft_manage_system.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,22 +35,22 @@ public abstract class BaseController<T extends BaseService,K> {
     @PostMapping("/insert")
     @Log2db("INSERT")
     @ResponseBody
-    public ServerResponse<K> insertOne(K k){
-        return service.insertOne(k);
+    public ServerResponse<K> insertOne(K k, HttpServletRequest request){
+        return service.insertOne(k, request);
     }
 
     @PostMapping("/delete")
     @Log2db("DELETE")
     @ResponseBody
-    public ServerResponse<K> deleteOne(K k){
-        return service.deleteOne(k);
+    public ServerResponse<K> deleteOne(K k, HttpServletRequest request){
+        return service.deleteOne(k, request);
     }
 
     @PostMapping("/update")
     @Log2db("UPDATE")
     @ResponseBody
-    public ServerResponse<K> updateOne(K k){
-        return service.updateOne(k);
+    public ServerResponse<K> updateOne(K k, HttpServletRequest request){
+        return service.updateOne(k, request);
     }
 
     @GetMapping("/select/one")

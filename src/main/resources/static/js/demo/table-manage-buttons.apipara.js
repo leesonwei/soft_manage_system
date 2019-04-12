@@ -169,6 +169,7 @@ $.fn.dataTable.ext.buttons.edit = {
             });
             return;
         }
+        layero.find('#isNullable').attr("checked",target.isNullable);
         layer.open({
             id:'layer-edit',
             title:'修改數據字典類型',
@@ -183,7 +184,6 @@ $.fn.dataTable.ext.buttons.edit = {
                 layero.find('#id').val(target.typeId);
                 layero.find('#paraName').val(target.paraName);
                 layero.find('#paraDataType').val(target.paraDataType);
-                layero.find('#isNullable').attr("checked",target.isNullable);
                 layero.find('#paraMemo').val(target.paraMemo);
             },
             yes:function(index1, layero){

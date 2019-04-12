@@ -19,6 +19,10 @@ public class XssFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        filterChain.doFilter(new XssRequestWrapper(request), servletResponse);
+        if (request.getRequestURI().contains("json")) {
+            filterChain.doFilter(request, servletResponse);
+        } else {
+            filterChain.doFilter(new XssRequestWrapper(request), servletResponse);
+        }
     }
 }

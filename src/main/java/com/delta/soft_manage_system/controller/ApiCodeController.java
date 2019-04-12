@@ -35,6 +35,7 @@ public class ApiCodeController extends BaseController<ApiCodeService, TweiApiCod
     public String getKnowledgeIndex(ModelMap modelMap){
         List<TweiApi> apis = apiService.selectList();
         modelMap.addAttribute("apis",apis);
+        setActiveMenu("6");
         return "backend/api/apicode_manage";
     }
 
