@@ -2,6 +2,7 @@ package com.delta.soft_manage_system.controller;
 
 import com.delta.auth.common.MenuUtil;
 import com.delta.auth.dto.TweiMenuVo;
+import com.delta.common.constant.GlobalConst;
 import com.delta.common.utils.ServerResponse;
 import com.delta.soft_manage_system.log2db.Log2db;
 import com.delta.soft_manage_system.service.BaseService;
@@ -25,12 +26,9 @@ public abstract class BaseController<T extends BaseService,K> {
 
     protected  T service;
 
-    //public BaseController(){}
-
     public BaseController(T t){
         this.service = t;
     }
-
 
     @PostMapping("/insert")
     @Log2db("INSERT")
@@ -66,8 +64,8 @@ public abstract class BaseController<T extends BaseService,K> {
     }
 
     protected void setActiveMenu(String id){
-        List<TweiMenuVo> menus = (List<TweiMenuVo>)request.getSession().getAttribute("menuTree");
+        List<TweiMenuVo> menus = (List<TweiMenuVo>)request.getSession().getAttribute(GlobalConst.MENUTREE);
         menus = MenuUtil.setActive(id,menus);
-        request.getSession().setAttribute("menuTree", menus);
+        request.getSession().setAttribute(GlobalConst.MENUTREE, menus);
     }
 }

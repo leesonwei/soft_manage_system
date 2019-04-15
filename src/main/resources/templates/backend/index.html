@@ -181,7 +181,7 @@
 				<ul class="nav">
 					<li class="nav-header">導航菜單</li>
 					<li th:class="${menu.subMenu.size() > 0 ?'has-sub ' + menu.active:'' + menu.active}" th:each="menu:${session.menuTree}">
-						<a th:href="${menu.authIdUrl != null ? menu.authIdUrl: 'javascript:;'}">
+						<a th:href="${(menu.authIdUrl != null && menu.authIdUrl != '/') ? menu.authIdUrl: 'javascript:;'}">
 							<b th:if="${menu.subMenu.size() > 0}" class="caret"></b>
 							<i th:class="${menu.menuIcon}"></i>
 							<span th:text="${menu.menuName}">首頁</span>
@@ -189,6 +189,11 @@
 						<ul  th:if="${menu.subMenu.size() > 0}" class="sub-menu">
 							<li th:each="sub:${menu.getSubMenu()}">
 								<a th:href="${sub.authIdUrl}" th:text="${sub.menuName}">菜單管理</a>
+								<ul  th:if="${sub.subMenu.size() > 0}" class="sub-menu">
+									<li th:each="sub1:${sub.getSubMenu()}">
+										<a th:href="${sub1.authIdUrl}" th:text="${sub1.menuName}">菜單管理</a>
+									</li>
+								</ul>
 							</li>
 						</ul>
 					</li>
@@ -270,10 +275,10 @@
 			
 
 			<!-- begin row -->
-			<div class="row">
-				<!-- begin col-8 -->
+			<!--<div class="row">
+				&lt;!&ndash; begin col-8 &ndash;&gt;
 				<div class="col-lg-8">
-					<!-- begin panel -->
+					&lt;!&ndash; begin panel &ndash;&gt;
 					<div class="panel panel-inverse" data-sortable-id="index-1">
 						<div class="panel-heading">
 							<div class="panel-heading-btn">
@@ -288,13 +293,13 @@
 							<div id="interactive-chart" class="height-sm"></div>
 						</div>
 					</div>
-					<!-- end panel -->
+					&lt;!&ndash; end panel &ndash;&gt;
 				</div>
-				<!--end col-8-->
+				&lt;!&ndash;end col-8&ndash;&gt;
 
-				<!--begin col-4-->
+				&lt;!&ndash;begin col-4&ndash;&gt;
 				<div class="col-lg-4">
-					<!-- begin panel -->
+					&lt;!&ndash; begin panel &ndash;&gt;
 					<div class="panel panel-inverse" data-sortable-id="index-10">
 						<div class="panel-heading">
 							<div class="panel-heading-btn">
@@ -309,10 +314,10 @@
 							<div id="datepicker-inline" class="datepicker-full-width overflow-y-scroll position-relative"><div></div></div>
 						</div>
 					</div>
-					<!-- end panel -->
+					&lt;!&ndash; end panel &ndash;&gt;
 				</div>
-				<!--end col-4-->
-			</div>
+				&lt;!&ndash;end col-4&ndash;&gt;
+			</div>-->
 			<!-- end row -->
 		</div>
 		<!-- end #content -->

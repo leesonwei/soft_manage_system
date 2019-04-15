@@ -1,5 +1,6 @@
 package com.delta.soft_manage_system.config;
 
+import com.delta.soft_manage_system.interceptor.AuthInterceptor;
 import com.delta.soft_manage_system.interceptor.GlobalInterceptor;
 import com.delta.soft_manage_system.interceptor.JWTInterceptor;
 import com.google.common.base.Predicates;
@@ -29,6 +30,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private GlobalInterceptor globalInterceptor;
     @Autowired
     private JWTInterceptor jwtInterceptor;
+    @Autowired
+    private AuthInterceptor authInterceptor;
 
 
     /**
@@ -42,6 +45,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         //config jwt intercept parttern
         registry.addInterceptor(jwtInterceptor)
+                .addPathPatterns("/admin/**");
+
+        //config jwt intercept parttern
+        registry.addInterceptor(authInterceptor)
                 .addPathPatterns("/admin/**");
     }
 

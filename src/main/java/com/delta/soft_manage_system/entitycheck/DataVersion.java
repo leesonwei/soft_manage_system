@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @Classname DataVersion
+ * @Classname DataVersion 數據版本號註解
  * @Date 2019/3/26 11:14
  * @Author LIZONG.WEI
  * @Since 1.8

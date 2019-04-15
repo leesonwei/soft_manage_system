@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Classname DictTypeController
@@ -30,10 +31,13 @@ public class DictTypeController extends BaseController<DictTypeService, TweiDict
     public DictTypeController(DictTypeService dictTypeService){
         super(dictTypeService);
     }
+    public final String menuid = "2100";
 
     @GetMapping("/manage")
-    public String getDictTypeIndex(){
+    public String getDictTypeIndex(HttpSession session){
         setActiveMenu("5");
+        Map<String,Object> button = (Map<String,Object>)session.getAttribute(GlobalConst.AUTHVALUE);
+        session.setAttribute(GlobalConst.SINGLEAUTHVALUE, button.get(menuid));
         return "backend/dict/dicttype_manage";
     }
 

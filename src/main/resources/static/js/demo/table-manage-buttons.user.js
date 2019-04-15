@@ -24,7 +24,7 @@ var handleDataTableButtons = function() {
 	if ($('#data-table-buttons').length !== 0) {
 		table = $('#data-table-buttons').DataTable({
 			dom: 'Bftip',
-            buttons:tableconst.buttons,
+            buttons:PublicFunc.getButtonList(),
 			responsive: true,
             order:[[0, "asc"],[4, "des"]],
 			oLanguage: {
@@ -133,7 +133,9 @@ $.fn.dataTable.ext.buttons.add = {
                 target.password = layero.find('#password').val();
                 target.userName = layero.find('#userName').val();
                 target.email = layero.find('#email').val();
-
+                if (target.role || target.role == null || target.role == '') {
+                    delete target['role'];
+                }
                 layer.confirm('您確定保存這條記錄嗎？',{
                     btn: ['確定','取消']
                 }, function(index2,layerc){
@@ -205,7 +207,9 @@ $.fn.dataTable.ext.buttons.edit = {
                     target.userName = layero.find('#userName').val();
                     target.email = layero.find('#email').val();
                     target.password = layero.find('#password').val();
-
+                    if (target.role || target.role == null || target.role == '') {
+                        delete target['role'];
+                    }
                     layero.find('a.layui-layer-btn0').text('正在提交...');
                     PublicFunc.ajaxCRUD(target,'/admin/user/update',function(ret){
                         layer.msg('修改成功', {icon: 1, time:2000});
@@ -245,9 +249,13 @@ $.fn.dataTable.ext.buttons.delete = {
             });
             return;
         }
+
         layer.confirm('您確定刪除這條記錄嗎？',{
             btn: ['確定','取消']
         }, function(){
+            if (target.role || target.role == null || target.role == '') {
+                delete target['role'];
+            }
             PublicFunc.ajaxCRUD(target,'/admin/user/delete',function(ret){
                 layer.msg('刪除成功', {icon: 1, time:2000});
                 table.row(targetRow).remove().draw(false);
@@ -329,7 +337,7 @@ $.fn.dataTable.ext.buttons.setroles = {
                         }
                     });
                 } else {
-                    layer.msg("獲取角色列表失敗" + ret.status, {
+                    layer.msg(ret.msg + ret.status, {
                         icon:2,
                         time: 3000,
                     });

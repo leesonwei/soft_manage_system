@@ -43,7 +43,7 @@ public class IndexController {
         List<TweiMenuVo> menus = (List<TweiMenuVo>)request.getSession().getAttribute(GlobalConst.MENUS);
         List<TweiMenuVo> menuTree = MenuUtil.getMenuTree(menus);
         menuTree = MenuUtil.setActive("2",menuTree);
-        request.getSession().setAttribute("menuTree", menuTree);
+        request.getSession().setAttribute(GlobalConst.MENUTREE, menuTree);
         return "backend/index";
     }
 

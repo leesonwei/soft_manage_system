@@ -4,6 +4,23 @@ var target;
 var targetRow;
 var formSize = {};
 
+var buttonEmun = function(){
+    var buttonEmun = {};
+    buttonEmun.INSERT = 2;
+    buttonEmun.UPDATE = 4;
+    buttonEmun.DELETE = 8;
+    buttonEmun.SELECT = 16;
+    buttonEmun.CHECK = 32;
+    buttonEmun.SETROLES = 64;
+    buttonEmun.SETAUTHS = 128;
+    return buttonEmun;
+}();
+var getButton = function(e,c){
+    var button = {};
+    button.extend = e;
+    button.className = c;
+    return button;
+}
 var formReSize = function(){
     if (window.innerWidth > 1198) {
         formSize.width = '800px';
@@ -72,6 +89,35 @@ var PublicFunc = function() {
                 icon:2,
                 time: 3000,
             });
+        },
+        getButtonList:function(){
+            var buttons = [];
+            var value = $('#singleAuthValue').val();
+            if (value&buttonEmun.INSERT) {
+                buttons.push(getButton('add','btn-sm btn-primary'));
+            }
+            if (value&buttonEmun.UPDATE) {
+                buttons.push(getButton('edit','btn-sm btn-info'));
+            }
+            if (value&buttonEmun.DELETE) {
+                buttons.push(getButton('delete','btn-sm btn-danger'));
+            }
+            if (value&buttonEmun.CHECK) {
+                buttons.push(getButton('check','btn-sm btn-green'));
+            }
+            if (value&buttonEmun.SETROLES) {
+                buttons.push(getButton('setroles','btn-sm btn-success'));
+            }
+            if (value&buttonEmun.SETAUTHS) {
+                buttons.push(getButton('setauths','btn-sm btn-success'));
+            }
+            if (buttons.length > 0) {
+                buttons.push(getButton('empty','btn-sm disabled'));
+            }
+            buttons.push(getButton('excel','btn-sm'));
+            buttons.push(getButton('pdf','btn-sm'));
+            buttons.push(getButton('print','btn-sm'));
+            return buttons;
         }
     }
 }();

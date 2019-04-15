@@ -83,6 +83,7 @@
 								<a th:if="false" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 							</div>
 							<h4 class="panel-title">菜單管理</h4>
+							<input type="hidden" id="singleAuthValue" th:value="${session.singleAuthValue}">
 						</div>
 						<!-- end panel-heading -->
 
@@ -96,7 +97,7 @@
 									<th class="text-nowrap">父菜單</th>
 									<th class="text-nowrap">名稱</th>
 									<th class="text-nowrap">層級</th>
-									<th class="text-nowrap">關聯資源名稱</th>
+									<th class="text-nowrap">關聯資源地址</th>
 									<th class="text-nowrap">創建日期</th>
 									<th class="text-nowrap">創建者</th>
 									<th class="text-nowrap">圖片</th>
@@ -109,7 +110,7 @@
 									<td>父菜單</td>
 									<td>名稱</td>
 									<td>層級</td>
-									<td>關聯資源名稱</td>
+									<td>關聯資源地址</td>
 									<td>創建日期</td>
 									<td>創建者</td>
 									<td>圖片</td>

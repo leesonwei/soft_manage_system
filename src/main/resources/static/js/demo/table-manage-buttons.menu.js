@@ -21,7 +21,7 @@ var handleDataTableButtons = function() {
 	if ($('#data-table-buttons').length !== 0) {
 		table = $('#data-table-buttons').DataTable({
 			dom: 'Bftip',
-            buttons:tableconst.buttons,
+            buttons:PublicFunc.getButtonList(),
 			responsive: true,
             order:[[1, "des"],[0, "des"]],
 			oLanguage: {
@@ -115,7 +115,7 @@ $.fn.dataTable.ext.buttons.add = {
 	action: function ( e, dt, node, config ) {
 		layer.open({
             id:'layer-add',
-			title:'增加數據字典類型',
+			title:'增加菜單',
 			type: 1,
 			resize: true,
             shadeClose:true,
@@ -129,6 +129,7 @@ $.fn.dataTable.ext.buttons.add = {
                 if (data != undefined && data.menuId != undefined) {
                     layero.find('#menuParentId').val(data.menuId);
                 }
+                layero.find('#menuLevel').val(data.menuLevel + 1);
             },
 			yes:function(index1, layero){
                 if (target === undefined) target = {};
@@ -185,7 +186,7 @@ $.fn.dataTable.ext.buttons.edit = {
         $('#authId option[value = ' + target.authId + ']').attr('selected', 'selected');
         layer.open({
             id:'layer-edit',
-            title:'修改數據字典類型',
+            title:'修改菜單',
             type: 1,
             resize: true,
             shadeClose:true,

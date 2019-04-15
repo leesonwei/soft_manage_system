@@ -5,6 +5,7 @@ import com.delta.auth.Service.AuthService;
 import com.delta.auth.Service.MenuService;
 import com.delta.auth.Service.RoleService;
 import com.delta.auth.Service.UserService;
+import com.delta.auth.common.MenuUtil;
 import com.delta.auth.dto.TweiAuth;
 import com.delta.auth.dto.TweiMenuVo;
 import com.delta.auth.dto.TweiUser;
@@ -50,7 +51,7 @@ public class UserController extends BaseController<UserService, TweiUser> {
 
     @Autowired
     private AuthService authService;
-    public final String menuid = "1100";
+    public final String menuid = "1300";
 
     @Autowired
     public UserController(UserService userService) {
@@ -86,6 +87,8 @@ public class UserController extends BaseController<UserService, TweiUser> {
                 menus = menuService.selectUserMenus(user.getUserid());
             }
             request.getSession().setAttribute(GlobalConst.MENUS,menus);
+            List<TweiMenuVo> menuTree = MenuUtil.getMenuTree(menus);
+            request.getSession().setAttribute(GlobalConst.MENUTREE, menuTree);
             //獲取用戶菜單的權限值
             List<TweiAuth> auths = authService.getOweAuths(successUser.getRole().getRoleId());
             request.getSession().setAttribute(GlobalConst.AUTHS,auths);
@@ -125,8 +128,11 @@ public class UserController extends BaseController<UserService, TweiUser> {
     @Log2db("DELETE")
     @ResponseBody
     @Override
-    public ServerResponse<TweiUser> deleteOne(TweiUser k, HttpServletRequest request){
-        return service.deleteOne(k, request);
+    public ServerResponse<TweiUser> deleteOne(TweiUser user, HttpServletRequest request){
+        if (user.getUserid().equals("weilizong")) {
+            return ServerResponse.createByErrorMessage("超級管理員不可刪除");
+        }
+        return service.deleteOne(user, request);
     }
 
     @PostMapping("/admin/user/update")

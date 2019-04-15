@@ -1,5 +1,6 @@
 package com.delta.soft_manage_system.controller;
 
+import com.delta.common.constant.GlobalConst;
 import com.delta.common.utils.ServerResponse;
 import com.delta.soft_manage_system.dto.TweiApi;
 import com.delta.soft_manage_system.dto.TweiApiCode;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Classname ApiCodeController
@@ -26,16 +29,19 @@ import java.util.List;
 public class ApiCodeController extends BaseController<ApiCodeService, TweiApiCode> {
     @Autowired
     private ApiService apiService;
+    public final String menuid = "3200";
     @Autowired
     public ApiCodeController(ApiCodeService apiCodeService){
         super(apiCodeService);
     }
 
     @GetMapping("/manage")
-    public String getKnowledgeIndex(ModelMap modelMap){
+    public String getKnowledgeIndex(ModelMap modelMap, HttpSession session){
         List<TweiApi> apis = apiService.selectList();
         modelMap.addAttribute("apis",apis);
         setActiveMenu("6");
+        Map<String,Object> button = (Map<String,Object>)session.getAttribute(GlobalConst.AUTHVALUE);
+        session.setAttribute(GlobalConst.SINGLEAUTHVALUE, button.get(menuid));
         return "backend/api/apicode_manage";
     }
 

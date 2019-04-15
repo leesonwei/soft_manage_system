@@ -23,7 +23,7 @@ var handleDataTableButtons = function() {
 	if ($('#data-table-buttons').length !== 0) {
 		table = $('#data-table-buttons').DataTable({
 			dom: 'Bftip',
-            buttons:tableconst.buttons,
+            buttons:PublicFunc.getButtonList(),
 			responsive: true,
             order:[[3, "des"]],
 			oLanguage: {
@@ -355,14 +355,14 @@ $.fn.dataTable.ext.buttons.setauths = {
                         }
                     });
                 } else {
-                    layer.msg("獲取權限列表失敗" + ret.status, {
+                    layer.msg(ret.msg + ret.status, {
                         icon:2,
                         time: 3000,
                     });
                 }
             },
             error:function(ret){
-                layer.msg("獲取角色列表失敗" + ret.status, {
+                layer.msg("獲取權限列表失敗" + ret.status, {
                     icon:2,
                     time: 3000,
                 });

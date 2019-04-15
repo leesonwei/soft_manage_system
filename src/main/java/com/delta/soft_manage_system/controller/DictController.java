@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Classname DictTypeController
@@ -33,6 +34,7 @@ import java.util.List;
 public class DictController extends BaseController<DictService, TweiDict> {
     @Autowired
     private DictTypeService dictTypeService;
+    public final String menuid = "2200";
 
     @Autowired
     public DictController(DictService dictService){
@@ -40,9 +42,11 @@ public class DictController extends BaseController<DictService, TweiDict> {
     }
 
     @GetMapping("/manage")
-    public String manage(ModelMap model){
+    public String manage(ModelMap model,HttpSession session){
         model.addAttribute("typeList", getModel());
         setActiveMenu("5");
+        Map<String,Object> button = (Map<String,Object>)session.getAttribute(GlobalConst.AUTHVALUE);
+        session.setAttribute(GlobalConst.SINGLEAUTHVALUE, button.get(menuid));
         return "backend/dict/dict_manage";
     }
 

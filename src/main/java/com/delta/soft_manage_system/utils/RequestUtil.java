@@ -20,12 +20,15 @@ public class RequestUtil {
             return token;
         }
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie:cookies) {
-            if(GlobalConst.TOKEN.equalsIgnoreCase(cookie.getName())){
-                token = cookie.getValue();
-                break;
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie:cookies) {
+                if(GlobalConst.TOKEN.equalsIgnoreCase(cookie.getName())){
+                    token = cookie.getValue();
+                    break;
+                }
             }
         }
+
         if (!StringUtil.isBlank(token)) {
             return token;
         }
@@ -34,5 +37,9 @@ public class RequestUtil {
             return token;
         }
         return token;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("/admin/role/getroles".startsWith("/admin/role/manage"));
     }
 }

@@ -13,6 +13,7 @@ import com.delta.soft_manage_system.utils.RequestUtil;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -27,23 +28,11 @@ import java.io.InputStream;
 
 @Slf4j
 @Component
+@Order(1)
 public class JWTInterceptor implements HandlerInterceptor{
 
 	@Autowired
 	private ApplicationInfo applicationInfo;
-
-	@Override
-	public void afterCompletion(HttpServletRequest request,
-			HttpServletResponse response, Object object, Exception exception)
-			throws Exception {
-		
-	}
-
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response,
-			Object object, ModelAndView exception) throws Exception {
-		
-	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
@@ -105,6 +94,19 @@ public class JWTInterceptor implements HandlerInterceptor{
 			response.sendRedirect("/error/403");
 			return false;
 		}
+	}
+
+	@Override
+	public void afterCompletion(HttpServletRequest request,
+								HttpServletResponse response, Object object, Exception exception)
+			throws Exception {
+
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response,
+						   Object object, ModelAndView exception) throws Exception {
+
 	}
 
 }

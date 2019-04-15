@@ -20,7 +20,7 @@ var handleDataTableButtons = function() {
 	if ($('#data-table-buttons').length !== 0) {
 		table = $('#data-table-buttons').DataTable({
 			dom: 'Bftip',
-			buttons: tableconst.buttons,
+			buttons: PublicFunc.getButtonList(),
 			responsive: true,
             order:[[0, "des"]],
 			oLanguage: {
