@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @Classname LogDeleteConfig
@@ -38,7 +38,7 @@ public class LogDeleteConfig {
 
     private EntityWrapper getWrapper(){
         EntityWrapper wrapper = new EntityWrapper();
-        wrapper.le("log_at", Calendar.getInstance().getTime());
+        wrapper.le("log_at", DateUtil.addDay(new Date(System.currentTimeMillis()),-1));
         return wrapper;
     }
 }
